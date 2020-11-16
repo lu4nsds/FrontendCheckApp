@@ -1,5 +1,4 @@
 import React, {Component, useState, useEffect} from 'react';
-import * as Font from 'expo-font';
 import { useNavigation } from "@react-navigation/native"
 import {
     Input,
@@ -38,7 +37,7 @@ const styles = {
         marginBottom: 20,
     },
     text: {
-        color: '#fff',
+        color: '#45cbf3',
         fontSize: 15,
     },
     textBold:{
@@ -50,7 +49,7 @@ const styles = {
         color: '#45cbf3',
         fontWeight: 'bold',
         fontSize: 16,
-    }
+    },
   };  
 
 export default ( ) => {
@@ -59,14 +58,7 @@ export default ( ) => {
     const [hospFilter, setHospFilter] = useState([]);
     const navigation = useNavigation();
     //Função para adicionar a font do Button Transparent
-    function fontes() {
-        Font.loadAsync({
-            Roboto: require('native-base/Fonts/Roboto.ttf'),
-            Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-        })
-    }
-
-    fontes();
+    
     useEffect(() => {
 
         

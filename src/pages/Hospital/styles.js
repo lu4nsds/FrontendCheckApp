@@ -3,14 +3,14 @@ import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
     background-color: #263165;
-    flex: 1;
     justify-content: center;
     align-items: center;
     padding: 20px;
-    text-align: center;
+width: 100%;
+    height: 100%;
+    padding-bottom: 5px;
 `;
 export const Scroller = styled.ScrollView`
-    flex: 1;
     background-color: #263165;
     width: 100%;
 `;

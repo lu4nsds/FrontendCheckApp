@@ -71,14 +71,6 @@ function SearchEquip() {
                         </CustomText>
                     </SearchButtonEquip>
                 </SearchArea>
-
-{/*                 <TesteArea>
-                    <ButtonTest onPress={handleTesteClick}>
-                        <CustomText>
-                            Aperte me
-                        </CustomText>
-                    </ButtonTest>
-                </TesteArea> */}
                     
                 <SearchBarEquip/>
 

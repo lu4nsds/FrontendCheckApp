@@ -22,9 +22,14 @@ const styles = {
         fontSize: 15,
     },
     EquipName: {
-        color: '#fff',
+        color: '#ff0',
         fontWeight: 'bold',
         fontSize: 18,
+    },
+    EquipHosp: {
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 16,
     },
     buttonEquip:{
         width: '100%',
@@ -41,6 +46,7 @@ const styles = {
         height: 200,
         marginTop: 5,
         marginBottom: 5,
+        borderRadius: 15,
     }
 };
 
@@ -49,7 +55,23 @@ function Equipamento(equipamento) {
     const equip = equipamento.route.params.equipamento.equip
     const hosp = equipamento.route.params.equipamento.hosp
     
-
+    function HandleClickManutencao(equip, hosp, tipo){
+        if(tipo == 1){
+            navigation.navigate('ManutencaoCorretiva',{
+                manutencao:{
+                    equip,
+                    hosp,
+                }
+            });
+        } else{
+         /*    navigation.navigate('ManutencaoPreventiva',{
+                equipamento:{
+                    equip,
+                    hosp,
+                }
+            });*/
+        }; 
+    }
 
     return (
         <Container>
@@ -62,8 +84,8 @@ function Equipamento(equipamento) {
                         </Text>    
                     </HeaderTitle>
                     <Thumbnail style ={styles.Thumbnail} square large source={{ uri: equip.imgUrl }} />
-                    <Text style={styles.EquipSN}>
-                        {hosp.name}
+                    <Text style={styles.EquipHosp}>
+                        Hospital: {hosp.name}
                     </Text>
                     <Text style={styles.EquipSN}>
                         Nº de Série: {equip.sn}
@@ -76,7 +98,12 @@ function Equipamento(equipamento) {
                             Manutenção Preventiva
                         </Text>
                     </Button>
-                    <Button style={styles.buttonEquip}>
+                    <Button style={styles.buttonEquip}
+                            onPress = {()=>{
+                                    HandleClickManutencao(equip, hosp, 1)
+                                }
+                            }
+                    >
                         <Text>
                             Manutenção Corretiva
                         </Text>

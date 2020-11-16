@@ -36,7 +36,7 @@ const styles = {
         marginBottom: 20,
     },
     text: {
-        color: '#fff',
+        color: '#45cbf3',
         fontSize: 15,
     },
     textBold: {
@@ -116,7 +116,7 @@ export default ({hosp}) => {
         <Content searchBar rounded>
             <Item style={styles.input} >
                 <Input
-                    placeholder='Digite o Serial Number'
+                    placeholder='Digite o Número de Série'
                     onChangeText={(text) => {
                         searchFilterFunction(text)
                     }}
@@ -137,7 +137,7 @@ export default ({hosp}) => {
                     </Left>
                     <Body>
                         <Text style={styles.textBold} >{equip.name}</Text>
-                        <Text note style={styles.text} >{equip.sn}</Text>
+                        <Text note style={styles.text} > Nº de série: {equip.sn}</Text>
                     </Body>
                 </ListItem>
             ))}

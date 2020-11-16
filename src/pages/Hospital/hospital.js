@@ -20,11 +20,14 @@ const styles = {
     hospEnd: {
         color: '#fff',
         fontSize: 15,
+        textAlign: 'center'
     },
     hospName: {
-        color: '#fff',
+        color: '#ff0',
         fontWeight: 'bold',
         fontSize: 18,
+        textAlign: 'center',
+        padding: 10
     },
 };
 
@@ -41,11 +44,9 @@ function Hospital(hosp) {
             <Scroller>
                 <HeaderArea>
                     <Thumbnail square large source={{ uri: 'https://images.squarespace-cdn.com/content/v1/546e1217e4b093626abfbae7/1511881792811-BAWT0VOSRGEQG5PGMP4Z/ke17ZwdGBToddI8pDm48kGfiFqkITS6axXxhYYUCnlRZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpxQ1ibo-zdhORxWnJtmNCajDe36aQmu-4Z4SFOss0oowgxUaachD66r8Ra2gwuBSqM/Hospital+%28icon%29.png?format=300w' }} />
-                    <HeaderTitle>
                         <Text style={styles.hospName}>
                             {hospEquip.name}
                         </Text>    
-                    </HeaderTitle>
                     <Text style={styles.hospEnd}>
                         {hospEquip.endereco}
                     </Text>

@@ -8,6 +8,7 @@ import SearchHosp from './pages/SearchHosp/searchHosp.js';
 import SearchEquip from './pages/SearchEquip/searchEquip.js';
 import Hospital from './pages/Hospital/hospital.js';
 import Equipamento from './pages/Equipamento/equipamento.js';
+import ManutencaoCorretiva from './pages/ManutencaoCorretiva/manutencaoCorretiva.js';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,7 @@ function Routes() {
         <Stack.Screen name="SearchEquip" component={SearchEquip} />
         <Stack.Screen name="Hospital" component={Hospital} />
         <Stack.Screen name="Equipamento" component={Equipamento} />
+        <Stack.Screen name="ManutencaoCorretiva" component={ManutencaoCorretiva} />
       </Stack.Navigator>
     </NavigationContainer>
   );

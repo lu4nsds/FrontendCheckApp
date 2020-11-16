@@ -1,4 +1,5 @@
 import React, {Component, useState, useEffect} from 'react';
+import { useNavigation } from "@react-navigation/native"
 import styled from 'styled-components/native';
 import {
     Input,
@@ -35,7 +36,7 @@ const styles = {
         marginBottom: 20,
     },
     text: {
-        color: '#fff',
+        color: '#45cbf3',
         fontSize: 15,
     },
     textBold:{
@@ -49,17 +50,36 @@ export default ( ) => {
     const [search, setSearch] = useState('');
     const [equipamentos, setEquipamentos] = useState([]);
     const [equipsFilter, setEquipsFilter] = useState([]);
+    const [hosp, setHosp] = useState([]);
+    const navigation = useNavigation();
     useEffect(() => {
 
         async function loadEquipamentos() {
             const response = await api.get('/equipamentos');
-
             await preencherItens(response.data);
         }
 
         loadEquipamentos();
 
     }, []);
+
+    async function loadHospPorEquip(equip) {
+        
+        const responseHosp = await api.get(`/hospitais/${equip.hospitalId}`);
+        await setHosp(responseHosp.data);
+        
+    } 
+    async function SingClickEquipamento(equip) {
+        console.log(hosp);
+        await loadHospPorEquip(equip);
+        console.log(hosp);
+        navigation.navigate('Equipamento',{
+            equipamento:{
+                equip,
+                hosp,
+            }
+        });
+    }
 
     async function preencherItens(equips) {
         let listEquips = [];
@@ -73,6 +93,24 @@ export default ( ) => {
         setEquipsFilter(listEquips);
             
     }
+
+  
+
+    /* function SingClickEquipamento(equip) {
+        async function loadHospPorEquip(equip) {
+            const responseHosp = await api.get(`/hospitais/${equip.hospitalId}`);
+
+            setHosp(responseHosp.data)
+        } 
+
+        loadHospPorEquip(equip);
+        navigation.navigate('Equipamento',{
+            equipamento:{
+                equip,
+                hosp,
+            }
+        });
+    } */
     
     const searchFilterFunction = (text) => {
         // Check if searched text is not blank
@@ -81,8 +119,8 @@ export default ( ) => {
           // Filter the masterDataSource and update FilteredDataSource
           const newData = equipamentos.filter(function (item) {
             // Applying filter for the inserted text in search bar
-            const itemData = item.name
-              ? item.name.toUpperCase()
+            const itemData = item.sn
+              ? item.sn.toUpperCase()
               : ''.toUpperCase();
             const textData = text.toUpperCase();
             return itemData.indexOf(textData) > -1;
@@ -103,7 +141,7 @@ export default ( ) => {
         <Content searchBar rounded>
             <Item style={styles.input} >
                 <Input 
-                    placeholder='Buscar Equipamento'
+                    placeholder='Buscar Número de Série'
                     onChangeText={(text)=>{
                         searchFilterFunction(text)
                     }}
@@ -112,6 +150,10 @@ export default ( ) => {
             </Item>
             {equipsFilter.map((equip, index)=>(
                 <ListItem
+                onPress = {()=>{
+                    SingClickEquipamento(equip)
+                    
+                }}
                 style={styles.listItem}
                 key={index}
                 avatar
@@ -121,7 +163,7 @@ export default ( ) => {
                     </Left>
                     <Body>
                         <Text style = {styles.textBold} >{equip.name}</Text>
-                        <Text note style = {styles.text} >{equip.sn}</Text>
+                        <Text note style = {styles.text} >Nº de Série: {equip.sn}</Text>
                     </Body>
                 </ListItem> 
             ))}
