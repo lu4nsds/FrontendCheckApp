@@ -11,7 +11,7 @@ const navigation = useNavigation();
 
     useEffect(() => {
         setTimeout(() => {
-            navigation.navigate('SearchHosp');
+            navigation.navigate('Login');
         }, 1000);
 
     }, []);

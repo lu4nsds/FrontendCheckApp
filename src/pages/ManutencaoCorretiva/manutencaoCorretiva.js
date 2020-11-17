@@ -1,5 +1,9 @@
 import React, {component, useState, useEffect } from 'react';
 import { useNavigation } from "@react-navigation/native"
+import DateTimePicker from '@react-native-community/datetimepicker';
+// tentativas: DateTimePicker / nativeBase (antigo) / Tentar o do reactNative
+import api from '../../api.js'
+import { useUser } from '../../contexts/User';
 import {
     Container,
     Scroller,
@@ -8,15 +12,18 @@ import {
     HeaderContent,
     HeaderTitle,
     InputArea,
-    Input,
     ButtonSubmeter,
+    DateTimeArea,
+    DateArea,
+    TimeArea,
 } from './styles';
-
+import{
+    TextInput,
+    
+} from 'react-native'
 import {
     Thumbnail,
-    Content,
     Text,
-    Button,
 } from 'native-base';
 
 
@@ -33,7 +40,7 @@ const styles = {
     EquipHosp: {
         color: '#fff',
         fontWeight: 'bold',
-        fontSize: 16,
+        fontSize: 16
     },
     ButtonText: {
         alignItems: 'center',
@@ -75,14 +82,62 @@ const styles = {
     },
     infoEquip:{
         flexDirection: 'column'
+    },
+    Input:{
+        backgroundColor: '#fff',
+        height: 100,
+        borderRadius: 10,
+        marginTop: 10,
+        marginBottom: 20,
+        padding: 10,
+    },
+    InputData:{
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        marginTop: 10,
+        marginBottom: 20,
+        padding: 10,
     }
 };
 
 function ManutencaoCorretiva(manutencao) {
     const equipCorretiva = manutencao.route.params.manutencao.equip
     const hospCorretiva = manutencao.route.params.manutencao.hosp
-         
+    const tipo = manutencao.route.params.manutencao.tipo
+    const [problema, setProblema] = useState('')
+    const [solucao, setSolucao] = useState('')
+    const [data, setData] = useState('')
+    const [hora, setHora] = useState('')
+    /* const [date, setDate] = useState([1,10 ,2020]); */
+    const { user } = useUser();
 
+    async function handleSubmeter(data, hora, problema, solucao, user, tipo){
+        // await getTime(data, hora)
+        console.log(`${data} - ${hora}`);
+        console.log(problema);
+        console.log(solucao);
+        console.log(user.id);
+        console.log(equipCorretiva.id);
+        console.log(tipo);
+        // const response = await api.post('/manutencoes',{
+        //     data,
+        //     solucao,
+        //     problema,
+        //     equipamentoId,
+        //     userId: user.id,
+        //     tipo,
+        // })
+        /* 
+        {
+            data,
+            solucao,
+            problema,
+            equipamentoId,
+            userId,
+            tipo,
+        }
+        */
+    }
     return (
         <Container>
             <Scroller>
@@ -112,26 +167,71 @@ function ManutencaoCorretiva(manutencao) {
                     
                     
                 </HeaderArea>
-                <InputArea>                
-                        <Text style={styles.EquipHosp}>
-                            Problema:
-                        </Text>
-                        <Input
-                            placeholder='Qual o problema?'>
-
-                        </Input>
-                        
-                </InputArea>
+                
                 <InputArea>
+                        <DateTimeArea>
+
+                            <DateTimePicker/>
+                        {/* <DateArea>
+                            <Text style={styles.EquipHosp}>
+                                Data:
+                            </Text>
+                            <TextInput
+                                style={styles.InputData}
+                                placeholder='DD/MM/AAAA'
+                                onChangeText={(text) => {
+                                    setData(text)
+                                }}
+                            ></TextInput>   
+                        </DateArea>
+                        <TimeArea>
+                            <Text style={styles.EquipHosp}>
+                                    Hora:
+                                </Text>
+                            <TextInput
+                                style={styles.InputData}
+                                placeholder='HH:MM'
+                                onChangeText={(text) => {
+                                    setHora(text)
+                                }}
+                            ></TextInput>
+                        </TimeArea> */}
+                            
+                        </DateTimeArea>  
+                            <Text style={styles.EquipHosp}>
+                                Problema:
+                            </Text>
+                      
+                        <TextInput
+                            multiline
+                            style={styles.Input}
+                            placeholder='Qual o problema?'
+                            onChangeText={(text)=>{
+                                setProblema(text)
+                            }}
+                            >
+                            
+
+                        </TextInput>
                     <Text style={styles.EquipHosp}>
                             Solução:
                     </Text>
-                    <Input
-                    placeholder='Qual a resolução?'>
+                    <TextInput
+                        multiline
+                        style={styles.Input}
+                        placeholder='Qual a resolução?'
+                        onChangeText={(text) => {
+                            setSolucao(text)
+                        }}
+                        >
                         
 
-                    </Input>
-                    <ButtonSubmeter>
+                    </TextInput>
+                    <ButtonSubmeter
+                        onPress={()=>{
+                            handleSubmeter(data, hora, problema, solucao, user, 1)
+                        }}
+                    >
                         <Text style = {styles.ButtonText}>
                             Submeter
                         </Text>

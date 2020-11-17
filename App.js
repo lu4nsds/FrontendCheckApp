@@ -3,6 +3,8 @@ import * as Font from 'expo-font';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import UserProvider from './src/contexts/User'
+
 import Routes from './src/routes'
 export default function App() {
 
@@ -15,7 +17,10 @@ export default function App() {
 
   fontes();
   return (
-    <Routes />
+    <UserProvider>
+      <Routes />
+    </UserProvider>
+    
   );
 }
 

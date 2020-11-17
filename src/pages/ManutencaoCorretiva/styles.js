@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 export const Container = styled.SafeAreaView`
     background-color: #263165;
     height: 100%;
+    width: 100%;
 `;
 export const Scroller = styled.ScrollView`
     background-color: #263165;
@@ -43,16 +44,28 @@ export const HeaderContent = styled.View`
     justify-content: space-between;
     width: 100%;
 `;
+export const DateTimeArea = styled.View`
+    flex-direction: row;
+    width: 100%;
+`;
+export const DateArea = styled.View`
+    border-radius: 100px;
+    width: 50%;
+    padding-right: 5px;
+`;
+export const TimeArea = styled.View`
+    border-radius: 100px;
+    width: 50%;
+    padding-left: 5px;
+`;
 
 
 export const InputArea = styled.View`
     flex-direction: column;
     width: 100%;
     border-radius: 100px;
-    margin-top:10px;
+    margin-top: 10px;
     padding: 10px;
-    justify-content: center;
-
 `;
 
 export const Input = styled.TextInput`
@@ -65,7 +78,7 @@ export const Input = styled.TextInput`
 
 export const ButtonSubmeter = styled.TouchableOpacity`
     border-radius: 10px;
-    margin-top:40px;
+    margin-top:10px;
     padding: 25px;
     width: 100%;
     height: 80px;

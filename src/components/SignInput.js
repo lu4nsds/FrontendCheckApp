@@ -35,5 +35,5 @@ export default ( {IconSVG, placeholder, value, password, onChangeText} ) => {
         </InputArea>
 
     );
-
+a
 }

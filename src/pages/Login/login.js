@@ -9,6 +9,8 @@ import {
 
 import api from '../../api.js'
 
+
+import {useUser} from '../../contexts/User';
 import SignInput from '../../components/SignInput';
 import EmailIcon from '../../../assets/email.svg';
 import LockIcon from '../../../assets/lock.svg';
@@ -16,25 +18,29 @@ import Check from '../../../assets/checked.svg';
 
 function Login() {
     const [emailField, setEmailField] = useState('luan.s9d7s@gmail.com');
-    const [passwordField, setPasswordField] = useState('');
+    const [passwordField, setPasswordField] = useState('111111');
+    const {user, setUser} = useUser();
     const navigation = useNavigation();
 
-    async function getUser(email, password) {
+    async function getLogin(email, password) {
         const response = await api.post('/login', {
             email: email,
             password: password
 
         })
-        return response
+        return response.data
     }
+
     const handleSignClick = async () => {
 
         if (emailField && passwordField) {
-            let check = await getUser(emailField, passwordField)
-            if (check.data) {
+            let logado = await getLogin(emailField, passwordField)
+            if (logado.result) {
+                setUser(logado.user);
                 navigation.reset({
                     routes: [{ name: 'SearchHosp' }]
                 });
+
             } else {
                 alert("Email e/ou Senha incorreto(s)")
             }
