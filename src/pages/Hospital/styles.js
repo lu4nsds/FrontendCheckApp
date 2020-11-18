@@ -6,9 +6,10 @@ export const Container = styled.SafeAreaView`
     justify-content: center;
     align-items: center;
     padding: 20px;
-width: 100%;
+    width: 100%;
     height: 100%;
     padding-bottom: 5px;
+    padding-top: 25px;
 `;
 export const Scroller = styled.ScrollView`
     background-color: #263165;

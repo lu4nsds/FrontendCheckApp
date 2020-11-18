@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
     background-color: #263165;
+    padding-top: 25px;
     height: 100%;
     width: 100%;
 `;
@@ -10,7 +11,8 @@ export const Scroller = styled.ScrollView`
     background-color: #263165;
     width: 100%;
     height: 100%;
-    padding: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
 `;
 
 export const HeaderArea = styled.View`
@@ -50,13 +52,12 @@ export const DateTimeArea = styled.View`
 `;
 export const DateArea = styled.View`
     border-radius: 100px;
-    width: 50%;
-    padding-right: 5px;
+    width: 100%
 `;
 export const TimeArea = styled.View`
     border-radius: 100px;
     width: 50%;
-    padding-left: 5px;
+    padding: 5px;
 `;
 
 
@@ -65,7 +66,7 @@ export const InputArea = styled.View`
     width: 100%;
     border-radius: 100px;
     margin-top: 10px;
-    padding: 10px;
+    padding: 10px
 `;
 
 export const Input = styled.TextInput`
@@ -84,4 +85,13 @@ export const ButtonSubmeter = styled.TouchableOpacity`
     height: 80px;
     background-color: #384C9D;
 
+`;
+
+export const CheckBoxArea = styled.View`
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    border-radius: 100px;
+    margin-top: 10px;
+    padding: 10px
 `;

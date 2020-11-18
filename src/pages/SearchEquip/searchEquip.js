@@ -15,8 +15,6 @@ import {
     
 } from './styles';
 
-import api from '../../api.js'
-
 import Check from '../../../assets/checked.svg';
 import SearchBarEquip from '../../components/SearchBarEquip';
 
@@ -24,25 +22,8 @@ import SearchBarEquip from '../../components/SearchBarEquip';
 
 
 function SearchEquip() {
-    const [hospitais, setHospitais] = useState('');
+
     const navigation = useNavigation();
-    async function getEquips() {
-        const response = await api.get('/equipamentos')
-        const equips = response.data
-        setHospitais({ equips })
-        return equips
-    }
-    const handleTesteClick = async () => {
-        let equips = await getEquips()
-        if (equips) {
-            console.log(equips)
-        } else {
-            alert("Não existem equipamentos cadastrados")
-        }
-
-    }
-    
-
     const handleEquipClick = () => {
         navigation.navigate('SearchHosp');
 

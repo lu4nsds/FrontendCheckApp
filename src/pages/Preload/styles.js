@@ -6,6 +6,7 @@ export const Container = styled.SafeAreaView`
     flex: 1;
     justify-content: center;
     align-items: center;
+    padding-top: 25px;
 `;
 
 export const LoadingIcon = styled.ActivityIndicator`

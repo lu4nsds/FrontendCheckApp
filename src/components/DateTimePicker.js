@@ -1,54 +1,53 @@
-import React, {useState} from 'react';
+import React, {useEffect, memo, useState} from 'react';
 import {View, Button, Platform} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-export default function CompDateTimePicker(){
-  const [date, setDate] = useState(new Date(1598051730000));
-  const [mode, setMode] = useState('date');
-  const [show, setShow] = useState(false);
+  const CompDateTimePicker = ({onChange, mode, date}) => {
+/*   const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState('date'); */
+/*   console.log(new Date()); */
 
-  const onChange = (event, selectedDate) => {
+/*   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
-    setShow(Platform.OS === 'android');
-    setDate(currentDate);
-    // setShow(false)
-    console.log(date);
-  };
+    if (event.type === 'set') {
+      setDate(currentDate);
+      setShow((prevState) => setShow(!prevState));
+    }  
+  }; */
+ /*  useEffect(() => {
+    console.log('show:',show);
+  }, [show]); */
 
-  const showMode = (currentMode) => {
+  /* const showMode = (currentMode) => {
     setShow(true);
     setMode(currentMode);
-  };
-
+  }; */
+/* 
   const showDatepicker = () => {
-    showMode('date');
+    setMode('date');
+    setShow(true);
   };
 
   const showTimepicker = () => {
-    showMode('time');
-  };
+    setMode('time');
+    setShow(true);
+  }; */
 
   return (
     <View>
-      <View>
-              <Button onPress={showDatepicker} title={`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`} />
-      </View>
-      <View>
-              <Button onPress={showTimepicker} title={`${date.getHours()}:${date.getMinutes()}`} />
-      </View>
-      {show && (
         <DateTimePicker
           testID="dateTimePicker"
+          minimumDate={new Date()}
           value={date}
           locale="pt-BR"
           mode={mode}
           is24Hour={true}
-          display="spinner"
-          onDateChange={onChange}
+          display="default"
           onChange={onChange}
           
         />
-      )}
     </View>
   );
 };
+
+export default memo(CompDateTimePicker);

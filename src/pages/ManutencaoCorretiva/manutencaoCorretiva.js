@@ -1,6 +1,5 @@
 import React, {component, useState, useEffect } from 'react';
 import { useNavigation } from "@react-navigation/native"
-import DateTimePicker from '@react-native-community/datetimepicker';
 // tentativas: DateTimePicker / nativeBase (antigo) / Tentar o do reactNative
 import api from '../../api.js'
 import { useUser } from '../../contexts/User';
@@ -16,14 +15,18 @@ import {
     DateTimeArea,
     DateArea,
     TimeArea,
+    CheckBoxArea,
 } from './styles';
+
 import{
     TextInput,
-    
 } from 'react-native'
+
 import {
     Thumbnail,
     Text,
+    CheckBox,
+    Body,
 } from 'native-base';
 
 
@@ -101,24 +104,36 @@ const styles = {
 };
 
 function ManutencaoCorretiva(manutencao) {
+    const [show, setShow] = useState(false);
     const equipCorretiva = manutencao.route.params.manutencao.equip
     const hospCorretiva = manutencao.route.params.manutencao.hosp
     const tipo = manutencao.route.params.manutencao.tipo
     const [problema, setProblema] = useState('')
     const [solucao, setSolucao] = useState('')
     const [data, setData] = useState('')
-    const [hora, setHora] = useState('')
+    const [horaInicial, setHoraInicial] = useState('')
+    const [horaFinal, setHoraFinal] = useState('')
+    const [checkSim, setCheckSim] = useState(false)
+    const [checkNao, setCheckNao] = useState(false)
+    const [checkPeca, setCheckPeca] = useState(false)
+    
+  /*   const [date, setDate] = useState(new Date());
+    const [mode, setMode] = useState('date');
+    const [datePicker, setDatePicker] = useState(new Date()) */
     /* const [date, setDate] = useState([1,10 ,2020]); */
     const { user } = useUser();
 
-    async function handleSubmeter(data, hora, problema, solucao, user, tipo){
+    async function handleSubmeter(data, horaInicial, horaFinal, problema, solucao, user, tipo){
         // await getTime(data, hora)
-        console.log(`${data} - ${hora}`);
+        console.log(`${data} - ${horaInicial}`);
+        console.log(`${data} - ${horaFinal}`);
         console.log(problema);
         console.log(solucao);
         console.log(user.id);
         console.log(equipCorretiva.id);
         console.log(tipo);
+
+        
         // const response = await api.post('/manutencoes',{
         //     data,
         //     solucao,
@@ -138,6 +153,9 @@ function ManutencaoCorretiva(manutencao) {
         }
         */
     }
+
+
+
     return (
         <Container>
             <Scroller>
@@ -169,35 +187,57 @@ function ManutencaoCorretiva(manutencao) {
                 </HeaderArea>
                 
                 <InputArea>
-                        <DateTimeArea>
-
-                            <DateTimePicker/>
-                        {/* <DateArea>
-                            <Text style={styles.EquipHosp}>
-                                Data:
+                    <DateArea>
+                        <Text style={styles.EquipHosp}>
+                            Data:
                             </Text>
-                            <TextInput
-                                style={styles.InputData}
-                                placeholder='DD/MM/AAAA'
-                                onChangeText={(text) => {
-                                    setData(text)
-                                }}
-                            ></TextInput>   
-                        </DateArea>
+                        <TextInput
+                            style={styles.InputData}
+                            placeholder='DD/MM/AAAA'
+                            onChangeText={(text) => {
+                                if (text.length == 2 || text.length == 5) {
+                                    text = text + '/'
+                                }
+                                setData(text)
+                            }}
+                            value={data}
+                        ></TextInput>
+                    </DateArea>
+                    <DateTimeArea>
+                        
                         <TimeArea>
                             <Text style={styles.EquipHosp}>
-                                    Hora:
+                                    Hora Inicial:
                                 </Text>
                             <TextInput
                                 style={styles.InputData}
                                 placeholder='HH:MM'
                                 onChangeText={(text) => {
-                                    setHora(text)
+                                    if (text.length == 2) {
+                                        text = text + ':'
+                                    }
+                                    setHoraInicial(text)
                                 }}
+                                value={horaInicial}
                             ></TextInput>
-                        </TimeArea> */}
-                            
-                        </DateTimeArea>  
+                        </TimeArea>
+                        <TimeArea>
+                            <Text style={styles.EquipHosp}>
+                                    Hora Final:
+                                </Text>
+                            <TextInput
+                                style={styles.InputData}
+                                placeholder='HH:MM'
+                                onChangeText={(text) => {
+                                    if (text.length == 2) {
+                                        text = text + ':'
+                                    }
+                                    setHoraFinal(text)
+                                }}
+                                value={horaFinal}
+                            ></TextInput>
+                        </TimeArea>
+                    </DateTimeArea>   
                             <Text style={styles.EquipHosp}>
                                 Problema:
                             </Text>
@@ -227,9 +267,58 @@ function ManutencaoCorretiva(manutencao) {
                         
 
                     </TextInput>
+                    <Text style = {styles.EquipHosp}>
+                        Manutenção Concluida?
+                    </Text>
+                    
+
+                    <CheckBoxArea>
+                        <CheckBox
+                        checked = {checkSim}
+                        onPress = {() => {
+                            // handleChangeCheck(checkSim)
+                            if (checkSim === false) {
+                                setCheckSim(true);
+                                setCheckNao(false)
+                                setCheckPeca(false)
+                            } else {
+                                setCheckSim(false);
+                            }
+                        }}
+                        />
+                        <Text style = {styles.EquipSN}>Sim</Text>
+                        <CheckBox
+                        checked = {checkNao}
+                        onPress = {() => {
+                            if (checkNao === false) {
+                                setCheckSim(false);
+                                setCheckNao(true)
+                                setCheckPeca(false)
+                            } else {
+                                setCheckNao(false);
+                            }
+                        }}
+                        />
+                        <Text style = {styles.EquipSN}>Não</Text>
+                        <CheckBox
+                        checked = {checkPeca}
+                        onPress = {() => {
+                            if (checkPeca === false) {
+                                setCheckSim(false);
+                                setCheckNao(false)
+                                setCheckPeca(true)
+                            } else {
+                                setCheckPeca(false);
+                            }
+                        }}
+                        />
+                        <Text style = {styles.EquipSN}>Aguardando Peça</Text>
+                    </CheckBoxArea>
+
+                    
                     <ButtonSubmeter
                         onPress={()=>{
-                            handleSubmeter(data, hora, problema, solucao, user, 1)
+                            handleSubmeter(data, horaInicial, horaFinal, problema, solucao, user, 1)
                         }}
                     >
                         <Text style = {styles.ButtonText}>

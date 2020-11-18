@@ -50,29 +50,24 @@ export default ( ) => {
     const [search, setSearch] = useState('');
     const [equipamentos, setEquipamentos] = useState([]);
     const [equipsFilter, setEquipsFilter] = useState([]);
-    const [hosp, setHosp] = useState([]);
     const navigation = useNavigation();
     useEffect(() => {
-
         async function loadEquipamentos() {
             const response = await api.get('/equipamentos');
             await preencherItens(response.data);
         }
 
         loadEquipamentos();
-
     }, []);
 
     async function loadHospPorEquip(equip) {
-        
         const responseHosp = await api.get(`/hospitais/${equip.hospitalId}`);
-        await setHosp(responseHosp.data);
-        
+        return responseHosp.data;
     } 
+    
+
     async function SingClickEquipamento(equip) {
-        console.log(hosp);
-        await loadHospPorEquip(equip);
-        console.log(hosp);
+        const hosp = await loadHospPorEquip(equip);
         navigation.navigate('Equipamento',{
             equipamento:{
                 equip,
@@ -93,24 +88,6 @@ export default ( ) => {
         setEquipsFilter(listEquips);
             
     }
-
-  
-
-    /* function SingClickEquipamento(equip) {
-        async function loadHospPorEquip(equip) {
-            const responseHosp = await api.get(`/hospitais/${equip.hospitalId}`);
-
-            setHosp(responseHosp.data)
-        } 
-
-        loadHospPorEquip(equip);
-        navigation.navigate('Equipamento',{
-            equipamento:{
-                equip,
-                hosp,
-            }
-        });
-    } */
     
     const searchFilterFunction = (text) => {
         // Check if searched text is not blank
@@ -150,8 +127,8 @@ export default ( ) => {
             </Item>
             {equipsFilter.map((equip, index)=>(
                 <ListItem
-                onPress = {()=>{
-                    SingClickEquipamento(equip)
+                onPress = {async ()=>{
+                   await SingClickEquipamento(equip)
                     
                 }}
                 style={styles.listItem}

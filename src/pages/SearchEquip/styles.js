@@ -9,11 +9,13 @@ export const Container = styled.SafeAreaView`
     width: 100%;
     height: 100%;
     padding-bottom: 5px;
+    padding-top: 25px;
 `;
 export const Scroller = styled.ScrollView`
     background-color: #263165;
     width: 100%;
-    
+    padding-right: 20px;
+    padding-left: 20px;
     
     
 `;

@@ -54,7 +54,6 @@ function Equipamento(equipamento) {
     const navigation = useNavigation()
     const equip = equipamento.route.params.equipamento.equip
     const hosp = equipamento.route.params.equipamento.hosp
-    
     function HandleClickManutencao(equip, hosp, tipo){
         if(tipo == 1){
             navigation.navigate('ManutencaoCorretiva',{
