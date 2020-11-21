@@ -3,6 +3,12 @@ import { useNavigation } from "@react-navigation/native"
 // tentativas: DateTimePicker / nativeBase (antigo) / Tentar o do reactNative
 import api from '../../api.js'
 import { useUser } from '../../contexts/User';
+/* import RNHTMLtoPDF from 'react-native-html-to-pdf';
+import RNPrint from 'react-native-print'; */
+import * as Print from 'expo-print';
+
+import OrdemDeServico from '../../../assets/OrdemDeServico/ordemDeServico';
+
 import {
     Container,
     Scroller,
@@ -26,8 +32,8 @@ import {
     Thumbnail,
     Text,
     CheckBox,
-    Body,
 } from 'native-base';
+
 
 
 const styles = {
@@ -116,23 +122,20 @@ function ManutencaoCorretiva(manutencao) {
     const [checkSim, setCheckSim] = useState(false)
     const [checkNao, setCheckNao] = useState(false)
     const [checkPeca, setCheckPeca] = useState(false)
-    
-  /*   const [date, setDate] = useState(new Date());
-    const [mode, setMode] = useState('date');
-    const [datePicker, setDatePicker] = useState(new Date()) */
-    /* const [date, setDate] = useState([1,10 ,2020]); */
+    const [print, setPrint] = useState({})
     const { user } = useUser();
-
-    async function handleSubmeter(data, horaInicial, horaFinal, problema, solucao, user, tipo){
-        // await getTime(data, hora)
-        console.log(`${data} - ${horaInicial}`);
+    
+    async function handleSubmeter(equip, data, horaInicial, horaFinal, problema, solucao, user, tipo){
+        /* console.log(`${data} - ${horaInicial}`);
         console.log(`${data} - ${horaFinal}`);
         console.log(problema);
         console.log(solucao);
         console.log(user.id);
         console.log(equipCorretiva.id);
-        console.log(tipo);
-
+        console.log(tipo); */
+        Print.printAsync({
+            html: `${OrdemDeServico(equip, data, horaInicial, horaFinal, problema, solucao, user, tipo)}`
+        });
         
         // const response = await api.post('/manutencoes',{
         //     data,
@@ -318,7 +321,7 @@ function ManutencaoCorretiva(manutencao) {
                     
                     <ButtonSubmeter
                         onPress={()=>{
-                            handleSubmeter(data, horaInicial, horaFinal, problema, solucao, user, 1)
+                            handleSubmeter(equipCorretiva , data, horaInicial, horaFinal, problema, solucao, user, 1)
                         }}
                     >
                         <Text style = {styles.ButtonText}>

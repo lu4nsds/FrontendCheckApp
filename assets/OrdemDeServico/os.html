@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,700&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+            *{
+                margin: 0;
+                padding: 0;
+                font-family: Roboto;
+            }
+            .container{
+                margin: 25px;
+            }
+            header{
+                text-align: center;
+                padding: auto 10px;
+                color: white;
+                background:#263165;
+                margin-bottom: 15px;
+                
+            }
+            header img{
+                width: 60px;
+            }
+            header h1{
+                font-family: Anton;
+                font-weight: bolder;
+                font-size: 60px;
+            }
+            section h3{
+                padding: 10px;
+                color: white;
+                background:#263165;
+                text-align: center;
+            }
+            .infos{
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+            .infos div{
+                padding: 20px;
+            }
+            .infos div p{
+                padding: 5px;
+            }
+            .assinatura{
+                padding-top: 30px;
+            }
+            .assinatura div p,
+            .assinatura div h4{
+                padding: 10px;
+            }
+            .caixa{
+                padding: 10px;
+                margin-bottom: 15px;
+            }
+            .caixa div{
+                border: 1px solid black;
+                padding: 10px;
+                text-align: justify;
+            }
+            .caixa h4{
+                margin-bottom: 5px;
+            }
+            .horas table{
+                width: 100%;
+                text-align: center;
+            }
+            td, tr, thead{
+               border: 1px solid black; 
+            }
+            .horas table thead td{
+                padding: 10px;
+                
+            }
+            .total{
+                text-align: right;
+                border: none;
+            }
+            footer{
+                background:#263165;
+                padding: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class='container'>
+            <header>
+                
+                <h1><img src="../checked.svg">  CheckApp</h1>
+            </header>
+            <section>
+                <h3>CLIENTE</h3>
+                <article class="infos">
+                    <div>
+                        <p><b>Ordem de Serviço:</b> 123456</p>
+                        <p><b>Cliente:</b> Hospital Universitário Onofre Lopes</p>
+                        <p><b>Contato:</b> Luan Santos de Souza</p>
+                    </div>
+                    <div>
+                        <p><b>Data:</b> 123456</p>
+                        <p><b>Endereço:</b> Av. Nilo Peçanha, 620 - Petrópolis, Natal - RN, 59012-300 </p>
+                        <p><b>Telefone:</b> 8499999999</p>
+                    </div>
+                </article>
+            </section>
+            <section>
+                <h3>EQUIPAMENTO</h3>
+                <article class="infos">
+                    <div>
+                        <p><b>Equipamento:</b> 13</p>
+                        <p><b>N° de Série:</b> 1489657</p>                        
+                    </div>
+                    <div>
+                        <p><b>Modelo:</b> Ultrassom EPIQ 7</p>
+                        <p><b>Sala/Departamento</b> Centro de Imagens </p>
+                    </div>
+                </article>
+            </section>
+            <section>
+                <h3>MANUTENÇÃO</h3>
+                <article class="infos">
+                    <div>
+                        <p><b>Atividade:</b> Manutenção Corretiva</p>
+                    </div>
+                    <div>
+                        <p><b>Responsável:</b> Luan Santos de Souza</p>
+                    </div>
+                </article>
+                <article class="caixa">
+                    <h4>Problema:</h4>
+                    <div>
+                        <p>
+                            Equipamento apresentando falha do TPS reset. Image:NONE-NONE-NONE
+                        </p>
+                    </div>
+                </article>
+                <article class="caixa">
+                    <h4>Descrição dos Serviços Executados:</h4>
+                    <div>
+                        <p>
+                            O eng remoto puxou o log de erros e encontrou a falha: A Monarch critical error was detected in task defaultServer (0x4624DE0). O eng remoto instruiu o cliente a re configurar o VRE que foi feito com sucesso mas o defeito permaneceu.
+                        </p>
+                    </div>
+                </article>
+                <article class="caixa">
+                    <h4>Pendências/Observações:</h4>
+                    <div>
+                        <p>
+                            01 - Equipment passed all required tests and is ready for use
+                        </p>
+                    </div>
+                </article>
+                <article class="horas">
+                    <table>
+                        <thead>
+                            <td><b>Data</b></td>
+                            <td><b>Início</b></td>
+                            <td><b>Término</b></td>
+                            <td><b>Horas Trabalhadas</b></td>
+                        </thead>
+                        <tr>
+                            <td>10/10</td>
+                            <td>10:10</td>
+                            <td>10:10</td>
+                            <td>10:30</td>
+                        </tr>
+                        <tr>
+                            <td>10/10</td>
+                            <td>10:10</td>
+                            <td>10:10</td>
+                            <td>10:30</td>
+                        </tr>
+                        <tr>
+                            <td>10/10</td>
+                            <td>10:10</td>
+                            <td>10:10</td>
+                            <td>10:30</td>
+                        </tr>
+                        <tr>
+                            <td>10/10</td>
+                            <td>10:10</td>
+                            <td>10:10</td>
+                            <td>10:30</td>
+                        </tr>
+                        <tr>
+                            <td>10/10</td>
+                            <td>10:10</td>
+                            <td>10:10</td>
+                            <td>10:30</td>
+                        </tr>
+                        <tr>
+                            <td class='total' colspan='3'><b>Total de Horas Trabalhadas:</b></td>
+                            <td><b>15:30</b></td>
+                        </tr>
+                    </table>
+                </article>
+                <article class="infos assinatura">
+                    <div>
+                        <h4>Dados do Engenheiro/Técnico</h4>
+                        <p><b>Nome:</b> Luan Santos De Souza</p>
+                        <p><b>Assinatura:</b> ____________________________________</p>
+                    </div>
+                    <div>
+                        <h4>Dados do Cliente</h4>
+                        <p><b>Nome:</b> ____________________________________</p>
+                        <p><b>CPF:</b> ______________________________________</p>
+                        <p><b>Assinatura:</b> _______________________________</p>
+                    </div>
+                </article>
+            </section>
+            <footer>
+            </footer>
+        </div>
+    </body>
+</html>
+
