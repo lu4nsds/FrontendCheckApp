@@ -8,6 +8,7 @@ import RNPrint from 'react-native-print'; */
 import * as Print from 'expo-print';
 
 import OrdemDeServico from '../../../assets/OrdemDeServico/ordemDeServico';
+import DateTime from '../../components/DateTime';
 
 import {
     Container,
@@ -19,8 +20,7 @@ import {
     InputArea,
     ButtonSubmeter,
     DateTimeArea,
-    DateArea,
-    TimeArea,
+    CheckArea,
     CheckBoxArea,
 } from './styles';
 
@@ -34,98 +34,26 @@ import {
     CheckBox,
 } from 'native-base';
 
-
-
-const styles = {
-    EquipSN: {
-        color: '#fff',
-        fontSize: 15,
-    },
-    EquipName: {
-        color: '#ff0',
-        fontWeight: 'bold',
-        fontSize: 18,
-    },
-    EquipHosp: {
-        color: '#fff',
-        fontWeight: 'bold',
-        fontSize: 16
-    },
-    ButtonText: {
-        alignItems: 'center',
-        color: '#fff',
-        fontSize: 20,
-        textAlign: 'center',
-        justifyContent: 'center',
-        fontWeight: 'bold',
-    },
-    buttonEquip:{
-        width: '100%',
-        height: 80,
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 40,
-        marginTop: 10,
-        borderRadius: 20
-    },
-    buttonEquip:{
-        width: '100%',
-        height: 80,
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 40,
-        marginTop: 10,
-        borderRadius: 20
-    },
-    Thumbnail:{
-        width: 100,
-        height: 100,
-        marginTop: 5,
-        marginBottom: 5,
-        borderRadius: 15,
-    },
-    headerContent:{
-        flexDirection: 'row',
-    },
-    infoEquip:{
-        flexDirection: 'column'
-    },
-    Input:{
-        backgroundColor: '#fff',
-        height: 100,
-        borderRadius: 10,
-        marginTop: 10,
-        marginBottom: 20,
-        padding: 10,
-    },
-    InputData:{
-        backgroundColor: '#fff',
-        borderRadius: 10,
-        marginTop: 10,
-        marginBottom: 20,
-        padding: 10,
-    }
-};
+import {styles} from './styles'
 
 function ManutencaoCorretiva(manutencao) {
     const [show, setShow] = useState(false);
     const equipCorretiva = manutencao.route.params.manutencao.equip
     const hospCorretiva = manutencao.route.params.manutencao.hosp
     const tipo = manutencao.route.params.manutencao.tipo
-    const [problema, setProblema] = useState('')
-    const [solucao, setSolucao] = useState('')
-    const [data, setData] = useState('')
-    const [horaInicial, setHoraInicial] = useState('')
-    const [horaFinal, setHoraFinal] = useState('')
-    const [checkSim, setCheckSim] = useState(false)
-    const [checkNao, setCheckNao] = useState(false)
-    const [checkPeca, setCheckPeca] = useState(false)
-    const [print, setPrint] = useState({})
+    const [problema, setProblema] = useState('');
+    const [solucao, setSolucao] = useState('');
+    const [data, setData] = useState('23/09/1997');
+    const [horaInicial, setHoraInicial] = useState('00:00');
+    const [horaFinal, setHoraFinal] = useState('02:00');
+    const [checkSim, setCheckSim] = useState(false);
+    const [checkNao, setCheckNao] = useState(false);
+    const [checkPeca, setCheckPeca] = useState(false);
+    const [situacao, setSituacao] = useState('');
+    const [pendencias, setPendencias] = useState('');
     const { user } = useUser();
-    
-    async function handleSubmeter(equip, data, horaInicial, horaFinal, problema, solucao, user, tipo){
+
+    async function handleSubmeter(equip, data, horaInicial, horaFinal, problema, solucao, user, tipo, situacao, pendencias){
         /* console.log(`${data} - ${horaInicial}`);
         console.log(`${data} - ${horaFinal}`);
         console.log(problema);
@@ -134,7 +62,7 @@ function ManutencaoCorretiva(manutencao) {
         console.log(equipCorretiva.id);
         console.log(tipo); */
         Print.printAsync({
-            html: `${OrdemDeServico(equip, data, horaInicial, horaFinal, problema, solucao, user, tipo)}`
+            html: `${OrdemDeServico(equip, data, horaInicial, horaFinal, problema, solucao, user, tipo, situacao, pendencias)}`
         });
         
         // const response = await api.post('/manutencoes',{
@@ -190,72 +118,31 @@ function ManutencaoCorretiva(manutencao) {
                 </HeaderArea>
                 
                 <InputArea>
-                    <DateArea>
-                        <Text style={styles.EquipHosp}>
-                            Data:
-                            </Text>
-                        <TextInput
-                            style={styles.InputData}
-                            placeholder='DD/MM/AAAA'
-                            onChangeText={(text) => {
-                                if (text.length == 2 || text.length == 5) {
-                                    text = text + '/'
-                                }
-                                setData(text)
-                            }}
-                            value={data}
-                        ></TextInput>
-                    </DateArea>
-                    <DateTimeArea>
+                    <DateTime
+                        data={data}
+                        setData={setData}
+                        horaInicial={horaInicial}
+                        setHoraInicial={setHoraInicial}
+                        horaFinal={horaFinal}
+                        setHoraFinal={setHoraFinal}
                         
-                        <TimeArea>
-                            <Text style={styles.EquipHosp}>
-                                    Hora Inicial:
-                                </Text>
-                            <TextInput
-                                style={styles.InputData}
-                                placeholder='HH:MM'
-                                onChangeText={(text) => {
-                                    if (text.length == 2) {
-                                        text = text + ':'
-                                    }
-                                    setHoraInicial(text)
-                                }}
-                                value={horaInicial}
-                            ></TextInput>
-                        </TimeArea>
-                        <TimeArea>
-                            <Text style={styles.EquipHosp}>
-                                    Hora Final:
-                                </Text>
-                            <TextInput
-                                style={styles.InputData}
-                                placeholder='HH:MM'
-                                onChangeText={(text) => {
-                                    if (text.length == 2) {
-                                        text = text + ':'
-                                    }
-                                    setHoraFinal(text)
-                                }}
-                                value={horaFinal}
-                            ></TextInput>
-                        </TimeArea>
-                    </DateTimeArea>   
-                            <Text style={styles.EquipHosp}>
-                                Problema:
-                            </Text>
+                    />
+
+                    <Text style={styles.EquipHosp}>
+                        Problema:
+                    </Text>
                       
-                        <TextInput
-                            multiline
-                            style={styles.Input}
-                            placeholder='Qual o problema?'
-                            onChangeText={(text)=>{
-                                setProblema(text)
-                            }}
-                            >
+                    <TextInput
+                        multiline
+                        style={styles.Input}
+                        placeholder='Qual o problema?'
+                        onChangeText={(text)=>{
+                            setProblema(text)
+                        }}
+                    >
                             
 
-                        </TextInput>
+                    </TextInput>
                     <Text style={styles.EquipHosp}>
                             Solução:
                     </Text>
@@ -270,58 +157,78 @@ function ManutencaoCorretiva(manutencao) {
                         
 
                     </TextInput>
-                    <Text style = {styles.EquipHosp}>
-                        Manutenção Concluida?
+                    <Text style={styles.EquipHosp}>
+                            Pendências/Observações:
                     </Text>
-                    
+                    <TextInput
+                        multiline
+                        style={styles.Input}
+                        placeholder='Quais são as pendências?'
+                        onChangeText={(text) => {
+                            setPendencias(text)
+                        }}
+                        >
+                        
 
+                    </TextInput>
                     <CheckBoxArea>
-                        <CheckBox
-                        checked = {checkSim}
-                        onPress = {() => {
-                            // handleChangeCheck(checkSim)
-                            if (checkSim === false) {
-                                setCheckSim(true);
-                                setCheckNao(false)
-                                setCheckPeca(false)
-                            } else {
-                                setCheckSim(false);
-                            }
-                        }}
-                        />
-                        <Text style = {styles.EquipSN}>Sim</Text>
-                        <CheckBox
-                        checked = {checkNao}
-                        onPress = {() => {
-                            if (checkNao === false) {
-                                setCheckSim(false);
-                                setCheckNao(true)
-                                setCheckPeca(false)
-                            } else {
-                                setCheckNao(false);
-                            }
-                        }}
-                        />
-                        <Text style = {styles.EquipSN}>Não</Text>
-                        <CheckBox
-                        checked = {checkPeca}
-                        onPress = {() => {
-                            if (checkPeca === false) {
-                                setCheckSim(false);
-                                setCheckNao(false)
-                                setCheckPeca(true)
-                            } else {
-                                setCheckPeca(false);
-                            }
-                        }}
-                        />
-                        <Text style = {styles.EquipSN}>Aguardando Peça</Text>
-                    </CheckBoxArea>
+                        <Text style = {styles.EquipHosp}>
+                            Manutenção Concluida?
+                        </Text>
+                        
 
+                        <CheckArea>
+                            
+                            <CheckBox
+                            checked = {checkSim}
+                            onPress = {() => {
+                                // handleChangeCheck(checkSim)
+                                if (checkSim === false) {
+                                    setCheckSim(true);
+                                    setCheckNao(false)
+                                    setCheckPeca(false)
+                                    setSituacao('Concluída')
+                                } else {
+                                    setCheckSim(false);
+                                }
+                            }}
+                            />
+                            <Text style = {styles.CheckText}>Sim</Text>
+                            <CheckBox
+                            checked = {checkNao}
+                            onPress = {() => {
+                                if (checkNao === false) {
+                                    setCheckSim(false);
+                                    setCheckNao(true)
+                                    setCheckPeca(false)
+                                    setSituacao('Não Concluída')
+                                } else {
+                                    setCheckNao(false);
+                                }
+                            }}
+                            />
+                            <Text style = {styles.CheckText}>Não</Text>
+                            <CheckBox
+                            checked = {checkPeca}
+                            onPress = {() => {
+                                if (checkPeca === false) {
+                                    setCheckSim(false);
+                                    setCheckNao(false)
+                                    setCheckPeca(true)
+                                    setSituacao('Aguardando Peça')
+                                } else {
+                                    setCheckPeca(false);
+                                }
+                            }}
+                            />
+                            <Text style = {styles.CheckText}>Aguardando Peça</Text>
+                        </CheckArea>
+                    </CheckBoxArea>         
                     
                     <ButtonSubmeter
                         onPress={()=>{
-                            handleSubmeter(equipCorretiva , data, horaInicial, horaFinal, problema, solucao, user, 1)
+                            handleSubmeter(equipCorretiva , data, horaInicial, horaFinal, problema, solucao, user, 1, situacao, pendencias)
+                            
                         }}
                     >
                         <Text style = {styles.ButtonText}>

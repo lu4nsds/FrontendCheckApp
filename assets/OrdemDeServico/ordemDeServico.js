@@ -1,4 +1,6 @@
-export default (equip, data, horaInicial, horaFinal, problema, solucao, user, tipo)=>{
+import checked from '../checked.svg'
+export default (equip, data, horaInicial, horaFinal, problema, solucao, user, tipo, situacao, pendencias)=>{
+
 
     function getTipo(tipo){
         if (tipo == 1) {
@@ -7,7 +9,6 @@ export default (equip, data, horaInicial, horaFinal, problema, solucao, user, ti
             return 'Manutenção Preventiva'
         }
     }
-    
     const html = `<!DOCTYPE html>
     <html>
         <head>
@@ -78,6 +79,7 @@ export default (equip, data, horaInicial, horaFinal, problema, solucao, user, ti
                 .horas table{
                     width: 100%;
                     text-align: center;
+                    margin-bottom: 20px;
                 }
                 td, tr, thead{
                    border: 1px solid black; 
@@ -100,7 +102,7 @@ export default (equip, data, horaInicial, horaFinal, problema, solucao, user, ti
             <div class='container'>
                 <header>
                     
-                    <h1><img src="../checked.svg">  CheckApp</h1>
+                    <h1><img src="../../../../app/assets/checked.svg"/> CheckApp</h1>
                 </header>
                 <section>
                     <h3>CLIENTE</h3>
@@ -160,7 +162,7 @@ export default (equip, data, horaInicial, horaFinal, problema, solucao, user, ti
                         <h4>Pendências/Observações:</h4>
                         <div>
                             <p>
-                                01 - Equipment passed all required tests and is ready for use
+                                ${pendencias}
                             </p>
                         </div>
                     </article>
@@ -207,6 +209,8 @@ export default (equip, data, horaInicial, horaFinal, problema, solucao, user, ti
                                 <td><b>15:30</b></td>
                             </tr>
                         </table>
+
+                        <p><b>Situação da Manutenção:</b> ${situacao}</p>
                     </article>
                     <article class="infos assinatura">
                         <div>
