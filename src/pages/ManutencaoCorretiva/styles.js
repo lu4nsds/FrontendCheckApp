@@ -11,6 +11,12 @@ export const styles = {
         fontWeight: 'bold',
         fontSize: 18,
     },
+    ListItem: {
+        backgroundColor: '#000000',
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 12,
+    },
     EquipHosp: {
         color: '#fff',
         fontWeight: 'bold',
@@ -97,10 +103,19 @@ export const Container = styled.SafeAreaView`
 `;
 export const Scroller = styled.ScrollView`
     background-color: #263165;
-    width: 100%;
-    height: 100%;
     padding-right: 20px;
     padding-left: 20px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+`;
+
+export const ScrollerTask = styled.ScrollView`
+    background-color: #fff;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    height: 300px;
 `;
 
 export const HeaderArea = styled.View`
@@ -203,7 +218,7 @@ export const DateTimeContainer = styled.View`
     margin-bottom: 10px;
     padding: 10px
 `;
-export const ShowDateTime = styled.View`
+export const TaskArea = styled.View`
     flex-direction: column;
     width: 100%;
     background-color: #000000;
@@ -211,6 +226,16 @@ export const ShowDateTime = styled.View`
     margin-bottom: 10px;
     padding: 20px
 `;
+
+export const Content = styled.View`
+    flex-direction: column;
+    width: 100%;
+    background-color: #000000;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    padding: 20px
+`;
+
 export const ButtonAdd = styled.TouchableOpacity`
     flex: 1;   
     flex-direction: row;

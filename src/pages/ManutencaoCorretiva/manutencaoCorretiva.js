@@ -52,7 +52,7 @@ function ManutencaoCorretiva(manutencao) {
     const [situacao, setSituacao] = useState('');
     const [pendencias, setPendencias] = useState('');
     const { user } = useUser();
-
+    console.log(`Data em MC: ${data}`);
     async function handleSubmeter(equip, data, horaInicial, horaFinal, problema, solucao, user, tipo, situacao, pendencias){
         /* console.log(`${data} - ${horaInicial}`);
         console.log(`${data} - ${horaFinal}`);

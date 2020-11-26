@@ -7,7 +7,7 @@ import {
     ButtonAdd,
     styles,
     DateTimeContainer,
-    ShowDateTime,
+    ScrollerTask,
 } from '../pages/ManutencaoCorretiva/styles';
 
 import {
@@ -16,32 +16,87 @@ import {
 
 import {
     Text,
-    Content,
+    ListItem,
+    View,
 } from 'native-base';
 import Plus from '../../assets/plus.svg';
+
+class DateTimeList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleAdd= this.handleAdd.bind(this);
+        this.state={
+            list: [],
+            data: props.data,
+            horaInicial: props.horaInicial,
+            horaFinal: props.horaFinal,
+        };
+        
+    }
+
+    handleAdd(){
+        let tarefa = {
+            data: this.state.data,
+            horaInicial: this.state.horaInicial,
+            horaFinal: this.state.horaFinal,
+        }    
+        /* console.log(`TAREFA: ${tarefa.data}`); */
+        
+        this.setState({            
+            list : [...this.state.list, tarefa],
+        })
+        
+
+    }
+
+    
+    
+
+    render(){/* 
+
+        console.log(this.state.list); */
+        let Lista = this.state.list.map((task, index)=>{
+            return (
+                    <ListItem
+                    style={styles.ListItem}
+                    key={index}
+                    pass_in_data={task}
+                    >
+                        <Text style={styles.EquipSN}>
+                            {task.data}
+                        </Text>
+                    </ListItem>  
+                )
+            })
+        return(
+
+            <View>
+                <ButtonAdd
+                onPress={()=>{
+                    this.handleAdd()
+                }
+                    
+                }
+            >
+                    <Plus height="18px" width="18px"/>
+                    <Text style = {styles.ButtonAdicionar}>
+                        Adicionar
+                    </Text>
+                </ButtonAdd>
+                {Lista}   
+            </View>  
+        
+        )
+    }
+
+}
+
 
 function DateTime({data, setData, horaInicial, setHoraInicial, horaFinal, setHoraFinal}){
     const [show, setShow] = useState(false);
     const [tasks, setTasks] = useState([]);
-    async function handleAdd(data,horaInicial, horaFinal){
-        setShow(true);
-        let tarefa = {
-            data,
-            horaInicial,
-            horaFinal,
-        }
-        await preencherTasks(tarefa);
-    };
-
-    async function preencherTasks(tarefa) {
-        let listTask = [...tasks, tarefa]
-        
-        
-        setTasks(listTask);
-        console.log(tasks);
-    };
-
-
+    
+    
     return (
         <DateTimeContainer>
             <DateArea>
@@ -96,32 +151,19 @@ function DateTime({data, setData, horaInicial, setHoraInicial, horaFinal, setHor
                     ></TextInput>
                 </TimeArea>
             </DateTimeArea>
-            {show &&
-              <ShowDateTime>
-                
-                {tasks.map(task => {
-                    <Content>
-                        <Text style={styles.CheckText}>
-                            {task.data}
-                            Coisinha
-                        </Text>
-                    </Content>
-                })}
-              </ShowDateTime>      
-            }
-            <ButtonAdd
-                onPress={() => {
-                    handleAdd(data, horaInicial, horaFinal)
-                }}
-            >
-                <Plus height="18px" width="18px"/>
-                <Text style = {styles.ButtonAdicionar}>
-                    Adicionar
-                </Text>
-            </ButtonAdd>
 
+            <ScrollerTask>  
+                        <DateTimeList
+                            data={data}
+                            horaInicial={horaInicial}
+                            horaFinal={horaFinal}
+                        />
+            </ScrollerTask> 
+            
+              
         </DateTimeContainer>
     )
-};
+
+}
 
 export default DateTime;
