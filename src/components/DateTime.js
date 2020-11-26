@@ -4,95 +4,24 @@ import {
     DateTimeArea,
     DateArea,
     TimeArea,
-    ButtonAdd,
     styles,
     DateTimeContainer,
     ScrollerTask,
 } from '../pages/ManutencaoCorretiva/styles';
 
+import DateTimeList from './DateTimeList'
+
 import {
     TextInput,
+    View,
 } from 'react-native';
 
 import {
     Text,
-    ListItem,
-    View,
 } from 'native-base';
-import Plus from '../../assets/plus.svg';
-
-class DateTimeList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleAdd= this.handleAdd.bind(this);
-        this.state={
-            list: [],
-            data: props.data,
-            horaInicial: props.horaInicial,
-            horaFinal: props.horaFinal,
-        };
-        
-    }
-
-    handleAdd(){
-        let tarefa = {
-            data: this.state.data,
-            horaInicial: this.state.horaInicial,
-            horaFinal: this.state.horaFinal,
-        }    
-        /* console.log(`TAREFA: ${tarefa.data}`); */
-        
-        this.setState({            
-            list : [...this.state.list, tarefa],
-        })
-        
-
-    }
-
-    
-    
-
-    render(){/* 
-
-        console.log(this.state.list); */
-        let Lista = this.state.list.map((task, index)=>{
-            return (
-                    <ListItem
-                    style={styles.ListItem}
-                    key={index}
-                    pass_in_data={task}
-                    >
-                        <Text style={styles.EquipSN}>
-                            {task.data}
-                        </Text>
-                    </ListItem>  
-                )
-            })
-        return(
-
-            <View>
-                <ButtonAdd
-                onPress={()=>{
-                    this.handleAdd()
-                }
-                    
-                }
-            >
-                    <Plus height="18px" width="18px"/>
-                    <Text style = {styles.ButtonAdicionar}>
-                        Adicionar
-                    </Text>
-                </ButtonAdd>
-                {Lista}   
-            </View>  
-        
-        )
-    }
-
-}
 
 
-function DateTime({data, setData, horaInicial, setHoraInicial, horaFinal, setHoraFinal}){
+function DateTime({data, setData, horaInicial, setHoraInicial, horaFinal, setHoraFinal, list, setList}){
     const [show, setShow] = useState(false);
     const [tasks, setTasks] = useState([]);
     
@@ -151,12 +80,18 @@ function DateTime({data, setData, horaInicial, setHoraInicial, horaFinal, setHor
                     ></TextInput>
                 </TimeArea>
             </DateTimeArea>
-
+            <View style={styles.taskView}>
+                <Text style={styles.taskText}>
+                    |    Data   |     Início    |    Término   |
+                </Text>
+            </View>     
             <ScrollerTask>  
                         <DateTimeList
                             data={data}
                             horaInicial={horaInicial}
                             horaFinal={horaFinal}
+                            list={list}
+                            setList={setList}
                         />
             </ScrollerTask> 
             

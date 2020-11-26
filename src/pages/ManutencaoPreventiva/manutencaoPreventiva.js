@@ -9,6 +9,7 @@ import * as Print from 'expo-print';
 
 import OrdemDeServico from '../../../assets/OrdemDeServico/ordemDeServico';
 import DateTime from '../../components/DateTime';
+import CheckList from '../../components/CheckList'
 
 import {
     Container,
@@ -19,13 +20,13 @@ import {
     HeaderTitle,
     InputArea,
     ButtonSubmeter,
-    DateTimeArea,
     CheckArea,
     CheckBoxArea,
 } from './styles';
 
 import{
     TextInput,
+    View,
 } from 'react-native'
 
 import {
@@ -36,10 +37,10 @@ import {
 
 import {styles} from './styles'
 
-function ManutencaoCorretiva(manutencao) {
+function ManutencaoPreventiva(manutencao) {
     const [show, setShow] = useState(false);
-    const equipCorretiva = manutencao.route.params.manutencao.equip
-    const hospCorretiva = manutencao.route.params.manutencao.hosp
+    const equipPreventiva = manutencao.route.params.manutencao.equip
+    const hospPreventiva = manutencao.route.params.manutencao.hosp
     const tipo = manutencao.route.params.manutencao.tipo
     const [problema, setProblema] = useState('');
     const [solucao, setSolucao] = useState('');
@@ -55,35 +56,11 @@ function ManutencaoCorretiva(manutencao) {
     const { user } = useUser();
     
     async function handleSubmeter(equip, list, problema, solucao, user, tipo, situacao, pendencias){
-        /* console.log(`${data} - ${horaInicial}`);
-        console.log(`${data} - ${horaFinal}`);
-        console.log(problema);
-        console.log(solucao);
-        console.log(user.id);
-        console.log(equipCorretiva.id);
-        console.log(tipo); */
+
         Print.printAsync({
             html: `${OrdemDeServico(equip, list, problema, solucao, user, tipo, situacao, pendencias)}`
         });
         
-        // const response = await api.post('/manutencoes',{
-        //     data,
-        //     solucao,
-        //     problema,
-        //     equipamentoId,
-        //     userId: user.id,
-        //     tipo,
-        // })
-        /* 
-        {
-            data,
-            solucao,
-            problema,
-            equipamentoId,
-            userId,
-            tipo,
-        }
-        */
     }
 
 
@@ -94,22 +71,22 @@ function ManutencaoCorretiva(manutencao) {
                 <HeaderArea>
                     <HeaderTitle>
                         <Text style={styles.EquipName}>
-                            Manutenção Corretiva
+                            Manutenção Preventiva
                         </Text>
                     </HeaderTitle> 
                     <HeaderContent>
-                        <Thumbnail style ={styles.Thumbnail} square source={{ uri: equipCorretiva.imgUrl }} />
+                        <Thumbnail style ={styles.Thumbnail} square source={{ uri: equipPreventiva.imgUrl }} />
                         <InfoArea style={styles.infoEquip}>
                             <HeaderTitle>
                                 <Text style={styles.EquipName}>
-                                    {equipCorretiva.name}
+                                    {equipPreventiva.name}
                                 </Text>
                             </HeaderTitle>
                             <Text style={styles.EquipSN}>
-                                Nº de Série: {equipCorretiva.sn}
+                                Nº de Série: {equipPreventiva.sn}
                             </Text>
                             <Text style={styles.EquipHosp}>
-                                Hospital: {hospCorretiva.name}
+                                Hospital: {hospPreventiva.name}
                             </Text> 
                         </InfoArea>
                                          
@@ -130,6 +107,15 @@ function ManutencaoCorretiva(manutencao) {
                         setList={setList}
                         
                     />
+
+
+                    <View>
+                        <CheckList
+                            equip={equipPreventiva}
+                            hosp={hospPreventiva}
+                        />
+                    </View>
+
 
                     <Text style={styles.EquipHosp}>
                         Problema:
@@ -230,7 +216,7 @@ function ManutencaoCorretiva(manutencao) {
                     
                     <ButtonSubmeter
                         onPress={()=>{
-                            handleSubmeter(equipCorretiva, list, problema, solucao, user, 1, situacao, pendencias)
+                            handleSubmeter(equipPreventiva, list, problema, solucao, user, 2, situacao, pendencias)
                             
                         }}
                     >
@@ -249,4 +235,4 @@ function ManutencaoCorretiva(manutencao) {
 }
 
 
-export default ManutencaoCorretiva;
+export default ManutencaoPreventiva;

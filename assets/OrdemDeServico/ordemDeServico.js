@@ -1,5 +1,5 @@
 import checked from '../checked.svg'
-export default (equip, data, horaInicial, horaFinal, problema, solucao, user, tipo, situacao, pendencias)=>{
+export default (equip, list, problema, solucao, user, tipo, situacao, pendencias)=>{
 
 
     function getTipo(tipo){
@@ -9,6 +9,46 @@ export default (equip, data, horaInicial, horaFinal, problema, solucao, user, ti
             return 'Manutenção Preventiva'
         }
     }
+    function taskList(list){
+        let table = ''
+        list.map(task=>{
+            table += `<tr>
+                <td>${task.data}</td>
+                <td>${task.horaInicial}</td>
+                <td>${task.horaFinal}</td>
+                <td>${somarHoras(task.horaInicial, task.horaFinal)}</td>
+            </tr>`    
+        })
+        return table
+    }
+    function horasTotais(list){
+        let horasTotais = 0
+        list.map(task => {
+            horasTotais = horasTotais + somarHoras(task.horaInicial, task.horaFinal)
+        })
+        return horasTotais.toFixed(2)
+    }
+    function somarHoras(horaInicial, horaFinal){
+        
+        let hInicial = Number(horaInicial.split(':')[0])
+        let minInicial = Number(horaInicial.split(':')[1])
+        let hFinal = Number(horaFinal.split(':')[0])
+        let minFinal = Number(horaFinal.split(':')[1])
+        
+        let hTrabs = hFinal - hInicial
+        
+        let minTrabs = minFinal - minInicial
+        
+        if (minTrabs<0){
+            minTrabs + 60
+        }
+        
+        let minTrabsDeHora = minTrabs / 60.0
+        
+        let horasTrabs = Number(hTrabs) + Number(minTrabsDeHora.toFixed(2))
+        return horasTrabs
+    }
+
     const html = `<!DOCTYPE html>
     <html>
         <head>
@@ -113,7 +153,7 @@ export default (equip, data, horaInicial, horaFinal, problema, solucao, user, ti
                             <p><b>Contato:</b> ${user.name}</p>
                         </div>
                         <div>
-                            <p><b>Data:</b> ${data}</p>
+                            <p><b>Data:</b> ${list[0].data}</p>
                             <p><b>Endereço:</b> Av. Nilo Peçanha, 620 - Petrópolis, Natal - RN, 59012-300 </p>
                             <p><b>Telefone:</b> 8499999999</p>
                         </div>
@@ -174,39 +214,10 @@ export default (equip, data, horaInicial, horaFinal, problema, solucao, user, ti
                                 <td><b>Término</b></td>
                                 <td><b>Horas Trabalhadas</b></td>
                             </thead>
-                            <tr>
-                                <td>${data}</td>
-                                <td>${horaInicial}</td>
-                                <td>${horaFinal}</td>
-                                <td>10:30</td>
-                            </tr>
-                            <tr>
-                                <td>10/10</td>
-                                <td>10:10</td>
-                                <td>10:10</td>
-                                <td>10:30</td>
-                            </tr>
-                            <tr>
-                                <td>10/10</td>
-                                <td>10:10</td>
-                                <td>10:10</td>
-                                <td>10:30</td>
-                            </tr>
-                            <tr>
-                                <td>10/10</td>
-                                <td>10:10</td>
-                                <td>10:10</td>
-                                <td>10:30</td>
-                            </tr>
-                            <tr>
-                                <td>10/10</td>
-                                <td>10:10</td>
-                                <td>10:10</td>
-                                <td>10:30</td>
-                            </tr>
+                            ${taskList(list)}
                             <tr>
                                 <td class='total' colspan='3'><b>Total de Horas Trabalhadas:</b></td>
-                                <td><b>15:30</b></td>
+                                <td><b>${horasTotais(list)} Horas</b></td>
                             </tr>
                         </table>
 

@@ -63,12 +63,12 @@ function Equipamento(equipamento) {
                 }
             });
         } else{
-         /*    navigation.navigate('ManutencaoPreventiva',{
-                equipamento:{
+            navigation.navigate('ManutencaoPreventiva',{
+                manutencao:{
                     equip,
                     hosp,
                 }
-            });*/
+            });
         }; 
     }
 
@@ -92,7 +92,11 @@ function Equipamento(equipamento) {
                     
                 </HeaderArea>
                 <ButtonArea>  
-                    <Button style={styles.buttonEquip}>
+                    <Button style={styles.buttonEquip}
+                     onPress={() => {
+                        HandleClickManutencao(equip, hosp, 2)
+                     }}
+                    >
                         <Text>
                             Manutenção Preventiva
                         </Text>
