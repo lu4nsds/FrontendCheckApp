@@ -1,10 +1,7 @@
 import React, {component, useState, useEffect } from 'react';
 import { useNavigation } from "@react-navigation/native"
-// tentativas: DateTimePicker / nativeBase (antigo) / Tentar o do reactNative
 import api from '../../api.js'
 import { useUser } from '../../contexts/User';
-/* import RNHTMLtoPDF from 'react-native-html-to-pdf';
-import RNPrint from 'react-native-print'; */
 import * as Print from 'expo-print';
 
 import OrdemDeServico from '../../../assets/OrdemDeServico/ordemDeServico';
@@ -54,7 +51,7 @@ function ManutencaoCorretiva(manutencao) {
     const [list, setList] = useState([])
     const { user } = useUser();
     
-    async function handleSubmeter(equip, list, problema, solucao, user, tipo, situacao, pendencias){
+    async function handleSubmeter(equip, list, problema, solucao, user, tipo, situacao, pendencias, hospital){
         /* console.log(`${data} - ${horaInicial}`);
         console.log(`${data} - ${horaFinal}`);
         console.log(problema);
@@ -62,8 +59,9 @@ function ManutencaoCorretiva(manutencao) {
         console.log(user.id);
         console.log(equipCorretiva.id);
         console.log(tipo); */
+        let itens =[]
         Print.printAsync({
-            html: `${OrdemDeServico(equip, list, problema, solucao, user, tipo, situacao, pendencias)}`
+            html: `${OrdemDeServico(equip, list, problema, solucao, user, tipo, situacao, pendencias, itens, hospital)}`
         });
         
         // const response = await api.post('/manutencoes',{
@@ -230,8 +228,8 @@ function ManutencaoCorretiva(manutencao) {
                     
                     <ButtonSubmeter
                         onPress={()=>{
-                            handleSubmeter(equipCorretiva, list, problema, solucao, user, 1, situacao, pendencias)
-                            
+                            handleSubmeter(equipCorretiva, list, problema, solucao, user, 1, situacao, pendencias, hospCorretiva)
+
                         }}
                     >
                         <Text style = {styles.ButtonText}>

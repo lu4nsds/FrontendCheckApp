@@ -25,7 +25,7 @@ function DateTime({data, setData, horaInicial, setHoraInicial, horaFinal, setHor
     const [show, setShow] = useState(false);
     const [tasks, setTasks] = useState([]);
     
-    
+
     return (
         <DateTimeContainer>
             <DateArea>
@@ -39,6 +39,7 @@ function DateTime({data, setData, horaInicial, setHoraInicial, horaFinal, setHor
                     if (text.length == 2 || text.length == 5) {
                         text = text + '/'
                     }
+                    
                     setData(text)
                 }}
                 value={data}

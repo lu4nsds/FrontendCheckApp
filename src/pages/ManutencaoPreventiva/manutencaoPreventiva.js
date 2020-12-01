@@ -37,6 +37,8 @@ import {
 
 import {styles} from './styles'
 
+
+
 function ManutencaoPreventiva(manutencao) {
     const [show, setShow] = useState(false);
     const equipPreventiva = manutencao.route.params.manutencao.equip
@@ -53,12 +55,13 @@ function ManutencaoPreventiva(manutencao) {
     const [situacao, setSituacao] = useState('');
     const [pendencias, setPendencias] = useState('');
     const [list, setList] = useState([])
+    const [itens, setItens] = useState([])
     const { user } = useUser();
     
-    async function handleSubmeter(equip, list, problema, solucao, user, tipo, situacao, pendencias){
+    async function handleSubmeter(equip, list, problema, solucao, user, tipo, situacao, pendencias, itens, hosp){
 
         Print.printAsync({
-            html: `${OrdemDeServico(equip, list, problema, solucao, user, tipo, situacao, pendencias)}`
+            html: `${OrdemDeServico(equip, list, problema, solucao, user, tipo, situacao, pendencias, itens, hosp)}`
         });
         
     }
@@ -108,44 +111,19 @@ function ManutencaoPreventiva(manutencao) {
                         
                     />
 
-
+                    <Text style={styles.EquipHosp}>
+                        Checklist:
+                    </Text>
                     <View>
                         <CheckList
                             equip={equipPreventiva}
                             hosp={hospPreventiva}
+                            itens={itens}
+                            setItens={setItens}
                         />
                     </View>
-
-
-                    <Text style={styles.EquipHosp}>
-                        Problema:
-                    </Text>
                       
-                    <TextInput
-                        multiline
-                        style={styles.Input}
-                        placeholder='Qual o problema?'
-                        onChangeText={(text)=>{
-                            setProblema(text)
-                        }}
-                    >
-                            
-
-                    </TextInput>
-                    <Text style={styles.EquipHosp}>
-                            Solução:
-                    </Text>
-                    <TextInput
-                        multiline
-                        style={styles.Input}
-                        placeholder='Qual a resolução?'
-                        onChangeText={(text) => {
-                            setSolucao(text)
-                        }}
-                        >
-                        
-
-                    </TextInput>
+                    
                     <Text style={styles.EquipHosp}>
                             Pendências/Observações:
                     </Text>
@@ -216,7 +194,7 @@ function ManutencaoPreventiva(manutencao) {
                     
                     <ButtonSubmeter
                         onPress={()=>{
-                            handleSubmeter(equipPreventiva, list, problema, solucao, user, 2, situacao, pendencias)
+                            handleSubmeter(equipPreventiva, list, problema, solucao, user, 2, situacao, pendencias, itens, hospPreventiva)
                             
                         }}
                     >

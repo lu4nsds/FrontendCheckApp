@@ -27,6 +27,23 @@ export const styles = {
         width: '100%',
         
     },
+    checklistArea: {
+        backgroundColor: '#fff',
+        padding: 10,
+        borderRadius: 15,
+        marginBottom: 10,
+        marginTop:10,
+        width: '100%',
+        
+    },
+    checklistItem: {
+        backgroundColor: '#fff',
+        flexDirection: 'row',
+        padding: 10,
+    },
+    checkbox:{
+        marginRight: 25,
+    },
     taskView: {
         justifyContent: 'center',
         flexDirection: 'row',
