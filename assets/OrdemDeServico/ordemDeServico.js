@@ -1,4 +1,4 @@
-export default (equip, list, problema, solucao, user, tipo, situacao, pendencias, itens, hospital)=>{
+export default (equip, list, problema, solucao, user, tipo, situacao, pendencias, itens, hospital, manutencaoId)=>{
 
     function getTipo(tipo){
         if (tipo == 1) {
@@ -170,14 +170,14 @@ export default (equip, list, problema, solucao, user, tipo, situacao, pendencias
                     <h3>CLIENTE</h3>
                     <article class="infos">
                         <div>
-                            <p><b>Ordem de Serviço:</b> MUDAR: 123456</p>
+                            <p><b>Ordem de Serviço:</b> ${manutencaoId}</p>
                             <p><b>Cliente:</b> ${hospital.name}</p>
-                            <p><b>Contato:</b> ${user.name}</p>
+                            <p><b>Contato:</b> ${hospital.contato}</p>
                         </div>
                         <div>
                             <p><b>Data:</b> ${list[0].data}</p>
                             <p><b>Endereço:</b> ${hospital.endereco} </p>
-                            <p><b>Telefone:</b> MUDAR: 8499999999</p>
+                            <p><b>Telefone:</b> ${hospital.telefone}</p>
                         </div>
                     </article>
                 </section>
@@ -190,7 +190,7 @@ export default (equip, list, problema, solucao, user, tipo, situacao, pendencias
                         </div>
                         <div>
                             <p><b>Modelo:</b> ${equip.modelo}</p>
-                            <p><b>Sala/Departamento</b> Centro de Imagens </p>
+                            <p><b>Sala/Departamento</b> ${equip.departamento} </p>
                         </div>
                     </article>
                 </section>
@@ -391,14 +391,14 @@ export default (equip, list, problema, solucao, user, tipo, situacao, pendencias
                     <h3>CLIENTE</h3>
                     <article class="infos">
                         <div>
-                            <p><b>Ordem de Serviço:</b> MUDAR: 123456</p>
+                            <p><b>Ordem de Serviço:</b> ${manutencaoId}</p>
                             <p><b>Cliente:</b> ${hospital.name}</p>
-                            <p><b>Contato:</b> ${user.name}</p>
+                            <p><b>Contato:</b> ${hospital.contato}</p>
                         </div>
                         <div>
                             <p><b>Data:</b> ${list[0].data}</p>
                             <p><b>Endereço:</b> ${hospital.endereco} </p>
-                            <p><b>Telefone:</b> MUDAR: 8499999999</p>
+                            <p><b>Telefone:</b> ${hospital.telefone}</p>
                         </div>
                     </article>
                 </section>
@@ -411,7 +411,7 @@ export default (equip, list, problema, solucao, user, tipo, situacao, pendencias
                         </div>
                         <div>
                             <p><b>Modelo:</b> ${equip.modelo}</p>
-                            <p><b>Sala/Departamento</b> MUDAR: Centro de Imagens </p>
+                            <p><b>Sala/Departamento</b> ${equip.departamento}</p>
                         </div>
                     </article>
                 </section>

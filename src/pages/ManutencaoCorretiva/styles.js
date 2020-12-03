@@ -12,6 +12,10 @@ export const styles = {
         fontWeight: 'bold',
         fontSize: 18,
     },
+    opcao: {
+        color: '#c6c6c6',   
+        fontSize: 12, 
+    },
     ListItem: {
         backgroundColor: '#fff',  
         flexDirection: 'row',

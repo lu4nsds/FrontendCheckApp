@@ -23,6 +23,7 @@ import {
 
 import{
     TextInput,
+    Alert
 } from 'react-native'
 
 import {
@@ -50,28 +51,101 @@ function ManutencaoCorretiva(manutencao) {
     const [pendencias, setPendencias] = useState('');
     const [list, setList] = useState([])
     const { user } = useUser();
+    const navigation = useNavigation();
     
-    async function handleSubmeter(equip, list, problema, solucao, user, tipo, situacao, pendencias, hospital){
-        /* console.log(`${data} - ${horaInicial}`);
-        console.log(`${data} - ${horaFinal}`);
-        console.log(problema);
-        console.log(solucao);
-        console.log(user.id);
-        console.log(equipCorretiva.id);
-        console.log(tipo); */
-        let itens =[]
-        Print.printAsync({
-            html: `${OrdemDeServico(equip, list, problema, solucao, user, tipo, situacao, pendencias, itens, hospital)}`
-        });
+    async function handleSubmeter(equip, list, problema, solucao, user, tipo, situacao, pendencias, hosp){
         
-        // const response = await api.post('/manutencoes',{
-        //     data,
-        //     solucao,
-        //     problema,
-        //     equipamentoId,
-        //     userId: user.id,
-        //     tipo,
-        // })
+        let itens =[]
+        const createButtonAlert = (manutencaoId) =>{
+            Alert.alert(
+                "Manutenção salva com Sucesso",
+                "Deseja imprimir Ordem de Serviço?",
+                [
+                    {
+                    text: "Imprimir OS",
+                    onPress: () => {
+                        Print.printAsync({
+                            html: `${OrdemDeServico(equip, list, problema, solucao, user, tipo, situacao, pendencias, itens, hosp, manutencaoId)}`
+                        });
+                        handleNavigate(equip, hosp);
+                    }
+                    },
+                    { text: "Não", onPress: () => {
+                        handleNavigate(equip, hosp);                    
+                    } }
+                ],
+                { cancelable: false }
+            );
+        }
+
+        let horasTrabsTotais = horasTotais(list)        
+        
+    
+        let response = await api.post('/manutencoes', {
+            data: list[0].data,
+            solucao: solucao,
+            problema: problema,
+            equipamentoId: equip.id,
+            userId: user.id,
+            observacoes: pendencias,
+            tipo: tipo,
+            horasTrabalhadas: horasTrabsTotais,
+        })
+        let manut = response.data
+        list.map(async(task)=>{
+            await api.post('/tarefas', {
+                data: task.data,
+                horaInicial: task.horaInicial,
+                horaFinal: task.horaFinal,
+                manutencaoId: manut[0]
+            })    
+        })
+        
+
+        createButtonAlert(manut[0]);
+
+        function handleNavigate(equip, hosp){
+            navigation.navigate('Equipamento',{
+                equipamento: {
+                    equip,
+                    hosp,
+                }
+            
+            });
+        }
+        
+        
+        
+        function horasTotais(list){
+            let horasTotais = 0
+            list.map(task => {
+                horasTotais = horasTotais + somarHoras(task.horaInicial, task.horaFinal)
+            })
+            return `${horasTotais.toFixed(2)}`
+        };
+        
+    
+        function somarHoras(horaInicial, horaFinal){
+            
+            let hInicial = Number(horaInicial.split(':')[0])
+            let minInicial = Number(horaInicial.split(':')[1])
+            let hFinal = Number(horaFinal.split(':')[0])
+            let minFinal = Number(horaFinal.split(':')[1])
+            
+            let hTrabs = hFinal - hInicial
+            
+            let minTrabs = minFinal - minInicial
+            
+            if (minTrabs<0){
+                minTrabs + 60
+            }
+            
+            let minTrabsDeHora = minTrabs / 60.0
+            
+            let horasTrabs = Number(hTrabs) + Number(minTrabsDeHora.toFixed(2))
+            return horasTrabs
+        };
+        
         /* 
         {
             data,
@@ -158,9 +232,14 @@ function ManutencaoCorretiva(manutencao) {
                         
 
                     </TextInput>
+                            
                     <Text style={styles.EquipHosp}>
-                            Pendências/Observações:
+                            Pendências/Observações 
+                            <Text style={styles.opcao}>
+                               : (Opcional)
+                            </Text>
                     </Text>
+
                     <TextInput
                         multiline
                         style={styles.Input}
@@ -228,7 +307,12 @@ function ManutencaoCorretiva(manutencao) {
                     
                     <ButtonSubmeter
                         onPress={()=>{
-                            handleSubmeter(equipCorretiva, list, problema, solucao, user, 1, situacao, pendencias, hospCorretiva)
+                            if(!list || !problema || !solucao ||!situacao){
+                                Alert.alert('[ERRO]', 'Existem campos não preenchidos!')
+                            }else{
+                                handleSubmeter(equipCorretiva, list, problema, solucao, user, 1, situacao, pendencias, hospCorretiva)
+                            }
+                            
 
                         }}
                     >

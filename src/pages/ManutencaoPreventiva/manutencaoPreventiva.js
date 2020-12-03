@@ -27,6 +27,7 @@ import {
 import{
     TextInput,
     View,
+    Alert,
 } from 'react-native'
 
 import {
@@ -57,12 +58,98 @@ function ManutencaoPreventiva(manutencao) {
     const [list, setList] = useState([])
     const [itens, setItens] = useState([])
     const { user } = useUser();
+    const navigation = useNavigation();
     
     async function handleSubmeter(equip, list, problema, solucao, user, tipo, situacao, pendencias, itens, hosp){
 
-        Print.printAsync({
-            html: `${OrdemDeServico(equip, list, problema, solucao, user, tipo, situacao, pendencias, itens, hosp)}`
-        });
+        const createButtonAlert = (manutencaoId) =>{
+            Alert.alert(
+                "Manutenção salva com Sucesso",
+                "Deseja imprimir Ordem de Serviço?",
+                [
+                    {
+                    text: "Imprimir OS",
+                    onPress: () => {
+                        Print.printAsync({
+                            html: `${OrdemDeServico(equip, list, problema, solucao, user, tipo, situacao, pendencias, itens, hosp, manutencaoId)}`
+                        });
+                        handleNavigate(equip, hosp);
+                    }
+                    },
+                    { text: "Não", onPress: () => {
+                        handleNavigate(equip, hosp);                    
+                    } }
+                ],
+                { cancelable: false }
+            );
+        }
+
+        let horasTrabsTotais = horasTotais(list)  
+
+        let response = await api.post('/manutencoes', {
+            data: list[0].data,
+            equipamentoId: equip.id,
+            userId: user.id,
+            observacoes: pendencias,
+            checklistId: itens[0].checklistId,
+            tipo: tipo,
+            horasTrabalhadas: horasTrabsTotais,
+        })
+        
+        let manut = response.data
+        list.map(async(task)=>{
+            await api.post('/tarefas', {
+                data: task.data,
+                horaInicial: task.horaInicial,
+                horaFinal: task.horaFinal,
+                manutencaoId: manut[0]
+            })    
+        })
+        
+
+        createButtonAlert(manut[0]);
+
+        function handleNavigate(equip, hosp){
+            navigation.navigate('Equipamento',{
+                equipamento: {
+                    equip,
+                    hosp,
+                }
+            
+            });
+        }
+        
+        
+        
+        function horasTotais(list){
+            let horasTotais = 0
+            list.map(task => {
+                horasTotais = horasTotais + somarHoras(task.horaInicial, task.horaFinal)
+            })
+            return `${horasTotais.toFixed(2)}`
+        };
+        
+    
+        function somarHoras(horaInicial, horaFinal){
+            
+            let hInicial = Number(horaInicial.split(':')[0])
+            let minInicial = Number(horaInicial.split(':')[1])
+            let hFinal = Number(horaFinal.split(':')[0])
+            let minFinal = Number(horaFinal.split(':')[1])
+            
+            let hTrabs = hFinal - hInicial
+            
+            let minTrabs = minFinal - minInicial
+            
+            if (minTrabs<0){
+                minTrabs + 60
+            }
+            
+            let minTrabsDeHora = minTrabs / 60.0
+            
+            let horasTrabs = Number(hTrabs) + Number(minTrabsDeHora.toFixed(2))
+            return horasTrabs
+        };
         
     }
 
@@ -194,7 +281,21 @@ function ManutencaoPreventiva(manutencao) {
                     
                     <ButtonSubmeter
                         onPress={()=>{
-                            handleSubmeter(equipPreventiva, list, problema, solucao, user, 2, situacao, pendencias, itens, hospPreventiva)
+                            const existItens = ()=>{
+                                let exist = false
+                                itens.map((item)=>{
+                                    if(item.checado){
+                                        exist = true
+                                    }
+                                })
+                                return exist
+                            }
+                            let itensCheck = existItens(itens)
+                            if(!list || !situacao || !itensCheck ){
+                                Alert.alert('[ERRO]', 'Existem campos não preenchidos!')
+                            }else{
+                                handleSubmeter(equipPreventiva, list, problema, solucao, user, 2, situacao, pendencias, itens, hospPreventiva)
+                            }                            
                             
                         }}
                     >
