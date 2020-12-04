@@ -97,11 +97,19 @@ function ManutencaoPreventiva(manutencao) {
         })
         
         let manut = response.data
+
         list.map(async(task)=>{
             await api.post('/tarefas', {
                 data: task.data,
                 horaInicial: task.horaInicial,
                 horaFinal: task.horaFinal,
+                manutencaoId: manut[0]
+            })    
+        })
+        itens.map(async(item)=>{
+            await api.post('/itens_status', {
+                procedimento: item.procedimento,
+                checado: item.checado,
                 manutencaoId: manut[0]
             })    
         })
@@ -201,7 +209,8 @@ function ManutencaoPreventiva(manutencao) {
                     <Text style={styles.EquipHosp}>
                         Checklist:
                     </Text>
-                    <View>
+                    
+                    <View style={styles.itensArea}>
                         <CheckList
                             equip={equipPreventiva}
                             hosp={hospPreventiva}

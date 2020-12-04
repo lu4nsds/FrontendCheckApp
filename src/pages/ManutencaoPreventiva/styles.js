@@ -12,12 +12,24 @@ export const styles = {
         fontWeight: 'bold',
         fontSize: 18,
     },
+    opcao: {
+        color: '#c6c6c6',   
+        fontSize: 12, 
+    },
     ListItem: {
         backgroundColor: '#fff',  
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingLeft: 30,
         paddingRight: 50,
+    },
+    itensArea: {
+        width:'100%',
+        padding: 10,
+        backgroundColor: '#fff',
+        borderRadius: 15,  
+        marginBottom: 15, 
+        marginTop: 10, 
     },
     listArea: {
         backgroundColor: '#fff',
@@ -29,20 +41,25 @@ export const styles = {
     },
     checklistArea: {
         backgroundColor: '#fff',
-        padding: 10,
         borderRadius: 15,
-        marginBottom: 10,
-        marginTop:10,
+        padding: 15,
         width: '100%',
         
     },
+    procedimento: {
+       width: 250,
+    },
     checklistItem: {
-        backgroundColor: '#fff',
         flexDirection: 'row',
-        padding: 10,
+        paddingTop: 10,
+        paddingBottom: 10,
     },
     checkbox:{
-        marginRight: 25,
+        width: 30,
+        height: 30,
+    },
+    checkboxArea:{
+        paddingRight: 20,
     },
     taskView: {
         justifyContent: 'center',

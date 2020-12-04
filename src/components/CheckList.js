@@ -24,25 +24,29 @@ function List({item, index}){
     const [check, setCheck] = useState(false);
         return (
             <View style={styles.checklistItem} key={index}>
-                <CheckBox
-                        key={index}
-                        style={styles.checkbox}
-                        checked={check}
-                        //onValueChange={}
-                        onPress={()=>{
-                            if(item.checado){
-                                item.checado = false
-                                setCheck(item.checado)
-                            }else{
-                                item.checado = true
-                                setCheck(item.checado)
-                            }
-                            // console.log(item.checado)
-                        }}
-                    /> 
-                    <Text>
+                <View style={styles.checkboxArea}>
+                    <CheckBox
+                            key={index}
+                            style={styles.checkbox}
+                            checked={check}
+                            //onValueChange={}
+                            onPress={()=>{
+                                if(item.checado){
+                                    item.checado = false
+                                    setCheck(item.checado)
+                                }else{
+                                    item.checado = true
+                                    setCheck(item.checado)
+                                }
+                                // console.log(item.checado)
+                            }}
+                        /> 
+                </View> 
+                <View>   
+                    <Text style={styles.procedimento}>
                         {item.procedimento}
                     </Text>
+                </View>
             </View>
         )
     }         
@@ -74,7 +78,7 @@ function CheckList({equip, hosp, itens, setItens}){
     
 
     return (
-        <View style={styles.checklistArea}>
+        <View>
             {itens.map((item, index)=>(
                 <List
                     key = {index}
