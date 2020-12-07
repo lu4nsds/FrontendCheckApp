@@ -54,6 +54,10 @@ function Equipamento(equipamento) {
     const navigation = useNavigation()
     const equip = equipamento.route.params.equipamento.equip
     const hosp = equipamento.route.params.equipamento.hosp
+
+
+
+
     function HandleClickManutencao(equip, hosp, tipo){
         if(tipo == 1){
             navigation.navigate('ManutencaoCorretiva',{
@@ -71,6 +75,19 @@ function Equipamento(equipamento) {
             });
         }; 
     }
+
+    function handleHistorico(equip,hosp){
+        
+        navigation.navigate('Historico',{
+            historico:{
+                equip,
+                hosp,
+            }
+        });
+
+    }
+    
+
 
     return (
         <Container>
@@ -111,7 +128,12 @@ function Equipamento(equipamento) {
                             Manutenção Corretiva
                         </Text>
                     </Button>
-                    <Button style={styles.buttonEquip}>
+                    <Button
+                    onPress={() => {
+                        handleHistorico(equip, hosp)    
+                        }
+                    }
+                    style={styles.buttonEquip}>
                         <Text>
                             Histórico
                         </Text>

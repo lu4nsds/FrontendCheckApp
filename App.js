@@ -16,6 +16,7 @@ export default function App() {
   }
 
   fontes();
+  
   return (
     <UserProvider>
       <Routes />
