@@ -1,4 +1,4 @@
-export default (equip, list, problema, solucao, user, tipo, situacao, pendencias, itens, hospital, manutencaoId)=>{
+export default (equip, list, problema, solucao, user, tipo, situacao, pendencias, itens, hospital, manutencaoId, data)=>{
 
     function getTipo(tipo){
         if (tipo == 1) {
@@ -175,7 +175,7 @@ export default (equip, list, problema, solucao, user, tipo, situacao, pendencias
                             <p><b>Contato:</b> ${hospital.contato}</p>
                         </div>
                         <div>
-                            <p><b>Data:</b> ${list[0].data}</p>
+                            <p><b>Data:</b> ${data}</p>
                             <p><b>Endereço:</b> ${hospital.endereco} </p>
                             <p><b>Telefone:</b> ${hospital.telefone}</p>
                         </div>
@@ -396,7 +396,7 @@ export default (equip, list, problema, solucao, user, tipo, situacao, pendencias
                             <p><b>Contato:</b> ${hospital.contato}</p>
                         </div>
                         <div>
-                            <p><b>Data:</b> ${list[0].data}</p>
+                            <p><b>Data:</b> ${data}</p>
                             <p><b>Endereço:</b> ${hospital.endereco} </p>
                             <p><b>Telefone:</b> ${hospital.telefone}</p>
                         </div>

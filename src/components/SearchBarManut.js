@@ -5,6 +5,7 @@ import {
     Input,
     Content,
     Left,
+    Right,
     Body,
     Item,
     Icon,
@@ -12,45 +13,24 @@ import {
     ListItem,
     Thumbnail,
 } from 'native-base';
-import api from '../api';
-const styles = {
-    input:{
-        height: 55,
-        color: '#000000',
-        backgroundColor: '#fff',
-        borderRadius: 30,
-        fontSize: 18,
-        textAlign: 'center',
-        shadowColor: '#000',
-        shadowOpacity: 0.2,
-        shadowOffset: {
-            width: 4,
-            height: 4,
-        },
-        padding: 10,
-        elevation: 2,
-        placeholder: {
-        color: '#000000'
-        },
-        marginTop: 20,
-        marginBottom: 20,
-    },
-    text: {
-        color: '#45cbf3',
-        fontSize: 15,
-    },
-    textBold:{
-        color: '#fff',
-        fontWeight: 'bold',
-        fontSize: 18,
-    },
-  };  
+import * as Print from 'expo-print';
+import OrdemDeServico from '../../assets/OrdemDeServico/ordemDeServico';
+import {
+    styles,
+    ButtonPrint,
+} from '../pages/Historico/styles';
 
-export default ( {equip, hosp} ) => {
+import api from '../api';
+import { useUser } from '../contexts/User';
+
+export default ({ equip, hosp }) => {
     const [search, setSearch] = useState('');
     const [manutencoes, setManutencoes] = useState([]);
     const [manutsFilter, setManutsFilter] = useState([]);
     const navigation = useNavigation();
+    const [tarefas, setTarefas] = useState([])
+    const [itens, setItens] = useState([])
+    const { user } = useUser();
 
     useEffect(() => {
         async function loadManutencoesByEquipamentoId() {
@@ -109,12 +89,63 @@ export default ( {equip, hosp} ) => {
           setSearch(text);
         }
       };
-   
+    function tipoManut(text){
+        if(text==1){
+            return "Manutenção Corretiva"
+        }else{
+            return "Manutenção Preventiva"
+        }
+    }
+    function imageManut(text){
+        if(text==1){
+            return require("../../assets/repair.png")
+        }else{
+            return require("../../assets/checklist.png")
+        }
+    }
+
+    function loadTarefas(tarefas){
+        let listTarefas = [];
+        tarefas.map(tarefa => {
+
+ 
+            listTarefas = [...listTarefas, tarefa];
+
+        });
+        setTarefas(listTarefas)
+    }
+    function loadItens(itens, tipo){
+        
+        let listItens = [];
+        if(tipo==1){
+            setItens([])
+        }else{
+           itens.map(item => {
+                listItens = [...listItens, item];
+            }); 
+        
+            setItens(listItens)
+
+        }
+    }
+
+    async function handleButtonPrint(manut){
+        const responseTarefas = await api.get(`/manutencoes/${manut.id}/tarefas`);
+        await loadTarefas(responseTarefas.data);
+
+        const responseItens = await api.get(`/manutencoes/${manut.id}/itens_status`);
+        await loadItens(responseItens.data)
+
+        let situacao = ""
+        Print.printAsync({
+            html: `${OrdemDeServico(equip, tarefas, manut.problema, manut.solucao, user, manut.tipo, situacao, manut.pendencias, itens, hosp, manut.id, manut.data)}`
+        });
+    }
     return (
-        <Content searchBar rounded>
+        <Content style={styles.content} searchBar rounded>
             <Item style={styles.input} >
                 <Input 
-                    placeholder='Buscar Número de Série'
+                    placeholder='Buscar por data'
                     onChangeText={(text)=>{
                         searchFilterFunction(text)
                     }}
@@ -123,21 +154,32 @@ export default ( {equip, hosp} ) => {
             </Item>
             {manutsFilter.map((manut, index)=>(
                 <ListItem
-                onPress = {async ()=>{
+                /* onPress = {async ()=>{
                    await SingClickEquipamento(manut)
                     
-                }}
+                }} */
                 style={styles.listItem}
                 key={index}
                 avatar
                 >
                     <Left>
-                        <Thumbnail source={{ uri: equip.imgUrl }} />
+                        <Thumbnail square source={imageManut(manut.tipo)} />
                     </Left>
                     <Body>
-                        <Text style = {styles.textBold} >{manut.tipo}</Text>
+                        <Text style = {styles.textBold}>
+                            {tipoManut(manut.tipo)}
+                        </Text>
+                                
                         <Text note style = {styles.text} >Data: {manut.data}</Text>
                     </Body>
+                    <Right>
+                        <ButtonPrint onPress={async()=>{
+                            await handleButtonPrint(manut)                            
+                        }}>
+                            <Thumbnail square small source={require("../../assets/file.png")}/>
+                        
+                        </ButtonPrint>
+                    </Right>
                 </ListItem> 
             ))}
                

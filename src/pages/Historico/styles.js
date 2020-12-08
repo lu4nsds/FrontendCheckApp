@@ -3,6 +3,39 @@ import styled from 'styled-components/native';
 
 
 export const styles = {
+    input:{
+        height: 55,
+        color: '#000000',
+        backgroundColor: '#fff',
+        borderRadius: 30,
+        fontSize: 18,
+        textAlign: 'center',
+        shadowColor: '#000',
+        shadowOpacity: 0.2,
+        shadowOffset: {
+            width: 4,
+            height: 4,
+        },
+        padding: 10,
+        elevation: 2,
+        placeholder: {
+        color: '#000000'
+        },
+        marginTop: 20,
+        marginBottom: 20,
+    },
+    text: {
+        color: '#45cbf3',
+        fontSize: 15,
+    },
+    textBold:{
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 18,
+    },
+    content:{
+        paddingBottom: 20,
+    },
     EquipSN: {
         color: '#fff',
         fontSize: 15,
@@ -117,6 +150,12 @@ export const Input = styled.TextInput`
     border-radius: 10px;
     margin-top: 10px;
     padding: 10px;
+`;
+export const ButtonPrint = styled.TouchableOpacity`
+    border-radius: 20px;
+    width: 100%;
+    margin: auto;
+
 `;
 
 export const ButtonSubmeter = styled.TouchableOpacity`
