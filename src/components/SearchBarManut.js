@@ -28,8 +28,6 @@ export default ({ equip, hosp }) => {
     const [manutencoes, setManutencoes] = useState([]);
     const [manutsFilter, setManutsFilter] = useState([]);
     const navigation = useNavigation();
-    const [tarefas, setTarefas] = useState([])
-    const [itens, setItens] = useState([])
     const { user } = useUser();
 
     useEffect(() => {
@@ -43,11 +41,16 @@ export default ({ equip, hosp }) => {
 
     
 
-    async function SingClickEquipamento(manut) {
-        const hosp = await loadHospPorEquip(manut);
-        navigation.navigate('Equipamento',{
-            equipamento:{
+    async function handleClickManutencao(manut) {
+        const tarefas = await tarefasPorManut(manut);
+        const itens = await itensPorManut(manut);
+        navigation.navigate('Manutencao',{
+            manutencao:{
                 manut,
+                tarefas,
+                itens,
+                equip,
+                hosp
             }
         });
     }
@@ -89,6 +92,8 @@ export default ({ equip, hosp }) => {
           setSearch(text);
         }
       };
+      
+      
     function tipoManut(text){
         if(text==1){
             return "Manutenção Corretiva"
@@ -96,6 +101,7 @@ export default ({ equip, hosp }) => {
             return "Manutenção Preventiva"
         }
     }
+
     function imageManut(text){
         if(text==1){
             return require("../../assets/repair.png")
@@ -104,41 +110,45 @@ export default ({ equip, hosp }) => {
         }
     }
 
-    function loadTarefas(tarefas){
-        let listTarefas = [];
-        tarefas.map(tarefa => {
 
- 
-            listTarefas = [...listTarefas, tarefa];
+    async function tarefasPorManut(manut) {
+        const responseTarefas = await api.get(`/manutencoes/${manut.id}/tarefas`);
+        return responseTarefas.data;
+    } 
+    async function itensPorManut(manut) {
+        const responseItens = await api.get(`/manutencoes/${manut.id}/itens_status`);
+        return responseItens.data;
+    } 
+    
 
-        });
-        setTarefas(listTarefas)
-    }
-    function loadItens(itens, tipo){
-        
-        let listItens = [];
-        if(tipo==1){
-            setItens([])
-        }else{
-           itens.map(item => {
-                listItens = [...listItens, item];
-            }); 
-        
-            setItens(listItens)
 
-        }
-    }
+    
 
     async function handleButtonPrint(manut){
-        const responseTarefas = await api.get(`/manutencoes/${manut.id}/tarefas`);
-        await loadTarefas(responseTarefas.data);
 
-        const responseItens = await api.get(`/manutencoes/${manut.id}/itens_status`);
-        await loadItens(responseItens.data)
-
+        const tarefas = await tarefasPorManut(manut)
+        const itens = await itensPorManut(manut)
+        
         let situacao = ""
+
+        //console.log(equip)
+        //console.log(tarefas)
+        //console.log(manut.problema)
+        //console.log(manut.solucao)
+        //console.log(user)
+        //console.log(manut.tipo)
+        //console.log(situacao)
+        //console.log(manut.observacoes)
+        //console.log(itens)
+        //console.log(hosp)
+        //console.log(manut.id)
+        //console.log(manut.data)
+        //console.log("================")
+            
+
+
         Print.printAsync({
-            html: `${OrdemDeServico(equip, tarefas, manut.problema, manut.solucao, user, manut.tipo, situacao, manut.pendencias, itens, hosp, manut.id, manut.data)}`
+            html: `${OrdemDeServico(equip, tarefas, manut.problema, manut.solucao, user, manut.tipo, situacao, manut.observacoes, itens, hosp, manut.id, manut.data)}`
         });
     }
     return (
@@ -154,10 +164,10 @@ export default ({ equip, hosp }) => {
             </Item>
             {manutsFilter.map((manut, index)=>(
                 <ListItem
-                /* onPress = {async ()=>{
-                   await SingClickEquipamento(manut)
+                onPress = {async ()=>{
+                   await handleClickManutencao(manut)
                     
-                }} */
+                }}
                 style={styles.listItem}
                 key={index}
                 avatar

@@ -11,6 +11,7 @@ import Equipamento from './pages/Equipamento/equipamento.js';
 import ManutencaoCorretiva from './pages/ManutencaoCorretiva/manutencaoCorretiva.js';
 import ManutencaoPreventiva from './pages/ManutencaoPreventiva/manutencaoPreventiva.js';
 import Historico from './pages/Historico/historico.js';
+import Manutencao from './pages/Manutencao/manutencao.js';
 
 const Stack = createStackNavigator();
 
@@ -31,6 +32,7 @@ function Routes() {
         <Stack.Screen name="ManutencaoCorretiva" component={ManutencaoCorretiva} />
         <Stack.Screen name="ManutencaoPreventiva" component={ManutencaoPreventiva} />
         <Stack.Screen name="Historico" component={Historico} />
+        <Stack.Screen name="Manutencao" component={Manutencao} />
       </Stack.Navigator>
     </NavigationContainer>
   );

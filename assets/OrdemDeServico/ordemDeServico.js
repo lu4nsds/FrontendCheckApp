@@ -1,5 +1,5 @@
 export default (equip, list, problema, solucao, user, tipo, situacao, pendencias, itens, hospital, manutencaoId, data)=>{
-
+    console.log(list)
     function getTipo(tipo){
         if (tipo == 1) {
             return 'Manutenção Corretiva'

@@ -1,41 +1,8 @@
+import { Row } from 'native-base';
 import React from 'react';
 import styled from 'styled-components/native';
 
-
 export const styles = {
-    input:{
-        height: 55,
-        color: '#000000',
-        backgroundColor: '#fff',
-        borderRadius: 30,
-        fontSize: 18,
-        textAlign: 'center',
-        shadowColor: '#000',
-        shadowOpacity: 0.2,
-        shadowOffset: {
-            width: 4,
-            height: 4,
-        },
-        padding: 10,
-        elevation: 2,
-        placeholder: {
-        color: '#000000'
-        },
-        marginTop: 20,
-        marginBottom: 20,
-    },
-    text: {
-        color: '#45cbf3',
-        fontSize: 15,
-    },
-    textBold:{
-        color: '#fff',
-        fontWeight: 'bold',
-        fontSize: 18,
-    },
-    content:{
-        paddingBottom: 20,
-    },
     EquipSN: {
         color: '#fff',
         fontSize: 15,
@@ -45,12 +12,117 @@ export const styles = {
         fontWeight: 'bold',
         fontSize: 18,
     },
-    EquipHosp: {
+    opcao: {
+        color: '#c6c6c6',   
+        fontSize: 12, 
+    },
+    ListItem: {
+        backgroundColor: '#fff',  
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingLeft: 30,
+        paddingRight: 50,
+    },
+    itensArea: {
+        width:'100%',
+        padding: 10,
+        backgroundColor: '#fff',
+        borderRadius: 15,  
+        marginBottom: 15, 
+        marginTop: 10, 
+    },
+    listArea: {
+        backgroundColor: '#fff',
+        padding: 10,
+        borderRadius: 15,
+        marginBottom: 10,
+        width: '100%',
+        
+    },
+    checklistArea: {
+        backgroundColor: '#fff',
+        borderRadius: 15,
+        padding: 15,
+        width: '100%',
+        
+    },
+    procedimento: {
+       width: 250,
+    },
+    checklistItem: {
+        flexDirection: 'row',
+        paddingTop: 10,
+        paddingBottom: 10,
+    },
+    checkbox:{
+        width: 30,
+        height: 30,
+    },
+    checkboxArea:{
+        paddingRight: 20,
+    },
+    taskView: {
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        paddingRight: 20,
+        paddingLeft:20,
+        
+    },
+    taskText: {
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 16,       
+    },
+    taskInicio: {
         color: '#fff',
         fontWeight: 'bold',
         fontSize: 16,
+        paddingLeft:70,
     },
-    buttonEquip: {
+    ListItemText: {
+        color: '#000000',
+        fontWeight: 'bold',
+        fontSize: 14,    
+        
+    },
+    EquipHosp: {
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 16
+    },
+    ButtonText: {
+        alignItems: 'center',
+        color: '#fff',
+        fontSize: 20,
+        textAlign: 'center',
+        justifyContent: 'center',
+        fontWeight: 'bold',
+    },
+    CheckText:{
+        color: '#fff',
+        fontSize: 15,
+        paddingLeft: 10,
+    },
+    ButtonAdicionar: {
+        alignItems: 'center',
+        color: '#fff',
+        textAlign: 'center',
+        justifyContent: 'center',
+        color: '#45cdff',
+        paddingLeft: 5,
+    
+    },
+    buttonEquip:{
+        width: '100%',
+        height: 80,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 40,
+        marginTop: 10,
+        borderRadius: 20
+    },
+    buttonEquip:{
         width: '100%',
         height: 80,
         flex: 1,
@@ -67,7 +139,29 @@ export const styles = {
         marginBottom: 5,
         borderRadius: 15,
     },
+    headerContent:{
+        flexDirection: 'row',
+    },
+    infoEquip:{
+        flexDirection: 'column'
+    },
+    Input:{
+        backgroundColor: '#fff',
+        height: 100,
+        borderRadius: 10,
+        marginTop: 10,
+        marginBottom: 20,
+        padding: 10,
+    },
+    InputData:{
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        marginTop: 10,
+        marginBottom: 20,
+        padding: 10,
+    }
 };
+
 
 export const Container = styled.SafeAreaView`
     background-color: #263165;
@@ -122,16 +216,15 @@ export const HeaderContent = styled.View`
 `;
 export const DateTimeArea = styled.View`
     flex-direction: row;
-    width: 100%;
+    justify-content: space-between;
 `;
 export const DateArea = styled.View`
     border-radius: 100px;
-    width: 100%
     padding: 5px;
+    background-color: #fff;
 `;
 export const TimeArea = styled.View`
     border-radius: 100px;
-    width: 50%;
     padding: 5px;
 `;
 
@@ -150,12 +243,6 @@ export const Input = styled.TextInput`
     border-radius: 10px;
     margin-top: 10px;
     padding: 10px;
-`;
-export const ButtonPrint = styled.TouchableOpacity`
-    border-radius: 20px;
-    margin: auto;
-    width: 100%;
-
 `;
 
 export const ButtonSubmeter = styled.TouchableOpacity`
@@ -189,11 +276,12 @@ export const CheckBoxArea = styled.View`
 export const DateTimeContainer = styled.View`
     flex-direction: column;
     width: 100%;
-    background-color: #384C9D;
+    background-color: #fff;
     border-radius: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 10px;
+    
 `;
 export const TaskArea = styled.View`
     flex-direction: column;
