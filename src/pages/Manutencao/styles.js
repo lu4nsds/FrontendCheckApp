@@ -31,6 +31,19 @@ export const styles = {
         marginBottom: 15, 
         marginTop: 10, 
     },
+    textSituacao: {
+        paddingLeft: 15,
+        justifyContent: 'center',
+    },
+    situacao: {
+        flexDirection:'row',
+        width:'100%',
+        padding: 10,
+        backgroundColor: '#384C9D',
+        borderRadius: 15,  
+        marginBottom: 15, 
+        marginTop: 10, 
+    },
     listArea: {
         backgroundColor: '#fff',
         padding: 10,

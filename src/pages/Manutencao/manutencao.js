@@ -128,7 +128,11 @@ function Manutencao(manutencao) {
                         <Text style={styles.EquipName}>
                             {tipoManut(manut.tipo)}
                         </Text>
-                    </HeaderTitle> 
+                        
+                    </HeaderTitle>
+                    <Text style={styles.EquipHosp}>
+                        Ordem de Serviço: Nº {manut.id}
+                    </Text> 
                     <HeaderContent>
                         <Thumbnail style ={styles.Thumbnail} square source={{ uri: equip.imgUrl }} />
                         <InfoArea style={styles.infoEquip}>
@@ -171,7 +175,34 @@ function Manutencao(manutencao) {
                
                     ))}
                 </DateTimeContainer>    
+                    {!isPreventiva(manut.tipo) && 
+                        <View>
+                            <Text style={styles.EquipHosp}>
+                                Problema:
+                            </Text>
+                            <View style={styles.itensArea} >
+                            <Text>
+                                {manut.problema}
+                            </Text>
 
+                            </View>
+                            <Text style={styles.EquipHosp}>
+                                Solução:
+                            </Text>
+                            <View style={styles.itensArea} >
+                            <Text >
+                                {manut.solucao}
+                            </Text>
+
+
+                            </View>
+                        </View>
+                        
+
+
+
+
+                    }    
                 
                     {isPreventiva(manut.tipo) &&
                         <View>
@@ -194,33 +225,37 @@ function Manutencao(manutencao) {
                         </View>  
                     }
                 
-                <InputArea>
-                    <CheckBoxArea>
-                        <Text style={styles.EquipHosp}>
-                                Pendências/Observações:
-                        </Text>
-                        
-                        <Text style={styles.EquipSN}>
-                                {manut.observacoes}
-                        </Text>
-                    </CheckBoxArea>    
+                <View>
+                    <Text style={styles.EquipHosp}>
+                             Pendências/Observações
+                    </Text>
+                        <View style={styles.itensArea} >
+                            <Text>
+                              {manut.observacoes}
+                            </Text>
+                        </View>
+                </View>     
 
-                    <CheckBoxArea>
-                        <Text style = {styles.EquipHosp}>
-                            Manutenção Concluida?
-                        </Text>
-                        
 
-                        <CheckArea style={styles.checklistItem}>
-                            <CheckBox style={styles.checkbox}
-                            checked={true}
-                            />
-                            <Text style = {styles.CheckText}> {situacao}</Text>
-                        </CheckArea>
-                        
-                    </CheckBoxArea>         
+                <View>
+                    <Text style={styles.EquipHosp}>
+                        Manutenção Concluída?
+                    </Text>
                     
-                </InputArea>
+                    <View style={styles.situacao}>
+                        <CheckBox style={styles.checkbox}
+                                checked={true}
+                            />
+                        <View style={styles.textSituacao}>
+                            
+                            <Text style = {styles.CheckText}>
+                                {situacao}
+                            </Text>
+                        
+                        </View>
+                    </View>
+                </View>       
+                
                 
             </Scroller>
         </Container>

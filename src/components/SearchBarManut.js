@@ -180,6 +180,7 @@ export default ({ equip, hosp }) => {
                             {tipoManut(manut.tipo)}
                         </Text>
                                 
+                        <Text note style={styles.text} >Ordem de Serviço: {manut.id}</Text>
                         <Text note style = {styles.text} >Data: {manut.data}</Text>
                     </Body>
                     <Right>
