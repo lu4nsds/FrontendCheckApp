@@ -9,11 +9,15 @@ import {
     Text,
     Item,
     View,
+    Thumbnail,
 } from 'native-base';
 import Plus from '../../assets/plus.svg';
+import { TouchableOpacity } from 'react-native';
+
+
 
 function DateTimeList({data, horaInicial, horaFinal, list, setList}) {
-    
+    const [show,setShow] = useState(false)    
 
     function handleAdd(){
         let tarefa = {
@@ -26,6 +30,12 @@ function DateTimeList({data, horaInicial, horaFinal, list, setList}) {
         listTask = [...list, tarefa];
         setList(listTask);
     }
+
+    function handleRemove(list, index) {
+        const newList = [...list]
+        newList.splice(index, 1)
+        setList(newList)
+    }
     
     
     
@@ -34,26 +44,42 @@ function DateTimeList({data, horaInicial, horaFinal, list, setList}) {
     function render(){
         let Lista = list.map((task, index)=>{
             return (
+                
                     <Item
                     style={styles.ListItem}
                     key={index}
                     pass_in_data={task}
                     > 
+                        <View style={styles.taskItem}>
 
+                            <Text style={styles.ListItemText}>
+                            {index+1} - {task.data}
+                            </Text>
+
+
+                            <Text style={styles.ListItemText}>
+                                {task.horaInicial}
+                            </Text>
+
+
+                            <Text style={styles.ListItemText}>
+                                {task.horaFinal}
+                            </Text>
+
+
+                        </View>
                         
-                        <Text style={styles.ListItemText}>
-                        {index+1} - {task.data}
-                        </Text>
-
-
-                        <Text style={styles.ListItemText}>
-                            {task.horaInicial}
-                        </Text>
-
-
-                        <Text style={styles.ListItemText}>
-                             {task.horaFinal}
-                        </Text>
+                        <TouchableOpacity style={styles.ButtonRemover}
+                        onPress={()=>{
+                            handleRemove(list,index)
+                        }}
+                        >
+                            <Thumbnail
+                            small
+                            source={require("../../assets/delete.png")}
+                            
+                            />
+                        </TouchableOpacity>
                     </Item>  
                 )
             })
@@ -68,6 +94,7 @@ function DateTimeList({data, horaInicial, horaFinal, list, setList}) {
                 <ButtonAdd
                 onPress={()=>{
                     handleAdd()
+                    setShow(true)
                 }
                     
                 }

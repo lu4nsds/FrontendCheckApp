@@ -16,12 +16,17 @@ export const styles = {
         color: '#c6c6c6',   
         fontSize: 12, 
     },
+    taskItem: {
+        backgroundColor: '#fff',  
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width:'85%',
+        padding: 10,
+    },
     ListItem: {
         backgroundColor: '#fff',  
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingLeft: 30,
-        paddingRight: 50,
     },
     listArea: {
         backgroundColor: '#fff',
@@ -45,7 +50,7 @@ export const styles = {
         color: '#000000',
         fontWeight: 'bold',
         fontSize: 14,    
-        
+        justifyContent: 'space-between',
     },
     EquipHosp: {
         color: '#fff',
@@ -72,6 +77,14 @@ export const styles = {
         justifyContent: 'center',
         color: '#45cdff',
         paddingLeft: 5,
+    
+    },
+    ButtonRemover: {
+        alignItems: 'center',
+        textAlign: 'center',
+        justifyContent: 'center',
+        width: '15%',
+        height: 40,
     
     },
     buttonEquip:{

@@ -85,7 +85,7 @@ function DateTime({data, setData, horaInicial, setHoraInicial, horaFinal, setHor
                 <Text style={styles.taskText}>
                     |    Data   |     Início    |    Término   |
                 </Text>
-            </View>     
+            </View>   
             <ScrollerTask>  
                         <DateTimeList
                             data={data}

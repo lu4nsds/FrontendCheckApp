@@ -114,8 +114,6 @@ function ManutencaoCorretiva(manutencao) {
             });
         }
         
-        
-        
         function horasTotais(list){
             let horasTotais = 0
             list.map(task => {
