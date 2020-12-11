@@ -1,4 +1,4 @@
-export default (equip, list, problema, solucao, user, tipo, situacao, pendencias, itens, hospital, manutencaoId, data)=>{
+export default (equip, list, problema, solucao, user, tipo, situacao, pendencias, itens, hospital, manutencaoId)=>{
     function getTipo(tipo){
         if (tipo == 1) {
             return 'Manutenção Corretiva'
@@ -174,7 +174,7 @@ export default (equip, list, problema, solucao, user, tipo, situacao, pendencias
                             <p><b>Contato:</b> ${hospital.contato}</p>
                         </div>
                         <div>
-                            <p><b>Data:</b> ${data}</p>
+                            <p><b>Data:</b> ${list[0].data}</p>
                             <p><b>Endereço:</b> ${hospital.endereco} </p>
                             <p><b>Telefone:</b> ${hospital.telefone}</p>
                         </div>
@@ -395,7 +395,7 @@ export default (equip, list, problema, solucao, user, tipo, situacao, pendencias
                             <p><b>Contato:</b> ${hospital.contato}</p>
                         </div>
                         <div>
-                            <p><b>Data:</b> ${data}</p>
+                            <p><b>Data:</b> ${list[0].data}</p>
                             <p><b>Endereço:</b> ${hospital.endereco} </p>
                             <p><b>Telefone:</b> ${hospital.telefone}</p>
                         </div>

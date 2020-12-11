@@ -88,8 +88,9 @@ function ManutencaoCorretiva(manutencao) {
             equipamentoId: equip.id,
             userId: user.id,
             observacoes: pendencias,
+            situacao: situacao,
             tipo: tipo,
-            horasTrabalhadas: horasTrabsTotais,
+            horasTotais: horasTrabsTotais,
         })
         let manut = response.data
         list.map(async(task)=>{
@@ -255,9 +256,9 @@ function ManutencaoCorretiva(manutencao) {
                         </Text>
                         
 
-                        <CheckArea>
-                            
+                        <CheckArea>                            
                             <CheckBox
+                            style={styles.checkbox}
                             checked = {checkSim}
                             onPress = {() => {
                                 // handleChangeCheck(checkSim)
@@ -272,7 +273,11 @@ function ManutencaoCorretiva(manutencao) {
                             }}
                             />
                             <Text style = {styles.CheckText}>Sim</Text>
+                        </CheckArea>
+                        
+                        <CheckArea>
                             <CheckBox
+                            style={styles.checkbox}
                             checked = {checkNao}
                             onPress = {() => {
                                 if (checkNao === false) {
@@ -286,7 +291,11 @@ function ManutencaoCorretiva(manutencao) {
                             }}
                             />
                             <Text style = {styles.CheckText}>Não</Text>
+                        </CheckArea>
+                        
+                        <CheckArea>
                             <CheckBox
+                            style={styles.checkbox}
                             checked = {checkPeca}
                             onPress = {() => {
                                 if (checkPeca === false) {
@@ -301,6 +310,7 @@ function ManutencaoCorretiva(manutencao) {
                             />
                             <Text style = {styles.CheckText}>Aguardando Peça</Text>
                         </CheckArea>
+
                     </CheckBoxArea>         
                     
                     <ButtonSubmeter

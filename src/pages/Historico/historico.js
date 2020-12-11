@@ -1,6 +1,14 @@
 import React, { Component, useState } from 'react';
 import { useNavigation } from "@react-navigation/native"
 import {
+    LineChart,
+    BarChart,
+    PieChart,
+    ProgressChart,
+    ContributionGraph,
+    StackedBarChart
+  } from "react-native-chart-kit";
+import {
     Container,
     Scroller,
 
@@ -31,9 +39,9 @@ import SearchBarManut from '../../components/SearchBarManut';
 
 function Historico(historico) {    
     const navigation = useNavigation();
-    
     const equip = historico.route.params.historico.equip
     const hosp = historico.route.params.historico.hosp
+
 
     const handleEquipClick = () => {
         navigation.navigate('SearchHosp');
@@ -50,6 +58,7 @@ function Historico(historico) {
                                 Histórico do Equipamento
                             </Text>
                         </HeaderTitle> 
+
                         <HeaderContent>
                             <Thumbnail style ={styles.Thumbnail} square source={{ uri: equip.imgUrl }} />
                             <InfoArea style={styles.infoEquip}>
@@ -68,8 +77,12 @@ function Historico(historico) {
                                             
                         </HeaderContent>
                         
-                        
-                    </HeaderArea>
+                </HeaderArea>
+
+
+
+
+
 
                 <SearchBarManut
                     equip={equip}

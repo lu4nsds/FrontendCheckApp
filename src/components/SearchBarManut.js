@@ -148,7 +148,7 @@ export default ({ equip, hosp }) => {
 
 
         Print.printAsync({
-            html: `${OrdemDeServico(equip, tarefas, manut.problema, manut.solucao, user, manut.tipo, situacao, manut.observacoes, itens, hosp, manut.id, manut.data)}`
+            html: `${OrdemDeServico(equip, tarefas, manut.problema, manut.solucao, user, manut.tipo, situacao, manut.observacoes, itens, hosp, manut.id)}`
         });
     }
     return (

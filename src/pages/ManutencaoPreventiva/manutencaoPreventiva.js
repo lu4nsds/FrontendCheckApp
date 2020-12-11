@@ -21,6 +21,7 @@ import {
     InputArea,
     ButtonSubmeter,
     CheckArea,
+    SituacaoArea,
     CheckBoxArea,
 } from './styles';
 
@@ -91,9 +92,10 @@ function ManutencaoPreventiva(manutencao) {
             equipamentoId: equip.id,
             userId: user.id,
             observacoes: pendencias,
+            situacao: situacao,
             checklistId: itens[0].checklistId,
             tipo: tipo,
-            horasTrabalhadas: horasTrabsTotais,
+            horasTotais: horasTrabsTotais,
         })
         
         let manut = response.data
@@ -240,9 +242,10 @@ function ManutencaoPreventiva(manutencao) {
                         </Text>
                         
 
-                        <CheckArea>
+                        <SituacaoArea>
                             
                             <CheckBox
+                            style={styles.checkbox}
                             checked = {checkSim}
                             onPress = {() => {
                                 // handleChangeCheck(checkSim)
@@ -256,8 +259,11 @@ function ManutencaoPreventiva(manutencao) {
                                 }
                             }}
                             />
-                            <Text style = {styles.CheckText}>Sim</Text>
+                            <Text style = {styles.situacaoText}>Sim</Text>
+                            </SituacaoArea>
+                        <SituacaoArea>
                             <CheckBox
+                            style={styles.checkbox}
                             checked = {checkNao}
                             onPress = {() => {
                                 if (checkNao === false) {
@@ -270,8 +276,11 @@ function ManutencaoPreventiva(manutencao) {
                                 }
                             }}
                             />
-                            <Text style = {styles.CheckText}>Não</Text>
+                            <Text style = {styles.situacaoText}>Não</Text>
+                            </SituacaoArea>
+                            <SituacaoArea>
                             <CheckBox
+                            style={styles.checkbox}
                             checked = {checkPeca}
                             onPress = {() => {
                                 if (checkPeca === false) {
@@ -284,8 +293,8 @@ function ManutencaoPreventiva(manutencao) {
                                 }
                             }}
                             />
-                            <Text style = {styles.CheckText}>Aguardando Peça</Text>
-                        </CheckArea>
+                            <Text style = {styles.situacaoText}>Aguardando Peça</Text>
+                        </SituacaoArea>
                     </CheckBoxArea>         
                     
                     <ButtonSubmeter

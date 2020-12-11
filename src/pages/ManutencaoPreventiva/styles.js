@@ -90,6 +90,11 @@ export const styles = {
         justifyContent: 'center',
         fontWeight: 'bold',
     },
+    situacaoText:{
+        color: '#fff',
+        fontSize: 15,
+        paddingLeft: 20,
+    },
     CheckText:{
         color: '#fff',
         fontSize: 15,
@@ -252,6 +257,13 @@ export const CheckArea = styled.View`
     flex-direction: row;
     width: 100%;
     justify-content: space-between;
+    background-color: #384C9D;
+    border-radius: 20px;
+    margin-top: 10px;
+`;
+export const SituacaoArea = styled.View`
+    flex-direction: row;
+    width: 100%;
     background-color: #384C9D;
     border-radius: 20px;
     margin-top: 10px;

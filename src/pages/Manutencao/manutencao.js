@@ -94,7 +94,6 @@ function Manutencao(manutencao) {
     const itens = manutencao.route.params.manutencao.itens
     const tarefas = manutencao.route.params.manutencao.tarefas
     const horasTotais = manutencao.route.params.manutencao.manut.horasTrabalhadas
-    const situacao = "Puxar do banco"
     const { user } = useUser();
     const navigation = useNavigation();
     
@@ -174,6 +173,9 @@ function Manutencao(manutencao) {
                     />
                
                     ))}
+                    <Text style={styles.horasTotais}>
+                        Horas Trabalhadas: {manut.horasTotais}
+                    </Text>
                 </DateTimeContainer>    
                     {!isPreventiva(manut.tipo) && 
                         <View>
@@ -221,13 +223,14 @@ function Manutencao(manutencao) {
                                     />
                 
                                 ))}
+
                             </View>
                         </View>  
                     }
                 
                 <View>
                     <Text style={styles.EquipHosp}>
-                             Pendências/Observações
+                             Pendências/Observações:
                     </Text>
                         <View style={styles.itensArea} >
                             <Text>
@@ -239,7 +242,7 @@ function Manutencao(manutencao) {
 
                 <View>
                     <Text style={styles.EquipHosp}>
-                        Manutenção Concluída?
+                        Situação da Manutenção:
                     </Text>
                     
                     <View style={styles.situacao}>
@@ -249,7 +252,7 @@ function Manutencao(manutencao) {
                         <View style={styles.textSituacao}>
                             
                             <Text style = {styles.CheckText}>
-                                {situacao}
+                                {manut.situacao}
                             </Text>
                         
                         </View>

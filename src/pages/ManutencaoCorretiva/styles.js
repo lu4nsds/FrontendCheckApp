@@ -68,7 +68,7 @@ export const styles = {
     CheckText:{
         color: '#fff',
         fontSize: 15,
-        paddingLeft: 10,
+        paddingLeft: 20,
     },
     ButtonAdicionar: {
         alignItems: 'center',
@@ -134,6 +134,23 @@ export const styles = {
         marginTop: 10,
         marginBottom: 20,
         padding: 10,
+    },
+    checklistArea: {
+        backgroundColor: '#fff',
+        borderRadius: 15,
+        padding: 15,
+        width: '100%',
+        
+    },
+    ListItem: {
+        flexDirection: 'row',
+    },
+    checkbox:{
+        width: 30,
+        height: 30,
+    },
+    checkboxArea:{
+        paddingRight: 20,
     }
 };
 
@@ -234,7 +251,6 @@ export const ButtonSubmeter = styled.TouchableOpacity`
 export const CheckArea = styled.View`
     flex-direction: row;
     width: 100%;
-    justify-content: space-between;
     background-color: #384C9D;
     border-radius: 20px;
     margin-top: 10px;

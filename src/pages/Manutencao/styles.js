@@ -81,6 +81,13 @@ export const styles = {
         paddingLeft:20,
         
     },
+    horasTotais: {
+        color: '#000000',
+        fontWeight: 'bold',
+        fontSize: 16,   
+        textAlign: 'right',
+        padding: 8,
+    },
     taskText: {
         color: '#fff',
         fontWeight: 'bold',
