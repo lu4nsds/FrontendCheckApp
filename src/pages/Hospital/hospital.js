@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native"
 import {
     Container,
     Scroller,
-
+    styles,
     HeaderArea,
     HeaderTitle,
     
@@ -12,32 +12,25 @@ import {
 import {
     Thumbnail,
     Text,
+    View,
 } from 'native-base';
 
 import SearchBarEquipInHosp from '../../components/SearchBarEquipInHosp';
+import HospMenu from '../../components/HospMenu';
 
-const styles = {
-    hospEnd: {
-        color: '#fff',
-        fontSize: 15,
-        textAlign: 'center'
-    },
-    hospName: {
-        color: '#ff0',
-        fontWeight: 'bold',
-        fontSize: 18,
-        textAlign: 'center',
-        padding: 10
-    },
-};
+
 
 function Hospital(hosp) {
     const [hospId, setHospId] = useState([]);
+    const [show, setShow] = useState(1);
     const navigation = useNavigation()
     const hospEquip = hosp.route.params.hospital
        
     
-
+    //show ==1 && <SearchBarEquipInHosp/>
+    //show ==2 && <Stats/>
+    //show ==3 && <OSAbertas/>
+    
 
     return (
         <Container>
@@ -50,10 +43,15 @@ function Hospital(hosp) {
                     <Text style={styles.hospEnd}>
                         {hospEquip.endereco}
                     </Text>
-                </HeaderArea>   
-                    
-                <SearchBarEquipInHosp hosp={hospEquip}/>
+                </HeaderArea>
 
+                <HospMenu
+                    setShow={setShow}
+                /> 
+                        
+                {show==1 &&
+                    <SearchBarEquipInHosp hosp={hospEquip}/>
+                }
             </Scroller>
         </Container>
 

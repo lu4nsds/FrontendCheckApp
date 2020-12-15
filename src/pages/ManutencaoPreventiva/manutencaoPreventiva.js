@@ -171,7 +171,7 @@ function ManutencaoPreventiva(manutencao) {
                 <HeaderArea>
                     <HeaderTitle>
                         <Text style={styles.EquipName}>
-                            Manutenção Preventiva
+                            Manutenção Planejada
                         </Text>
                     </HeaderTitle> 
                     <HeaderContent>

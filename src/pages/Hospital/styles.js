@@ -1,6 +1,31 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
+export const styles = {
+    hospEnd: {
+        color: '#fff',
+        fontSize: 15,
+        textAlign: 'center'
+    },
+    hospName: {
+        color: '#ff0',
+        fontWeight: 'bold',
+        fontSize: 18,
+        textAlign: 'center',
+        padding: 10
+    },
+    hospMenuArea: {
+        padding: 10,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    buttonMenu:{
+        borderRadius: 100,
+        backgroundColor: '#45cbf3',
+        padding: 15, 
+    },
+};
+
 export const Container = styled.SafeAreaView`
     background-color: #263165;
     justify-content: center;
@@ -44,6 +69,12 @@ export const SearchButtonHosp = styled.TouchableOpacity`
     borderTopLeftRadius: 100px;
     borderTopRightRadius: 0;
     background: #45cbf3;
+    
+`;
+export const ButtonMenu = styled.TouchableOpacity`  
+    border-radius: 100px;
+    background: #45cbf3;
+    padding: 15px;
     
 `;
 export const SearchButtonEquip = styled.TouchableOpacity`

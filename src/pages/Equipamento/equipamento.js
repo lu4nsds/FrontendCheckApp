@@ -115,7 +115,7 @@ function Equipamento(equipamento) {
                      }}
                     >
                         <Text>
-                            Manutenção Preventiva
+                            Manutenção Planejada
                         </Text>
                     </Button>
                     <Button style={styles.buttonEquip}
