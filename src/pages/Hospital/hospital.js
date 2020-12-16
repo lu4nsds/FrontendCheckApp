@@ -17,6 +17,7 @@ import {
 
 import SearchBarEquipInHosp from '../../components/SearchBarEquipInHosp';
 import HospMenu from '../../components/HospMenu';
+import SearchBarOpened from '../../components/SearchBarOpened';
 
 
 
@@ -47,10 +48,18 @@ function Hospital(hosp) {
 
                 <HospMenu
                     setShow={setShow}
+                    hosp = {hospEquip}
                 /> 
                         
                 {show==1 &&
                     <SearchBarEquipInHosp hosp={hospEquip}/>
+                }
+
+                {show==3 &&
+                    <SearchBarOpened 
+                    hosp={hospEquip}
+                    
+                    />
                 }
             </Scroller>
         </Container>

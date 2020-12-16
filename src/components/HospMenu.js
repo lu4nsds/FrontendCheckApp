@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Linking} from 'react-native';
 import {
     styles,
     ButtonMenu,
@@ -11,7 +12,7 @@ import {
     View,
 } from 'native-base';
 
-function HospMenu({setShow}){
+function HospMenu({setShow, hosp}){
 
     return (
         <View style={styles.hospMenuArea}>
@@ -51,7 +52,7 @@ function HospMenu({setShow}){
             
             <ButtonMenu
             onPress={()=>{
-                console.log('Google Maps!')
+                Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${hosp.endereco}`);
             }}
             >
                 <Thumbnail

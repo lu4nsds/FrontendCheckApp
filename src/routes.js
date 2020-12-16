@@ -10,6 +10,7 @@ import Hospital from './pages/Hospital/hospital.js';
 import Equipamento from './pages/Equipamento/equipamento.js';
 import ManutencaoCorretiva from './pages/ManutencaoCorretiva/manutencaoCorretiva.js';
 import ManutencaoPreventiva from './pages/ManutencaoPreventiva/manutencaoPreventiva.js';
+import ManutencaoUpdate from './pages/ManutencaoUpdate/manutencaoUpdate.js';
 import Historico from './pages/Historico/historico.js';
 import Manutencao from './pages/Manutencao/manutencao.js';
 
@@ -33,6 +34,7 @@ function Routes() {
         <Stack.Screen name="ManutencaoPreventiva" component={ManutencaoPreventiva} />
         <Stack.Screen name="Historico" component={Historico} />
         <Stack.Screen name="Manutencao" component={Manutencao} />
+        <Stack.Screen name="ManutencaoUpdate" component={ManutencaoUpdate} />
       </Stack.Navigator>
     </NavigationContainer>
   );
