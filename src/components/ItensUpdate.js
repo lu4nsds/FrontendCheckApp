@@ -1,13 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import api from '../api.js'
 import {
-    DateTimeArea,
-    DateArea,
-    TimeArea,
     styles,
-    DateTimeContainer,
-    ScrollerTask,
-    CheckBoxArea,
 } from '../pages/ManutencaoPreventiva/styles';
 
 import {
@@ -49,30 +43,8 @@ function List({item, index}){
         )
     }         
 
-function CheckList({equip, hosp, itens, setItens}){
-    
-    useEffect(()=>{
-        async function getChecklist() {
-            const response = await api.get(`/equipamentos/${equip.id}/checklist`);
-            preencherItens(response.data);
+function ItensUpdate({equip, hosp, itens, setItens}){
 
-        }
-        getChecklist()
-
-
-    }, []);
-    
-    async function preencherItens(itensChecklist) {
-        let listItens = [];
-        itensChecklist.map(item => {
-            listItens = [...listItens, item];
-
-        });
-
-
-        setItens(listItens);
-    };
-    
 
     return (
         <View>
@@ -89,4 +61,4 @@ function CheckList({equip, hosp, itens, setItens}){
     );
 }
 
-export default CheckList;
+export default ItensUpdate;

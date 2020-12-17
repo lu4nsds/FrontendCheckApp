@@ -107,7 +107,7 @@ export default ({hosp }) => {
         if(text==1){
             return require("../../assets/cross.png")
         }else{
-            return require("../../assets/checklist.png")
+            return require("../../assets/cross.png")
         }
     }
 

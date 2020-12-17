@@ -93,7 +93,6 @@ function Manutencao(manutencao) {
     const manut = manutencao.route.params.manutencao.manut
     const itens = manutencao.route.params.manutencao.itens
     const tarefas = manutencao.route.params.manutencao.tarefas
-    const horasTotais = manutencao.route.params.manutencao.manut.horasTrabalhadas
     const { user } = useUser();
     const navigation = useNavigation();
     

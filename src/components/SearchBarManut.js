@@ -102,12 +102,18 @@ export default ({ equip, hosp }) => {
         }
     }
 
-    function imageManut(text){
-        if(text==1){
-            return require("../../assets/repair.png")
+    function imageManut(manut){
+        if(manut.situacao != 'Concluída'){
+            return require("../../assets/cross.png")
+
         }else{
-            return require("../../assets/checklist.png")
+            if(manut.tipo==1){
+                return require("../../assets/repair.png")
+            }else{
+                return require("../../assets/checklist.png")
+            }  
         }
+            
     }
 
 
@@ -173,7 +179,7 @@ export default ({ equip, hosp }) => {
                 avatar
                 >
                     <Left>
-                        <Thumbnail square source={imageManut(manut.tipo)} />
+                        <Thumbnail square source={imageManut(manut)} />
                     </Left>
                     <Body>
                         <Text style = {styles.textBold}>

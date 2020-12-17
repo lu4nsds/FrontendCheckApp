@@ -1,6 +1,5 @@
 import React, {component, useState, useEffect } from 'react';
 import { useNavigation } from "@react-navigation/native"
-// tentativas: DateTimePicker / nativeBase (antigo) / Tentar o do reactNative
 import api from '../../api.js'
 import { useUser } from '../../contexts/User';
 /* import RNHTMLtoPDF from 'react-native-html-to-pdf';
@@ -9,7 +8,6 @@ import * as Print from 'expo-print';
 
 import OrdemDeServico from '../../../assets/OrdemDeServico/ordemDeServico';
 import DateTime from '../../components/DateTime';
-import CheckList from '../../components/CheckList'
 
 import {
     Container,
@@ -38,18 +36,18 @@ import {
 } from 'native-base';
 
 import {styles} from './styles'
+import ItensUpdate from '../../components/ItensUpdate';
 
 
 
 function ManutencaoUpdate(manutencao) {
-    
     const equip = manutencao.route.params.manutencao.equip
     const hosp = manutencao.route.params.manutencao.hosp
     const manut = manutencao.route.params.manutencao.manut
     const checks = checkSituation(manut)
-    const tipo = manutencao.route.params.manutencao.tipo
+    const tipo = manutencao.route.params.manutencao.manut.tipo
     const tarefas = manutencao.route.params.manutencao.tarefas
-    const itensManut = manutencao.route.params.manutencao.itensManut
+    const itensManut = manutencao.route.params.manutencao.itens
     const [show, setShow] = useState(manut.tipo);
     const [problema, setProblema] = useState(manut.problema);
     const [solucao, setSolucao] = useState(manut.solucao);
@@ -61,11 +59,11 @@ function ManutencaoUpdate(manutencao) {
     const [checkPeca, setCheckPeca] = useState(checks[2]);
     const [situacao, setSituacao] = useState(manut.situacao);
     const [pendencias, setPendencias] = useState(manut.observacoes);
-    const [list, setList] = useState(tarefas)
+    const [list, setList] = useState(tarefas)    
     const [itens, setItens] = useState(itensManut)
     const { user } = useUser();
     const navigation = useNavigation();
-    console.log(list)
+
     function checkSituation(manut){
         let status = [false, false, false]
         if(manut.situacao=='Concluída'){
@@ -87,7 +85,7 @@ function ManutencaoUpdate(manutencao) {
     
 
 
-    async function handleSubmeter(equip, list, problema, solucao, user, tipo, situacao, pendencias, itens, hosp){
+    async function handleSubmeter(equip, list, problema, solucao, user, tipo, situacao, pendencias, itens, hosp, manut){
 
         const createButtonAlert = (manutencaoId) =>{
             Alert.alert(
@@ -100,11 +98,11 @@ function ManutencaoUpdate(manutencao) {
                         Print.printAsync({
                             html: `${OrdemDeServico(equip, list, problema, solucao, user, tipo, situacao, pendencias, itens, hosp, manutencaoId)}`
                         });
-                        handleNavigate(equip, hosp);
+                        handleNavigate(equip, hosp, manut, list, itens);
                     }
                     },
                     { text: "Não", onPress: () => {
-                        handleNavigate(equip, hosp);                    
+                        handleNavigate(equip, hosp, manut, list, itens);                    
                     } }
                 ],
                 { cancelable: false }
@@ -113,51 +111,73 @@ function ManutencaoUpdate(manutencao) {
 
         let horasTrabsTotais = horasTotais(list)  
 
-        let response = await api.put(`/manutencoes/${manut.id}`, {
+        if(tipo == 1){
+            await api.put(`/manutencoes/${manut.id}`, {
+                data: list[0].data,
+                equipamentoId: equip.id,
+                userId: user.id,
+                observacoes: pendencias,
+                situacao: situacao,
+                problema: problema,
+                solucao: solucao,
+                tipo: tipo,
+                horasTotais: horasTrabsTotais,
+        })
+
+        }else if(tipo == 2){
+           await api.put(`/manutencoes/${manut.id}`, {
             data: list[0].data,
             equipamentoId: equip.id,
             userId: user.id,
             observacoes: pendencias,
             situacao: situacao,
-            checklistId: itens[0].checklistId,
+            checklistId: manut.checklistId,
             tipo: tipo,
             horasTotais: horasTrabsTotais,
         })
+        }      
         
-        let manut = response.data
 
         // Se houver ID usa metodo PUT para update, Se não utiliza os metodo POST para salvar nova TASK
         list.map(async(task, index)=>{
-            await api.put(`/tarefas/${task.id}`, {
-                data: task.data,
-                horaInicial: task.horaInicial,
-                horaFinal: task.horaFinal,
-                manutencaoId: manut[0]
-            })    
+            if(task.id){
+                await api.put(`/tarefas/${task.id}`, {
+                    data: task.data,
+                    horaInicial: task.horaInicial,
+                    horaFinal: task.horaFinal,
+                    manutencaoId: manut.id
+                }) 
+                
+            }else{
+                await api.post(`/tarefas`, {
+                    data: task.data,
+                    horaInicial: task.horaInicial,
+                    horaFinal: task.horaFinal,
+                    manutencaoId: manut.id
+                }) 
+            }
+               
         })
-        
+               
         itens.map(async(item)=>{
             await api.put(`/itens_status/${item.id}`, {
                 procedimento: item.procedimento,
                 checado: item.checado,
-                manutencaoId: manut[0]
+                manutencaoId: manut.id
             })    
         })
         
 
-        createButtonAlert(manut[0]);
+        createButtonAlert(manut.id);
 
         function handleNavigate(equip, hosp, manut, tarefas, itens){
-            navigation.navigate('Manutencao',{
-                manutencao:{
-                manut,
-                tarefas,
-                itens,
+            navigation.navigate('Historico',{
+            historico:{
                 equip,
-                hosp
+                hosp,
             }
-    
-            });
+        });
+        
         }
         
         
@@ -309,9 +329,9 @@ function ManutencaoUpdate(manutencao) {
                     }
                     {show==2 &&
                     <View style={styles.itensArea}>
-                        <CheckList
-                            equip={equipPreventiva}
-                            hosp={hospPreventiva}
+                        <ItensUpdate
+                            equip={equip}
+                            hosp={hosp}
                             itens={itens}
                             setItens={setItens}
                         />
@@ -329,9 +349,6 @@ function ManutencaoUpdate(manutencao) {
                             <CheckBox
                             style={styles.checkbox}
                             checked = {checkSim}
-                            value={() => {
-                                checkSituation(manut)
-                            }}
                             onPress = {() => {
                                 // handleChangeCheck(checkSim)
                                 if (checkSim === false) {
@@ -387,7 +404,8 @@ function ManutencaoUpdate(manutencao) {
                     
                     <ButtonSubmeter
                         onPress={()=>{
-                            const existItens = ()=>{
+                            
+                            const existItens = ()=>{                                
                                 let exist = false
                                 itens.map((item)=>{
                                     if(item.checado){
@@ -396,12 +414,22 @@ function ManutencaoUpdate(manutencao) {
                                 })
                                 return exist
                             }
-                            let itensCheck = existItens(itens)
-                            if(!list || !situacao || !itensCheck ){
-                                Alert.alert('[ERRO]', 'Existem campos não preenchidos!')
-                            }else{
-                                /* handleSubmeter(equipPreventiva, list, problema, solucao, user, 2, situacao, pendencias, itens, hospPreventiva) */
+                            if(tipo == 1){
+                                if(!list || !problema || !solucao ||!situacao){
+                                    Alert.alert('[ERRO]', 'Existem campos não preenchidos!')
+                                }else{
+                                    handleSubmeter(equip, list, problema, solucao, user, tipo, situacao, pendencias, itens, hosp, manut)
+                                }
+
+                            }else if(tipo == 2){
+                                const itensCheck = existItens(itens)
+                                if(!list || !situacao || !itensCheck ){
+                                    Alert.alert('[ERRO]', 'Existem campos não preenchidos!')
+                                }else{
+                                    handleSubmeter(equip, list, problema, solucao, user, tipo, situacao, pendencias, itens, hosp, manut)
+                                }
                             }                            
+                                                       
                             
                         }}
                     >
