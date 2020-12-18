@@ -24,6 +24,9 @@ export const styles = {
         backgroundColor: '#45cbf3',
         padding: 15, 
     },
+    barChart:{
+        justifyContent: 'center',
+    },
 };
 
 export const Container = styled.SafeAreaView`
