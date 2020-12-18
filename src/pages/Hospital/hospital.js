@@ -18,6 +18,7 @@ import {
 import SearchBarEquipInHosp from '../../components/SearchBarEquipInHosp';
 import HospMenu from '../../components/HospMenu';
 import SearchBarOpened from '../../components/SearchBarOpened';
+import Charts from '../../components/Charts';
 
 
 
@@ -26,11 +27,6 @@ function Hospital(hosp) {
     const [show, setShow] = useState(1);
     const navigation = useNavigation()
     const hospEquip = hosp.route.params.hospital
-       
-    
-    //show ==1 && <SearchBarEquipInHosp/>
-    //show ==2 && <Stats/>
-    //show ==3 && <OSAbertas/>
     
 
     return (
@@ -53,6 +49,11 @@ function Hospital(hosp) {
                         
                 {show==1 &&
                     <SearchBarEquipInHosp hosp={hospEquip}/>
+                }
+                {show==2 &&
+                    <Charts 
+                    hosp={hospEquip}                    
+                    />
                 }
 
                 {show==3 &&

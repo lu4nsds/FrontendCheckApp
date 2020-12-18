@@ -171,12 +171,7 @@ function ManutencaoUpdate(manutencao) {
         createButtonAlert(manut.id);
 
         function handleNavigate(equip, hosp, manut, tarefas, itens){
-            navigation.navigate('Historico',{
-            historico:{
-                equip,
-                hosp,
-            }
-        });
+            navigation.popToTop();
         
         }
         

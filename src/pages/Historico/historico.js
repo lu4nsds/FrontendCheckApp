@@ -1,13 +1,6 @@
 import React, { Component, useState } from 'react';
 import { useNavigation } from "@react-navigation/native"
-import {
-    LineChart,
-    BarChart,
-    PieChart,
-    ProgressChart,
-    ContributionGraph,
-    StackedBarChart
-  } from "react-native-chart-kit";
+
 import {
     Container,
     Scroller,
