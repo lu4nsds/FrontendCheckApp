@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @react-native-community/datetimepicker@ 2.1.0
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add victory-native
 
 PATH: 
   C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\MATLAB\R2017b\runtime\win64;C:\Program Files\MATLAB\R2017b\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\Git\cmd;C:\Program Files\PostgreSQL\13\bin;C:\Users\luans\AppData\Local\Microsoft\WindowsApps;C:\Users\luans\AppData\Roaming\npm;C:\Users\luans\AppData\Local\Yarn\bin;C:\Users\luans\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\luans\AppData\Android\Sdk\platform-tools;
@@ -14,17 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/2.1.0: Not found
-      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:66056:18)
-      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:140665:22)
-      at Request.emit (events.js:223:5)
-      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141637:10)
-      at Request.emit (events.js:223:5)
-      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141559:12)
-      at Object.onceWrapper (events.js:312:28)
-      at IncomingMessage.emit (events.js:228:7)
-      at endReadableNT (_stream_readable.js:1185:12)
-      at processTicksAndRejections (internal/process/task_queues.js:81:21)
+  Error: EPERM: operation not permitted, unlink 'C:\Users\luans\tccluan\TccLuan\Frontend\app\node_modules\@babel\generator\node_modules\.bin'
 
 npm manifest: 
   {
@@ -44,14 +34,18 @@ npm manifest:
       "axios": "^0.21.0",
       "expo": "~39.0.2",
       "expo-font": "^8.3.0",
+      "expo-print": "~9.1.0",
       "expo-status-bar": "~1.0.2",
       "expo-updates": "~0.3.3",
       "native-base": "^2.13.14",
       "react": "16.13.1",
       "react-dom": "16.13.1",
       "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.4.tar.gz",
+      "react-native-chart-kit": "^6.8.1",
       "react-native-gesture-handler": "~1.7.0",
+      "react-native-html-to-pdf": "^0.8.0",
       "react-native-picker-select": "^8.0.2",
+      "react-native-print": "^0.6.0",
       "react-native-reanimated": "~1.13.0",
       "react-native-safe-area-context": "3.1.4",
       "react-native-screens": "~2.10.1",
@@ -3428,6 +3422,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-9.3.0.tgz#b90c7e9e411d306c1c7ba2bae18d5c53c201affd"
     integrity sha512-ylSJZVvEGJVFTKsFrUL2S6gCvFt+/o8TJ3xT4WaMjHe2/2Z7R8ng6NR47Kt54t7XBIV/SZ7DIY9uRiR7TPuNYA==
   
+  expo-print@~9.1.0:
+    version "9.1.0"
+    resolved "https://registry.yarnpkg.com/expo-print/-/expo-print-9.1.0.tgz#b5ed2285af5ebc049a0cff8e669ca098577ce44a"
+    integrity sha512-yMUQ9MQAKTQ8NcQZOqS0Ecf5CbZlF44LmUQnXvBojvMavnfqMxDwzhLj0MA8E+vH6xWoqlWw/kXJjX8r+e1diQ==
+  
   expo-splash-screen@~0.6.2:
     version "0.6.2"
     resolved "https://registry.yarnpkg.com/expo-splash-screen/-/expo-splash-screen-0.6.2.tgz#2be7fc28ad62549e870c69f1fe133ebe756c524f"
@@ -5662,6 +5661,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
     integrity sha512-GSmOT2EbHrINBf9SR7CDELwlJ8AENk3Qn7OikK4nFYAu3Ote2+JYNVvkpAEQm3/TLNEJFD/xZJjzyxg3KBWOzw==
   
+  paths-js@^0.4.10:
+    version "0.4.11"
+    resolved "https://registry.yarnpkg.com/paths-js/-/paths-js-0.4.11.tgz#b2a9d5f94ee9949aa8fee945f78a12abff44599e"
+    integrity sha512-3mqcLomDBXOo7Fo+UlaenG6f71bk1ZezPQy2JCmYHy2W2k5VKpP+Jbin9H0bjXynelTbglCqdFhSEkeIkKTYUA==
+  
   performance-now@^2.1.0:
     version "2.1.0"
     resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
@@ -5734,6 +5738,11 @@ Lockfile:
     version "5.0.0"
     resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-5.0.0.tgz#e79dd2b215767fd9c04561c01236df960bce7fbb"
     integrity sha512-40QW5YalBNfQo5yRYmiw7Yz6TKKVr3h6970B2YE+3fQpsWcrbj1PzJgxeJ19DRQjhMbKPIuMY8rFaXc8moolVw==
+  
+  point-in-polygon@^1.0.1:
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/point-in-polygon/-/point-in-polygon-1.0.1.tgz#d59b64e8fee41c49458aac82b56718c5957b2af7"
+    integrity sha1-1Ztk6P7kHElFiqyCtWcYxZV7Kvc=
   
   posix-character-classes@^0.1.0:
     version "0.1.1"
@@ -5890,6 +5899,15 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
     integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
   
+  react-native-chart-kit@^6.8.1:
+    version "6.8.1"
+    resolved "https://registry.yarnpkg.com/react-native-chart-kit/-/react-native-chart-kit-6.8.1.tgz#8359083337ace5ec83327d6caf39d4297573bd6f"
+    integrity sha512-v0CVMZu+8yPG5+KVJE2PQ5+56CntCNe+u+Au+u0oaE7rVyW/dGew7UnFmQAl6ypHYkVe5+YZJgrTbtG2p6oVYw==
+    dependencies:
+      lodash "^4.17.13"
+      paths-js "^0.4.10"
+      point-in-polygon "^1.0.1"
+  
   react-native-drawer@2.5.1:
     version "2.5.1"
     resolved "https://registry.yarnpkg.com/react-native-drawer/-/react-native-drawer-2.5.1.tgz#08b9314184f48c724f1b467f8859797369798654"
@@ -5915,6 +5933,11 @@ Lockfile:
       invariant "^2.2.4"
       prop-types "^15.7.2"
   
+  react-native-html-to-pdf@^0.8.0:
+    version "0.8.0"
+    resolved "https://registry.yarnpkg.com/react-native-html-to-pdf/-/react-native-html-to-pdf-0.8.0.tgz#c6e27296a05de76ac3800406144ebdfd77cfe054"
+    integrity sha512-64Hx7JbX3sZ1iXgouuCI25/C6o8BHyTzOO3RzvLfw4O8VcdpB+wJ4d24iWRtKjeJmArsubN9+WMOebBxQaPzJw==
+  
   react-native-iphone-x-helper@^1.0.3:
     version "1.3.1"
     resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.3.1.tgz#20c603e9a0e765fd6f97396638bdeb0e5a60b010"
@@ -5932,6 +5955,11 @@ Lockfile:
     dependencies:
       "@react-native-community/picker" "1.6.0"
       lodash.isequal "^4.5.0"
+  
+  react-native-print@^0.6.0:
+    version "0.6.0"
+    resolved "https://registry.yarnpkg.com/react-native-print/-/react-native-print-0.6.0.tgz#11286c45db5109262123ed6261f61e867cef1a89"
+    integrity sha512-lWGI5JoB/crLRlukuB7FMmfjSOwC8Cia9JHVEFjpnQWGtnRSLY+oRYwgFLzll7XPi7LqUNohFKT+jsRMA/1bRg==
   
   react-native-reanimated@~1.13.0:
     version "1.13.1"
