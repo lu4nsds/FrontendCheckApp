@@ -32,7 +32,7 @@ export default ({hosp }) => {
 
     useEffect(() => {
         async function loadManutencoesAbertas() {
-            const response = await api.get(`/users/${user.id}/manutencoes/abertas`);
+            const response = await api.get(`/hospitais/${hosp.id}/manutencoes/abertas`);
             await preencherItens(response.data);
         }
 

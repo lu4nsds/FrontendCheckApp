@@ -87,6 +87,7 @@ function ManutencaoCorretiva(manutencao) {
             problema: problema,
             equipamentoId: equip.id,
             userId: user.id,
+            hospitalId: hospCorretiva.id,
             observacoes: pendencias,
             situacao: situacao,
             tipo: tipo,

@@ -91,6 +91,7 @@ function ManutencaoPreventiva(manutencao) {
             data: list[0].data,
             equipamentoId: equip.id,
             userId: user.id,
+            hospitalId: hospPreventiva.id,
             observacoes: pendencias,
             situacao: situacao,
             checklistId: itens[0].checklistId,
