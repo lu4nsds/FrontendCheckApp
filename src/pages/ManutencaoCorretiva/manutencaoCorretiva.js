@@ -41,7 +41,7 @@ function ManutencaoCorretiva(manutencao) {
     const tipo = manutencao.route.params.manutencao.tipo
     const [problema, setProblema] = useState('');
     const [solucao, setSolucao] = useState('');
-    const [data, setData] = useState('23/09/1997');
+    const [data, setData] = useState('23/09/2020');
     const [horaInicial, setHoraInicial] = useState('00:00');
     const [horaFinal, setHoraFinal] = useState('02:00');
     const [checkSim, setCheckSim] = useState(false);
