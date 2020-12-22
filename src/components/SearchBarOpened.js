@@ -26,20 +26,29 @@ import { useUser } from '../contexts/User';
 export default ({hosp }) => {
     const [search, setSearch] = useState('');
     const [manutencoes, setManutencoes] = useState([]);
+    const [equipamentosId, setEquipamentosId] = useState([]);
+    const [equipamentosHosp, setEquipamentosHosp] = useState([]);
     const [manutsFilter, setManutsFilter] = useState([]);
     const navigation = useNavigation();
     const { user } = useUser();
 
     useEffect(() => {
+
         async function loadManutencoesAbertas() {
             const response = await api.get(`/hospitais/${hosp.id}/manutencoes/abertas`);
-            await preencherItens(response.data);
+            // PREENCHER UM ARRAY DE EQUIP ID
+            await preencherItens(response.data); 
+            await preencherIds(manutencoes)
+            /* await preencherEquips(equipamentosId);   */
+            
+            let equips = await equipsPorId(manutencoes)
+            console.log(equips)
         }
 
         loadManutencoesAbertas();
+        
     }, []);
 
-    
 
     async function handleClickManutencao(manut) {
         const tarefas = await tarefasPorManut(manut);
@@ -57,17 +66,35 @@ export default ({hosp }) => {
     }
 
     async function preencherItens(manutencoes) {
+
         let listManuts = [];
+        let listEquips = [];
         manutencoes.map(manut => {
 
-
+            listEquips = [...listEquips, manut.equipamentoId];
             listManuts = [...listManuts, manut];
 
         });
+        
         setManutencoes(listManuts);
-        setManutsFilter(listManuts);
+        setManutsFilter(listManuts);        
             
     }
+
+    async function preencherIds(manutencoes) {
+
+        let listEquips = [];
+        manutencoes.map(manut => {
+
+            listEquips = [...listEquips, manut.equipamentoId];
+
+        });
+
+        setEquipamentosId(listEquips)   
+        
+    }
+
+    
     
     const searchFilterFunction = (text) => {
         // Check if searched text is not blank
@@ -99,15 +126,15 @@ export default ({hosp }) => {
         if(text==1){
             return "Manutenção Corretiva"
         }else{
-            return "Manutenção Preventiva"
+            return "Manutenção Planejada"
         }
     }
 
     function imageManut(text){
         if(text==1){
-            return require("../../assets/cross.png")
+            return require("../../assets/timing.png")
         }else{
-            return require("../../assets/cross.png")
+            return require("../../assets/timing.png")
         }
     }
 
@@ -116,6 +143,15 @@ export default ({hosp }) => {
         const responseEquip = await api.get(`/equipamentos/${manut.equipamentoId}`);
         return responseEquip.data;
     } 
+    async function equipsPorId(manutencoes) {
+        let equips=[]
+        manutencoes.map(async(manut)=>{
+           const responseEquip = await api.get(`/equipamentos/${manut.equipamentoId}`);
+            equips.push(responseEquip.data)
+        })
+        
+        return equips;
+    }
     async function tarefasPorManut(manut) {
         const responseTarefas = await api.get(`/manutencoes/${manut.id}/tarefas`);
         return responseTarefas.data;
@@ -123,11 +159,21 @@ export default ({hosp }) => {
     async function itensPorManut(manut) {
         const responseItens = await api.get(`/manutencoes/${manut.id}/itens_status`);
         return responseItens.data;
-    } 
+    }
     
+     
+    /* async function preencherEquips(equipamentosId){
+        let listEquips = []
+        equipamentosId.map(equip=>{
+            let equipamento = equipsPorId({equipamentoId: equip})
+            listEquips = [...listEquips, equipamento];
+
+        })
+        setEquipamentosHosp(listEquips)
+    } */
 
 
-    
+
 
     async function handleButtonPrint(manut){
 
@@ -168,7 +214,7 @@ export default ({hosp }) => {
                 />
                 <Icon name='search' />
             </Item>
-            {manutsFilter.map((manut, index)=>(
+            {manutsFilter.map((manut, index)=>( 
                 <ListItem
                 onPress = {async ()=>{
                    await handleClickManutencao(manut)
@@ -179,7 +225,7 @@ export default ({hosp }) => {
                 avatar
                 >
                     <Left>
-                        <Thumbnail square source={imageManut(manut.tipo)} />
+                        <Thumbnail square medium source={imageManut(manut.tipo)} />
                     </Left>
                     <Body>
                         <Text style = {styles.textBold}>

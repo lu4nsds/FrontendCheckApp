@@ -299,13 +299,13 @@ function Charts({hosp}){
                             fill: 'white'
                         }
                     },{
-                    name: "Manutenções Abertas", 
-                    symbol: { fill: "white" }, 
+                    name: "Manutenções Concluídas", 
+                    symbol: { fill: "#f3c444" }, 
                     labels: {
                         fill: 'white'} 
-                    },{ 
-                    name: "Manutenções Concluídas", 
-                    symbol: { fill: "yellow" }, 
+                    },{     
+                    name: "Manutenções Abertas", 
+                    symbol: { fill: "#f34473" }, 
                     labels: {
                         fill: 'white'} 
                     }
@@ -339,7 +339,7 @@ function Charts({hosp}){
                         }}
                         />
                         <VictoryGroup offset={20}
-                        colorScale={["#45cbf3", "white", "yellow"]}
+                        colorScale={["#45cbf3", "#f3c444", "#f34473"]}
                         >
                             <VictoryBar //TODAS
                             data={getEstatisticas(manuts)}

@@ -98,13 +98,13 @@ export default ({ equip, hosp }) => {
         if(text==1){
             return "Manutenção Corretiva"
         }else{
-            return "Manutenção Preventiva"
+            return "Manutenção Planejada"
         }
     }
 
     function imageManut(manut){
         if(manut.situacao != 'Concluída'){
-            return require("../../assets/cross.png")
+            return require("../../assets/timing.png")
 
         }else{
             if(manut.tipo==1){
@@ -183,7 +183,7 @@ export default ({ equip, hosp }) => {
                     </Left>
                     <Body>
                         <Text style = {styles.textBold}>
-                            {tipoManut(manut.tipo)}
+                            {tipoManut(manut.tipo) }
                         </Text>
                                 
                         <Text note style={styles.text} >Ordem de Serviço: {manut.id}</Text>

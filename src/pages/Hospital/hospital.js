@@ -59,7 +59,6 @@ function Hospital(hosp) {
                 {show==3 &&
                     <SearchBarOpened 
                     hosp={hospEquip}
-                    
                     />
                 }
             </Scroller>

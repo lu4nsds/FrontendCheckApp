@@ -102,7 +102,7 @@ function Manutencao(manutencao) {
         if (text == 1) {
             return "Manutenção Corretiva"
         } else {
-            return "Manutenção Preventiva"
+            return "Manutenção Planejada"
         }
     }
 
