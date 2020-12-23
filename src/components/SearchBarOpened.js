@@ -23,11 +23,11 @@ import {
 import api from '../api';
 import { useUser } from '../contexts/User';
 
-export default ({hosp }) => {
+export default ({hosp, equip }) => {
     const [search, setSearch] = useState('');
-    const [manutencoes, setManutencoes] = useState([]);
-    const [equipamentosId, setEquipamentosId] = useState([]);
+    const [manutencoes, setManutencoes] = useState([]);    
     const [equipamentosHosp, setEquipamentosHosp] = useState([]);
+    const [id, setId] = useState([]);
     const [manutsFilter, setManutsFilter] = useState([]);
     const navigation = useNavigation();
     const { user } = useUser();
@@ -37,12 +37,9 @@ export default ({hosp }) => {
         async function loadManutencoesAbertas() {
             const response = await api.get(`/hospitais/${hosp.id}/manutencoes/abertas`);
             // PREENCHER UM ARRAY DE EQUIP ID
-            await preencherItens(response.data); 
-            await preencherIds(manutencoes)
-            /* await preencherEquips(equipamentosId);   */
+            await preencherItens(response.data);   
+            //equipsPorId(equipsId);       
             
-            let equips = await equipsPorId(manutencoes)
-            console.log(equips)
         }
 
         loadManutencoesAbertas();
@@ -73,26 +70,17 @@ export default ({hosp }) => {
 
             listEquips = [...listEquips, manut.equipamentoId];
             listManuts = [...listManuts, manut];
-
+            
         });
-        
+
         setManutencoes(listManuts);
-        setManutsFilter(listManuts);        
+        setManutsFilter(listManuts);  
+        setId(listEquips);        
+        
             
     }
 
-    async function preencherIds(manutencoes) {
 
-        let listEquips = [];
-        manutencoes.map(manut => {
-
-            listEquips = [...listEquips, manut.equipamentoId];
-
-        });
-
-        setEquipamentosId(listEquips)   
-        
-    }
 
     
     
@@ -130,12 +118,20 @@ export default ({hosp }) => {
         }
     }
 
-    function imageManut(text){
-        if(text==1){
-            return require("../../assets/timing.png")
-        }else{
-            return require("../../assets/timing.png")
-        }
+    function equipManut(manutencoes){
+        // chamar preencherItens que retorna os Ids
+        const equipamentos = []
+        const equipIds = id 
+        manutencoes.map((manut)=>{
+           equipIds.map((id)=>{
+                if(id == manut.equipamentoId){
+                    equipamentos.push() 
+                }
+
+           })
+
+        })
+        
     }
 
 
@@ -143,15 +139,17 @@ export default ({hosp }) => {
         const responseEquip = await api.get(`/equipamentos/${manut.equipamentoId}`);
         return responseEquip.data;
     } 
+
     async function equipsPorId(manutencoes) {
-        let equips=[]
+        /* const equips = [];
         manutencoes.map(async(manut)=>{
-           const responseEquip = await api.get(`/equipamentos/${manut.equipamentoId}`);
-            equips.push(responseEquip.data)
-        })
-        
-        return equips;
-    }
+           const responseEquip = await api.get(`/equipamentos/${manut}`);
+           equips.push(responseEquip.data)
+           console.log(equips)
+        }) */        
+    
+    }   
+
     async function tarefasPorManut(manut) {
         const responseTarefas = await api.get(`/manutencoes/${manut.id}/tarefas`);
         return responseTarefas.data;
@@ -234,6 +232,8 @@ export default ({hosp }) => {
                                 
                         <Text note style={styles.text} >Ordem de Serviço: {manut.id}</Text>
                         <Text note style = {styles.text} >Data: {manut.data}</Text>
+                        <Text note style = {styles.text} >Equip: {manut.data}</Text>
+                        <Text note style = {styles.text} >Modelo: {manut.data}</Text>
                     </Body>
                     <Right>
                         <ButtonPrint onPress={async()=>{

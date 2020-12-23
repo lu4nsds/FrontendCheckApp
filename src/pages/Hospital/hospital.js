@@ -19,7 +19,7 @@ import SearchBarEquipInHosp from '../../components/SearchBarEquipInHosp';
 import HospMenu from '../../components/HospMenu';
 import SearchBarOpened from '../../components/SearchBarOpened';
 import Charts from '../../components/Charts';
-
+import api from '../../api';
 
 
 function Hospital(hosp) {
@@ -28,6 +28,30 @@ function Hospital(hosp) {
     const navigation = useNavigation()
     const hospEquip = hosp.route.params.hospital
     
+    const [equipamentos, setEquipamentos] = useState([]);
+
+
+    useEffect(() => {
+
+        async function loadEquipamentos() {
+            const response = await api.get(`/hospitais/${hospEquip.id}/equipamentos`);
+            await preencherItens(response.data);
+        }
+        loadEquipamentos();
+
+    }, []);
+
+    async function preencherItens(equips) {
+        let listEquips = [];
+        equips.map(equip => {
+            listEquips = [...listEquips, equip];
+
+        });
+        setEquipamentos(listEquips);
+
+    }
+
+
 
     return (
         <Container>
@@ -59,6 +83,7 @@ function Hospital(hosp) {
                 {show==3 &&
                     <SearchBarOpened 
                     hosp={hospEquip}
+                    equip={equipamentos}
                     />
                 }
             </Scroller>
