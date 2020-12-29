@@ -1,4 +1,5 @@
 export default (equip, list, problema, solucao, user, tipo, situacao, pendencias, itens, hospital, manutencaoId)=>{
+    
     function getTipo(tipo){
         if (tipo == 1) {
             return 'Manutenção Corretiva'
@@ -163,7 +164,7 @@ export default (equip, list, problema, solucao, user, tipo, situacao, pendencias
             <div class='container'>
                 <header>
                     
-                    <h1><img src="https://www.flaticon.com/svg/static/icons/svg/753/753266.svg"/> CheckApp</h1>
+                    <h1><img src="../../assets/logoHorizontalBordaAzul.png"/>CheckApp</h1>
                 </header>
                 <section>
                     <h3>CLIENTE</h3>
@@ -384,7 +385,7 @@ export default (equip, list, problema, solucao, user, tipo, situacao, pendencias
             <div class='container'>
                 <header>
                     
-                    <h1><img src="https://www.flaticon.com/svg/static/icons/svg/753/753266.svg"/> CheckApp</h1>
+                    <h1><img src="../../assets/logoHorizontalBordaAzul.png"/>CheckApp</h1>
                 </header>
                 <section>
                     <h3>CLIENTE</h3>

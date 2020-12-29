@@ -99,7 +99,7 @@ function Equipamento(equipamento) {
                             {equip.name}
                         </Text>    
                     </HeaderTitle>
-                    <Thumbnail style ={styles.Thumbnail} square large source={{ uri: equip.imgUrl }} />
+                    <Thumbnail style={styles.Thumbnail} square large source={{ uri: equip.imgUrl }} />
                     <Text style={styles.EquipHosp}>
                         Hospital: {hosp.name}
                     </Text>

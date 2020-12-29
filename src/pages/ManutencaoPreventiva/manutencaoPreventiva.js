@@ -176,7 +176,7 @@ function ManutencaoPreventiva(manutencao) {
                         </Text>
                     </HeaderTitle> 
                     <HeaderContent>
-                        <Thumbnail style ={styles.Thumbnail} square source={{ uri: equipPreventiva.imgUrl }} />
+                        <Thumbnail style={styles.Thumbnail} square large source={{ uri: equipPreventiva.imgUrl }} />
                         <InfoArea style={styles.infoEquip}>
                             <HeaderTitle>
                                 <Text style={styles.EquipName}>

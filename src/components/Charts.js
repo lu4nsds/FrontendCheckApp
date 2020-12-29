@@ -73,7 +73,7 @@ function Charts({hosp}){
     }    
 
     // PASSANDO MANUTS, ABERTAS E CONCLUIDAS
-    function getEstatisticas(manuts){
+    function getEstatisticas(manuts, ano){
         let qtdJan=0
         let qtdFev=0
         let qtdMar=0
@@ -88,7 +88,6 @@ function Charts({hosp}){
         let qtdDez=0
 
         let mesAtual = new Date().getMonth()
-        
 
         let stats = [{
                 x: 'Jan',
@@ -141,40 +140,40 @@ function Charts({hosp}){
         ]
 
         manuts.map(manut=>{
-            if(getMes(manut)=='Jan'){
+            if(getMes(manut, ano)=='Jan'){
                 qtdJan++
                 stats[0].y=qtdJan
-            } else if(getMes(manut)=='Fev'){
+            } else if(getMes(manut, ano)=='Fev'){
                 qtdFev++
                 stats[1].y=qtdFev
-            }else if(getMes(manut)=='Mar'){
+            }else if(getMes(manut, ano)=='Mar'){
                 qtdMar++
                 stats[2].y=qtdMar
-            }else if(getMes(manut)=='Abr'){
+            }else if(getMes(manut, ano)=='Abr'){
                 qtdAbr++
                 stats[3].y=qtdAbr
-            }else if(getMes(manut)=='Mai'){
+            }else if(getMes(manut, ano)=='Mai'){
                 qtdMai++
                 stats[4].y=qtdMai
-            }else if(getMes(manut)=='Jun'){
+            }else if(getMes(manut, ano)=='Jun'){
                 qtdJun++
                 stats[5].y=qtdJun
-            }else if(getMes(manut)=='Jul'){
+            }else if(getMes(manut, ano)=='Jul'){
                 qtdJul++
                 stats[6].y=qtdJul
-            }else if(getMes(manut)=='Ago'){
+            }else if(getMes(manut, ano)=='Ago'){
                 qtdAgo++
                 stats[7].y=qtdAgo
-            }else if(getMes(manut)=='Set'){
+            }else if(getMes(manut, ano)=='Set'){
                 qtdSet++
                 stats[8].y=qtdSet
-            }else if(getMes(manut)=='Out'){
+            }else if(getMes(manut, ano)=='Out'){
                 qtdOut++
                 stats[9].y=qtdOut
-            }else if(getMes(manut)=='Nov'){
+            }else if(getMes(manut, ano)=='Nov'){
                 qtdNov++
                 stats[10].y=qtdNov
-            }else if(getMes(manut)=='Dez'){
+            }else if(getMes(manut, ano)=='Dez'){
                 qtdDez++
                 stats[11].y=qtdDez
             }
@@ -189,14 +188,12 @@ function Charts({hosp}){
         return stats      
 
     }
-    getEstatisticas(manuts);
 
-    function getMes(manut){
+    function getMes(manut, ano){
         
         let dataManut = manut.data       
         let data = dataManut.split('/')
         let mes = ''
-        let ano = new Date().getFullYear()
         if(data[1]=='01' && data[2] ==ano){
             mes='Jan'
         }else if(data[1]=='02' && data[2]==ano){
@@ -367,13 +364,13 @@ function Charts({hosp}){
                         colorScale={["#45cbf3", "#f3c444", "#f34473"]}
                         >
                             <VictoryBar //TODAS
-                            data={getEstatisticas(manuts)}
+                            data={getEstatisticas(manuts, ano)}
                             />
                             <VictoryBar //CONCLUIDAS
-                            data={getEstatisticas(concluidas)}
+                            data={getEstatisticas(concluidas, ano)}
                             />
                             <VictoryBar // NÃO CONCLUIDAS
-                            data={getEstatisticas(abertas)}
+                            data={getEstatisticas(abertas, ano)}
                             />
                         </VictoryGroup>                     
                         

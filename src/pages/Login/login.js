@@ -6,6 +6,9 @@ import {
     CustomButton,
     CustomButtonText
 } from './styles';
+import {
+    Thumbnail,
+} from 'native-base';
 
 import api from '../../api.js'
 
@@ -14,7 +17,6 @@ import {useUser} from '../../contexts/User';
 import SignInput from '../../components/SignInput';
 import EmailIcon from '../../../assets/email.svg';
 import LockIcon from '../../../assets/lock.svg';
-import Check from '../../../assets/checked.svg';
 
 function Login() {
     const [emailField, setEmailField] = useState('luan.s9d7s@gmail.com');
@@ -51,7 +53,7 @@ function Login() {
     }
     return (
         <Container>
-            <Check width="100%" height="160" />
+             <Thumbnail style={{height: 200, width: 200}} square large source={require(`../../../assets/logoBordaAzulEBranco.png`)} />
             <InputArea>
                 <SignInput
                     IconSVG={EmailIcon}

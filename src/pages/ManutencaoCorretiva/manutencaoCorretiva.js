@@ -170,7 +170,7 @@ function ManutencaoCorretiva(manutencao) {
                         </Text>
                     </HeaderTitle> 
                     <HeaderContent>
-                        <Thumbnail style ={styles.Thumbnail} square source={{ uri: equipCorretiva.imgUrl }} />
+                        <Thumbnail style={styles.Thumbnail} square large source={{ uri: equipCorretiva.imgUrl }} />
                         <InfoArea style={styles.infoEquip}>
                             <HeaderTitle>
                                 <Text style={styles.EquipName}>

@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import {
     Container,
     Scroller,
-
+    styles,
     HeaderArea,
     HeaderTitle,
 
@@ -17,6 +17,12 @@ import {
 
 
 } from './styles';
+
+import Logo from '../../../assets/logoHorizontalBordaAzul.svg'
+import {
+    Thumbnail,
+    Image,
+} from 'native-base';
 import SearchBarHosp from './../../components/SearchBarHosp'
 import Check from '../../../assets/checked.svg';
 
@@ -41,8 +47,7 @@ function SearchHosp() {
         <Container>
             <Scroller>
                 <HeaderArea>
-                    <Check width="60" height="40" fill="#fff" />
-                    <HeaderTitle numberOfLines={1}>Buscar Hospital:</HeaderTitle>
+                    <Logo width={'100%'} height={65}/>
 
                 </HeaderArea>
 

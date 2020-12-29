@@ -230,7 +230,7 @@ function ManutencaoUpdate(manutencao) {
                         </Text>
                     </HeaderTitle> 
                     <HeaderContent>
-                        <Thumbnail style ={styles.Thumbnail} square source={{ uri: equip.imgUrl }} />
+                        <Thumbnail style={styles.Thumbnail} square large source={{ uri: equip.imgUrl }} />
                         <InfoArea style={styles.infoEquip}>
                             <HeaderTitle>
                                 <Text style={styles.EquipName}>

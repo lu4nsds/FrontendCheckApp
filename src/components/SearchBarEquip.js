@@ -136,7 +136,7 @@ export default ( ) => {
                 avatar
                 >
                     <Left>
-                        <Thumbnail source={{uri: equip.imgUrl}} />
+                        <Thumbnail source={{ uri: equip.imgUrl }} />
                     </Left>
                     <Body>
                         <Text style = {styles.textBold} >{equip.name}</Text>

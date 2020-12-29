@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { Container, LoadingIcon } from './styles';
 import { useNavigation } from '@react-navigation/native';
+import {
+    Thumbnail,
+} from 'native-base';
 
 
-import Check from '../../../assets/checked.svg';
 
 function Preload() {
 const navigation = useNavigation();
@@ -18,7 +20,7 @@ const navigation = useNavigation();
 
     return (
         <Container>
-            <Check width="120%" height="160" />
+            <Thumbnail style={{height: 200, width: 200}} square large source={require(`../../../assets/logoBordaAzulEBranco.png`)} />
             <LoadingIcon size="large" color="#FFFFFF" />
         </Container>
 

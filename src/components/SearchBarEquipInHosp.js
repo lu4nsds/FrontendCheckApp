@@ -52,7 +52,6 @@ export default ({hosp}) => {
     const [equipsFilter, setEquipsFilter] = useState([]);
     const navigation = useNavigation();
 
-
     useEffect(() => {
 
         async function loadEquipamentos() {
@@ -110,7 +109,12 @@ export default ({hosp}) => {
         });
     };
   
-
+    /* function imageEquip(url){
+        console.log(url)
+        let img = "../../assets/imgEquips/" + url
+        console.log(img)
+        return require(`${img}`)
+    } */
 
     return (
         <Content searchBar rounded>
@@ -133,7 +137,7 @@ export default ({hosp}) => {
                     avatar
                 >
                     <Left>
-                        <Thumbnail source={{ uri: equip.imgUrl }} />
+                        <Thumbnail source={{uri: equip.imgUrl}} />
                     </Left>
                     <Body>
                         <Text style={styles.textBold} >{equip.name}</Text>

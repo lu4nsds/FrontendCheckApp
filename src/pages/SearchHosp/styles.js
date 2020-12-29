@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
+
 export const Container = styled.SafeAreaView`
     background-color: #263165;
     justify-content: center;
@@ -19,11 +20,10 @@ export const Scroller = styled.ScrollView`
 `;
 
 export const HeaderArea = styled.View`
-    flex-direction: row;
     padding: 10px;
     width: 100%;
-    align-items: center;
     margin-top: 20px;
+    justify-content: center;
 
     
 `;

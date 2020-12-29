@@ -14,8 +14,7 @@ import {
     CustomText,
     
 } from './styles';
-
-import Check from '../../../assets/checked.svg';
+import Logo from '../../../assets/logoHorizontalBordaAzul.svg'
 import SearchBarEquip from '../../components/SearchBarEquip';
 
 
@@ -35,8 +34,7 @@ function SearchEquip() {
             <Scroller>
                 <HeaderArea>
                     
-                    <Check width="60" height="40" fill="#fff" />
-                    <HeaderTitle numberOfLines={1}>Buscar Equipamento:</HeaderTitle>
+                    <Logo width={'100%'} height={65}/>
 
                 </HeaderArea>
 
