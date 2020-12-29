@@ -27,6 +27,22 @@ export const styles = {
     barChart:{
         justifyContent: 'center',
     },
+    PickerArea:{
+        alignItems: 'flex-end',
+        borderRadius: 20,
+        backgroundColor: '#45cbf3',
+        height: 30,
+        width: '50%',
+        marginLeft: 'auto',
+        
+    },
+    Picker:{
+        flex: 1,
+        color: '#000000',
+        width: '100%',
+        fontWeight: 'bold',
+    },
+
 };
 
 export const Container = styled.SafeAreaView`
@@ -43,6 +59,7 @@ export const Scroller = styled.ScrollView`
     background-color: #263165;
     width: 100%;
 `;
+
 
 export const HeaderArea = styled.View`
     flex-direction: column;

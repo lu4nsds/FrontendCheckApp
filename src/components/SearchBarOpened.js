@@ -25,9 +25,8 @@ import { useUser } from '../contexts/User';
 
 export default ({hosp, equip }) => {
     const [search, setSearch] = useState('');
-    const [manutencoes, setManutencoes] = useState([]);    
-    const [equipamentosHosp, setEquipamentosHosp] = useState([]);
-    const [id, setId] = useState([]);
+    const [manutencoes, setManutencoes] = useState([]); 
+    const [equipamentos, setEquipamentos] = useState([]);
     const [manutsFilter, setManutsFilter] = useState([]);
     const navigation = useNavigation();
     const { user } = useUser();
@@ -75,10 +74,11 @@ export default ({hosp, equip }) => {
 
         setManutencoes(listManuts);
         setManutsFilter(listManuts);  
-        setId(listEquips);        
+       
         
             
     }
+    
 
 
 
@@ -118,38 +118,28 @@ export default ({hosp, equip }) => {
         }
     }
 
-    function equipManut(manutencoes){
-        // chamar preencherItens que retorna os Ids
-        const equipamentos = []
-        const equipIds = id 
-        manutencoes.map((manut)=>{
-           equipIds.map((id)=>{
-                if(id == manut.equipamentoId){
-                    equipamentos.push() 
-                }
-
-           })
-
-        })
-        
-    }
 
 
     async function equipPorId(manut) {
         const responseEquip = await api.get(`/equipamentos/${manut.equipamentoId}`);
+        setEquipamentos(responseEquip.data)
         return responseEquip.data;
     } 
 
-    async function equipsPorId(manutencoes) {
-        /* const equips = [];
-        manutencoes.map(async(manut)=>{
-           const responseEquip = await api.get(`/equipamentos/${manut}`);
-           equips.push(responseEquip.data)
-           console.log(equips)
-        }) */        
     
-    }   
+    function imageManut(manut) {
+        if (manut.situacao != 'Concluída') {
+            return require("../../assets/timing.png")
 
+        } else {
+            if (manut.tipo == 1) {
+                return require("../../assets/repair.png")
+            } else {
+                return require("../../assets/checklist.png")
+            }
+        }
+
+    }
     async function tarefasPorManut(manut) {
         const responseTarefas = await api.get(`/manutencoes/${manut.id}/tarefas`);
         return responseTarefas.data;
@@ -159,16 +149,6 @@ export default ({hosp, equip }) => {
         return responseItens.data;
     }
     
-     
-    /* async function preencherEquips(equipamentosId){
-        let listEquips = []
-        equipamentosId.map(equip=>{
-            let equipamento = equipsPorId({equipamentoId: equip})
-            listEquips = [...listEquips, equipamento];
-
-        })
-        setEquipamentosHosp(listEquips)
-    } */
 
 
 
@@ -178,22 +158,7 @@ export default ({hosp, equip }) => {
         const tarefas = await tarefasPorManut(manut)
         const itens = await itensPorManut(manut)
         const equip = await equipPorId(manut)
-        
         let situacao = ""
-
-        //console.log(equip)
-        //console.log(tarefas)
-        //console.log(manut.problema)
-        //console.log(manut.solucao)
-        //console.log(user)
-        //console.log(manut.tipo)
-        //console.log(situacao)
-        //console.log(manut.observacoes)
-        //console.log(itens)
-        //console.log(hosp)
-        //console.log(manut.id)
-        //console.log(manut.data)
-        //console.log("================")
             
 
 
@@ -212,7 +177,7 @@ export default ({hosp, equip }) => {
                 />
                 <Icon name='search' />
             </Item>
-            {manutsFilter.map((manut, index)=>( 
+            {manutsFilter.map((manut, index) =>( 
                 <ListItem
                 onPress = {async ()=>{
                    await handleClickManutencao(manut)
@@ -232,8 +197,8 @@ export default ({hosp, equip }) => {
                                 
                         <Text note style={styles.text} >Ordem de Serviço: {manut.id}</Text>
                         <Text note style = {styles.text} >Data: {manut.data}</Text>
-                        <Text note style = {styles.text} >Equip: {manut.data}</Text>
-                        <Text note style = {styles.text} >Modelo: {manut.data}</Text>
+                        <Text note style={styles.text} >Equip: {manut.name}</Text>
+                        <Text note style={styles.text} >Modelo:{manut.modelo}</Text>
                     </Body>
                     <Right>
                         <ButtonPrint onPress={async()=>{

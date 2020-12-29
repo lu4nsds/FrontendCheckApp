@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import { Dimensions, ScrollView } from "react-native";
+import { Dimensions, ScrollView} from "react-native";
+import {Picker} from '@react-native-picker/picker';
 import {VictoryBar, VictoryChart, VictoryGroup, VictoryLegend, VictoryContainer, VictoryAxis} from "victory-native";
 import api from '../api.js'
 import { assign } from "lodash";
 import {
-    styles,
-    
+    styles,    
 } from '../pages/Hospital/styles';
 
 import {
@@ -19,6 +19,8 @@ function Charts({hosp}){
     const [manuts, setManuts] = useState([]);
     const [abertas, setAbertas] = useState([]);
     const [concluidas, setConcluidas] = useState([]);
+    const [ano, setAno] = useState(new Date().getFullYear());
+    const [anoAtual, setAnoAtual] = useState(new Date().getFullYear());
     const qtdManuts = manuts.length; 
     const qtdAbertas = abertas.length; 
     const qtdConcluidas = concluidas.length; 
@@ -191,10 +193,10 @@ function Charts({hosp}){
 
     function getMes(manut){
         
-        let dataManut = manut.data
-        let ano = new Date().getFullYear()
+        let dataManut = manut.data       
         let data = dataManut.split('/')
         let mes = ''
+        let ano = new Date().getFullYear()
         if(data[1]=='01' && data[2] ==ano){
             mes='Jan'
         }else if(data[1]=='02' && data[2]==ano){
@@ -311,6 +313,29 @@ function Charts({hosp}){
                     }
                 ]}
             />
+            
+            <View style={styles.PickerArea}>
+                <Picker
+                    selectedValue={ano}
+                    style={styles.Picker}
+                    //onValueChange={(itemValue, itemIndex) => this.setState({ language: itemValue })}
+                    onValueChange={(ano)=>{
+                        setAno(ano)
+                    }}
+                >
+                    <Picker.Item label={`${Number(anoAtual) - 0}`} value={`${Number(anoAtual)-0}`} />
+                    <Picker.Item label={`${Number(anoAtual) - 1}`} value={`${Number(anoAtual)-1}`} />
+                    <Picker.Item label={`${Number(anoAtual) - 2}`} value={`${Number(anoAtual)-2}`} />
+                    <Picker.Item label={`${Number(anoAtual) - 3}`} value={`${Number(anoAtual)-3}`} />
+                    <Picker.Item label={`${Number(anoAtual) - 4}`} value={`${Number(anoAtual)-4}`} />
+                    <Picker.Item label={`${Number(anoAtual) - 5}`} value={`${Number(anoAtual)-5}`} />
+                    <Picker.Item label={`${Number(anoAtual) - 6}`} value={`${Number(anoAtual)-6}`} />
+                    <Picker.Item label={`${Number(anoAtual) - 7}`} value={`${Number(anoAtual)-7}`} />
+                    <Picker.Item label={`${Number(anoAtual) - 8}`} value={`${Number(anoAtual)-8}`} />
+                    <Picker.Item label={`${Number(anoAtual) - 9}`} value={`${Number(anoAtual)-9}`} />
+                </Picker>
+            </View>
+
             <ScrollView
                 horizontal={true}
                 
