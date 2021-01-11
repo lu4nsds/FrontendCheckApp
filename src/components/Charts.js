@@ -87,7 +87,14 @@ function Charts({hosp}){
         let qtdNov=0
         let qtdDez=0
 
-        let mesAtual = new Date().getMonth()
+        let mesAtual = null
+
+        if(ano == new Date().getFullYear()){
+            mesAtual = new Date().getMonth()
+
+        }else{
+            mesAtual = 11
+        }
 
         let stats = [{
                 x: 'Jan',
@@ -339,7 +346,7 @@ function Charts({hosp}){
                 >
                     <VictoryChart
                     theme={chartTheme}
-                    width={(getEstatisticas(manuts).length*120)}                
+                    width={(getEstatisticas(manuts, ano).length*120) + 100 }                
                     >   
                         <VictoryAxis label='Meses'
                         style={{

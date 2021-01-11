@@ -89,14 +89,14 @@ export default (equip, list, problema, solucao, user, tipo, situacao, pendencias
                 }
                 header{
                     text-align: center;
-                    padding: auto 10px;
+                    padding: 5px;
                     color: white;
                     background:#263165;
                     margin-bottom: 15px;
                     
                 }
                 header img{
-                    width: 60px;
+                    width: 50%;
                 }
                 header h1{
                     font-family: Anton;
@@ -164,7 +164,7 @@ export default (equip, list, problema, solucao, user, tipo, situacao, pendencias
             <div class='container'>
                 <header>
                     
-                    <h1><img src="../../assets/logoHorizontalBordaAzul.png"/>CheckApp</h1>
+                    <img src="https://images.pexels.com/photos/6470327/pexels-photo-6470327.png?cs=srgb&dl=pexels-luan-santos-6470327.jpg&fm=jpg"/>
                 </header>
                 <section>
                     <h3>CLIENTE</h3>
@@ -285,14 +285,14 @@ export default (equip, list, problema, solucao, user, tipo, situacao, pendencias
                 }
                 header{
                     text-align: center;
-                    padding: auto 10px;
+                    padding: 5px;
                     color: white;
                     background:#263165;
                     margin-bottom: 15px;
                     
                 }
                 header img{
-                    width: 60px;
+                    width: 50%;
                 }
                 header h1{
                     font-family: Anton;
@@ -385,7 +385,7 @@ export default (equip, list, problema, solucao, user, tipo, situacao, pendencias
             <div class='container'>
                 <header>
                     
-                    <h1><img src="../../assets/logoHorizontalBordaAzul.png"/>CheckApp</h1>
+                <img  src="https://images.pexels.com/photos/6470327/pexels-photo-6470327.png?cs=srgb&dl=pexels-luan-santos-6470327.jpg&fm=jpg"/>
                 </header>
                 <section>
                     <h3>CLIENTE</h3>
