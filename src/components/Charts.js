@@ -233,15 +233,6 @@ function Charts({hosp}){
     }
     
 
-    // A GENTE VAI PRECISAS TER UMA VARIAVEL QUE TEM A QUANTIDADE DE MANUTENÇÕES POR MÊS
-    const data = {
-        planned: [
-            {x: 'week 1', y: 50}],
-
-
-        actual: [],
-
-    };
 
     const chartTheme = {
         area: assign(
@@ -288,9 +279,33 @@ function Charts({hosp}){
             width: '100%',
             marginTop: 20,
         }}> 
+            
+            
+            <View style={styles.PickerArea}>
+                <Picker
+                    selectedValue={ano}
+                    style={styles.Picker}
+                    //onValueChange={(itemValue, itemIndex) => this.setState({ language: itemValue })}
+                    onValueChange={(ano)=>{
+                        setAno(ano)
+                    }}
+                >
+                    <Picker.Item label={`${Number(anoAtual) - 0}`} value={`${Number(anoAtual)-0}`} />
+                    <Picker.Item label={`${Number(anoAtual) - 1}`} value={`${Number(anoAtual)-1}`} />
+                    <Picker.Item label={`${Number(anoAtual) - 2}`} value={`${Number(anoAtual)-2}`} />
+                    <Picker.Item label={`${Number(anoAtual) - 3}`} value={`${Number(anoAtual)-3}`} />
+                    <Picker.Item label={`${Number(anoAtual) - 4}`} value={`${Number(anoAtual)-4}`} />
+                    <Picker.Item label={`${Number(anoAtual) - 5}`} value={`${Number(anoAtual)-5}`} />
+                    <Picker.Item label={`${Number(anoAtual) - 6}`} value={`${Number(anoAtual)-6}`} />
+                    <Picker.Item label={`${Number(anoAtual) - 7}`} value={`${Number(anoAtual)-7}`} />
+                    <Picker.Item label={`${Number(anoAtual) - 8}`} value={`${Number(anoAtual)-8}`} />
+                    <Picker.Item label={`${Number(anoAtual) - 9}`} value={`${Number(anoAtual)-9}`} />
+                </Picker>
+            </View>
+
             <VictoryLegend
             x={Dimensions.get('screen').width/2 -100}
-            height={100}
+            height={85}
                 centerTitle
                 orientation="vertical"
                 gutter={20}
@@ -317,28 +332,6 @@ function Charts({hosp}){
                     }
                 ]}
             />
-            
-            <View style={styles.PickerArea}>
-                <Picker
-                    selectedValue={ano}
-                    style={styles.Picker}
-                    //onValueChange={(itemValue, itemIndex) => this.setState({ language: itemValue })}
-                    onValueChange={(ano)=>{
-                        setAno(ano)
-                    }}
-                >
-                    <Picker.Item label={`${Number(anoAtual) - 0}`} value={`${Number(anoAtual)-0}`} />
-                    <Picker.Item label={`${Number(anoAtual) - 1}`} value={`${Number(anoAtual)-1}`} />
-                    <Picker.Item label={`${Number(anoAtual) - 2}`} value={`${Number(anoAtual)-2}`} />
-                    <Picker.Item label={`${Number(anoAtual) - 3}`} value={`${Number(anoAtual)-3}`} />
-                    <Picker.Item label={`${Number(anoAtual) - 4}`} value={`${Number(anoAtual)-4}`} />
-                    <Picker.Item label={`${Number(anoAtual) - 5}`} value={`${Number(anoAtual)-5}`} />
-                    <Picker.Item label={`${Number(anoAtual) - 6}`} value={`${Number(anoAtual)-6}`} />
-                    <Picker.Item label={`${Number(anoAtual) - 7}`} value={`${Number(anoAtual)-7}`} />
-                    <Picker.Item label={`${Number(anoAtual) - 8}`} value={`${Number(anoAtual)-8}`} />
-                    <Picker.Item label={`${Number(anoAtual) - 9}`} value={`${Number(anoAtual)-9}`} />
-                </Picker>
-            </View>
 
             <ScrollView
                 horizontal={true}

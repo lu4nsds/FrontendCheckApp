@@ -29,18 +29,23 @@ export const styles = {
     },
     PickerArea:{
         alignItems: 'flex-end',
+        borderColor: '#45cbf3',
+        marginBottom: 20,
+        borderWidth: 2,
         borderRadius: 20,
-        backgroundColor: '#45cbf3',
         height: 30,
         width: '50%',
         marginLeft: 'auto',
         
+        
     },
     Picker:{
         flex: 1,
-        color: '#000000',
+        color: '#fff',
         width: '100%',
         fontWeight: 'bold',
+        textDecorationStyle: "solid",
+        textDecorationColor: "#fff",
     },
 
 };
