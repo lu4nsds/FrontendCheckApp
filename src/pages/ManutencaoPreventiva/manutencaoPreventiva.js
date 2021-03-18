@@ -15,7 +15,6 @@ import {
     Container,
     Scroller,
     HeaderArea,
-    InfoArea,
     HeaderContent,
     HeaderTitle,
     InputArea,
@@ -48,9 +47,9 @@ function ManutencaoPreventiva(manutencao) {
     const tipo = manutencao.route.params.manutencao.tipo
     const [problema, setProblema] = useState('');
     const [solucao, setSolucao] = useState('');
-    const [data, setData] = useState('23/09/2020');
-    const [horaInicial, setHoraInicial] = useState('00:00');
-    const [horaFinal, setHoraFinal] = useState('02:00');
+    const [data, setData] = useState('');
+    const [horaInicial, setHoraInicial] = useState('');
+    const [horaFinal, setHoraFinal] = useState('');
     const [checkSim, setCheckSim] = useState(false);
     const [checkNao, setCheckNao] = useState(false);
     const [checkPeca, setCheckPeca] = useState(false);
@@ -177,7 +176,7 @@ function ManutencaoPreventiva(manutencao) {
                     </HeaderTitle> 
                     <HeaderContent>
                         <Thumbnail style={styles.Thumbnail} square large source={{ uri: equipPreventiva.imgUrl }} />
-                        <InfoArea style={styles.infoEquip}>
+                        <View style={styles.infoEquip}>
                             <HeaderTitle>
                                 <Text style={styles.EquipName}>
                                     {equipPreventiva.name}
@@ -187,9 +186,9 @@ function ManutencaoPreventiva(manutencao) {
                                 Nº de Série: {equipPreventiva.sn}
                             </Text>
                             <Text style={styles.EquipHosp}>
-                                Hospital: {hospPreventiva.name}
+                               {hospPreventiva.name}
                             </Text> 
-                        </InfoArea>
+                        </View>
                                          
                     </HeaderContent>
                     

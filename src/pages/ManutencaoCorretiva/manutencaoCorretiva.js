@@ -41,9 +41,9 @@ function ManutencaoCorretiva(manutencao) {
     const tipo = manutencao.route.params.manutencao.tipo
     const [problema, setProblema] = useState('');
     const [solucao, setSolucao] = useState('');
-    const [data, setData] = useState('23/09/2020');
-    const [horaInicial, setHoraInicial] = useState('00:00');
-    const [horaFinal, setHoraFinal] = useState('02:00');
+    const [data, setData] = useState('');
+    const [horaInicial, setHoraInicial] = useState('');
+    const [horaFinal, setHoraFinal] = useState('');
     const [checkSim, setCheckSim] = useState(false);
     const [checkNao, setCheckNao] = useState(false);
     const [checkPeca, setCheckPeca] = useState(false);
@@ -181,7 +181,7 @@ function ManutencaoCorretiva(manutencao) {
                                 Nº de Série: {equipCorretiva.sn}
                             </Text>
                             <Text style={styles.EquipHosp}>
-                                Hospital: {hospCorretiva.name}
+                                {hospCorretiva.name}
                             </Text> 
                         </InfoArea>
                                          

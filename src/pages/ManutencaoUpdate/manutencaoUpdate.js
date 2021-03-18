@@ -241,7 +241,7 @@ function ManutencaoUpdate(manutencao) {
                                 Nº de Série: {equip.sn}
                             </Text>
                             <Text style={styles.EquipHosp}>
-                                Hospital: {hosp.name}
+                                {hosp.name}
                             </Text> 
                         </InfoArea>
                                          
@@ -431,7 +431,7 @@ function ManutencaoUpdate(manutencao) {
                         }}
                     >
                         <Text style = {styles.ButtonText}>
-                            Submeter
+                            Atualizar
                         </Text>
                     </ButtonSubmeter>
                     

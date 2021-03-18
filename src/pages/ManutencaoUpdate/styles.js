@@ -80,7 +80,8 @@ export const styles = {
     EquipHosp: {
         color: '#fff',
         fontWeight: 'bold',
-        fontSize: 16
+        fontSize: 16,
+        maxWidth: 218,
     },
     ButtonText: {
         alignItems: 'center',

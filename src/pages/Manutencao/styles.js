@@ -103,6 +103,7 @@ export const styles = {
         color: '#000000',
         fontWeight: 'bold',
         fontSize: 14,    
+        maxWidth: 218,
         
     },
     EquipHosp: {

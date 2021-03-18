@@ -158,7 +158,7 @@ export default ({hosp, equip }) => {
         const tarefas = await tarefasPorManut(manut)
         const itens = await itensPorManut(manut)
         const equip = await equipPorId(manut)
-        let situacao = ""
+        let situacao = manut.situacao
             
 
 

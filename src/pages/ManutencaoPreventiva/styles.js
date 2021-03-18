@@ -80,8 +80,10 @@ export const styles = {
     EquipHosp: {
         color: '#fff',
         fontWeight: 'bold',
-        fontSize: 16
-    },
+        fontSize: 16,
+        maxWidth: 218,
+        flexWrap: 'wrap',
+        },
     ButtonText: {
         alignItems: 'center',
         color: '#fff',
@@ -138,9 +140,14 @@ export const styles = {
     },
     headerContent:{
         flexDirection: 'row',
+        width: '100%',
     },
     infoEquip:{
-        flexDirection: 'column'
+        flexDirection: 'column',
+        width: "100%",
+        padding: 15,
+        flexWrap: 'wrap', 
+
     },
     Input:{
         backgroundColor: '#fff',
@@ -196,19 +203,9 @@ export const HeaderTitle = styled.Text`
     
 `;
 
-export const InfoArea = styled.View`
-    flex-direction: column;
-    width: 100%;
-    border-radius: 100px;
-    padding: 15px;
-    padding-left: 30px;
-
-`;
 export const HeaderContent = styled.View`
     flex-direction: row;
-    padding: 0px;
     margin-top: 15px;
-    justify-content: space-between;
     width: 100%;
 `;
 export const DateTimeArea = styled.View`

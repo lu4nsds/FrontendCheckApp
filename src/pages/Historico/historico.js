@@ -64,7 +64,7 @@ function Historico(historico) {
                                     Nº de Série: {equip.sn}
                                 </Text>
                                 <Text style={styles.EquipHosp}>
-                                    Hospital: {hosp.name}
+                                    {hosp.name}
                                 </Text> 
                             </InfoArea>
                                             

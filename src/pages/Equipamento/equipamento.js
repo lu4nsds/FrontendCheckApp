@@ -101,7 +101,7 @@ function Equipamento(equipamento) {
                     </HeaderTitle>
                     <Thumbnail style={styles.Thumbnail} square large source={{ uri: equip.imgUrl }} />
                     <Text style={styles.EquipHosp}>
-                        Hospital: {hosp.name}
+                        {hosp.name}
                     </Text>
                     <Text style={styles.EquipSN}>
                         Nº de Série: {equip.sn}

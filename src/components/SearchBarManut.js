@@ -134,8 +134,7 @@ export default ({ equip, hosp }) => {
 
         const tarefas = await tarefasPorManut(manut)
         const itens = await itensPorManut(manut)
-        
-        let situacao = ""
+        let situation = manut.situacao
 
         //console.log(equip)
         //console.log(tarefas)
@@ -154,7 +153,7 @@ export default ({ equip, hosp }) => {
 
 
         Print.printAsync({
-            html: `${OrdemDeServico(equip, tarefas, manut.problema, manut.solucao, user, manut.tipo, situacao, manut.observacoes, itens, hosp, manut.id)}`
+            html: `${OrdemDeServico(equip, tarefas, manut.problema, manut.solucao, user, manut.tipo, situation, manut.observacoes, itens, hosp, manut.id)}`
         });
     }
     return (

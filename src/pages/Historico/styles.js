@@ -49,6 +49,7 @@ export const styles = {
         color: '#fff',
         fontWeight: 'bold',
         fontSize: 16,
+        maxWidth: 218,
     },
     buttonEquip: {
         width: '100%',

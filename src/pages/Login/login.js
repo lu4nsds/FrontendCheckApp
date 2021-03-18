@@ -19,7 +19,7 @@ import EmailIcon from '../../../assets/email.svg';
 import LockIcon from '../../../assets/lock.svg';
 
 function Login() {
-    const [emailField, setEmailField] = useState('luan.s9d7s@gmail.com');
+    const [emailField, setEmailField] = useState('luan.ufrn@gmail.com');
     const [passwordField, setPasswordField] = useState('111111');
     const {user, setUser} = useUser();
     const navigation = useNavigation();
